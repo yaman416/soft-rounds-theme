@@ -4,6 +4,193 @@
 
 Use the [Shopify AI Toolkit](https://shopify.dev/docs/apps/build/ai-toolkit) for all Shopify API and platform work. If missing, install it in the agent host per that page (or `npx skills add Shopify/shopify-ai-toolkit` for skill-compatible hosts).
 
+## Soft Rounds Australia Project Instructions
+
+### Project Overview
+
+This repository contains the Shopify Online Store 2.0 theme for Soft Rounds
+Australia.
+
+Soft Rounds Australia is a premium healthcare apparel and comfort brand focused
+initially on:
+
+- Nursing compression socks
+- Premium healthcare scrubs
+
+The brand should communicate:
+
+- Softness
+- Durability
+- Professional quality
+- Practical comfort
+- Premium but approachable design
+- Confidence during long healthcare shifts
+
+### Design Source of Truth
+
+Before making any visual, layout, content, component, or styling change, read:
+
+`design.md`
+
+The rules in `design.md` are the project-specific source of truth for:
+
+- Brand positioning
+- Colours
+- Typography
+- Spacing
+- Buttons
+- Product cards
+- Photography direction
+- Page structure
+- Accessibility
+- Responsive behaviour
+- Motion
+- Performance
+- Content style
+
+Do not introduce visual decisions that conflict with `design.md` unless the
+project owner explicitly approves the change.
+
+### Working Process
+
+Before editing code:
+
+1. Read the relevant existing files.
+2. Read the relevant rules in `design.md`.
+3. Explain the proposed change.
+4. List the files expected to change.
+5. Preserve existing Shopify commerce functionality.
+6. Make the smallest coherent change.
+7. Run `shopify theme check`.
+8. Review mobile and desktop behaviour.
+9. Clearly report what changed and what remains unverified.
+
+### Safety Rules
+
+Never:
+
+- Publish the live Shopify theme without explicit approval.
+- Run `shopify theme publish` without explicit approval.
+- Replace the entire Dawn theme for a small visual change.
+- Delete working sections without first checking where they are used.
+- Hardcode product titles, prices, collections, product URLs, or image URLs.
+- Invent customer reviews, ratings, medical claims, guarantees, or stock counts.
+- Modify Shopify checkout.
+- Install dependencies without explaining why they are needed.
+- Store passwords, tokens, credentials, or private keys in the repository.
+- Edit `config/settings_data.json` unless specifically required.
+- Use destructive Git commands without explicit approval.
+- Claim testing succeeded unless the relevant test was actually completed.
+
+### Shopify Requirements
+
+All major storefront content should remain editable through Shopify’s theme
+editor.
+
+Use:
+
+- Section settings for configurable section content
+- Blocks for repeatable items
+- Theme settings for global design controls
+- Shopify product and collection objects
+- Shopify routes instead of hardcoded URLs
+- Responsive Shopify image filters
+- Translation keys for reusable interface text where practical
+
+Do not hardcode business content that should be manageable through Shopify.
+
+### Development Rules
+
+Preserve Dawn’s existing functionality unless a change is specifically required.
+
+Important functionality includes:
+
+- Product forms
+- Variant selection
+- Cart drawer or cart page
+- Search
+- Predictive search
+- Navigation
+- Customer accounts
+- Localisation
+- Product media
+- Filtering and sorting
+- Shopify app blocks
+- Dynamic checkout buttons where enabled
+
+Use:
+
+- Valid Shopify Liquid
+- Online Store 2.0 JSON templates
+- Semantic HTML
+- Native CSS
+- Vanilla JavaScript
+- Existing Dawn patterns where appropriate
+
+Avoid unnecessary third-party libraries.
+
+### Accessibility
+
+Target WCAG 2.2 AA where practical.
+
+Maintain:
+
+- Keyboard navigation
+- Visible focus states
+- Logical heading structure
+- Accessible labels
+- Meaningful alternative text handling
+- Sufficient colour contrast
+- Touch-friendly interaction targets
+- Reduced-motion support
+- Accessible drawers, menus, forms, and dialogs
+
+Do not remove existing accessibility behaviour unless replacing it with an
+equivalent or better implementation.
+
+### Performance
+
+- Avoid unnecessary JavaScript.
+- Prefer CSS for simple visual behaviour.
+- Use responsive Shopify images.
+- Lazy-load below-the-fold images.
+- Do not lazy-load the primary above-the-fold hero image.
+- Reserve image dimensions to reduce layout shift.
+- Avoid large autoplay video.
+- Avoid excessive third-party apps and scripts.
+- Keep components modular and maintainable.
+
+### Content and Claims
+
+Website copy should be calm, specific, warm, credible, and professional.
+
+Avoid unsupported statements such as:
+
+- Best ever
+- Number one in Australia
+- Guaranteed pain relief
+- Doctor approved
+- Medical grade
+- Clinically proven
+
+Compression products must not be presented as treating or curing a medical
+condition unless the claim is legally permitted and supported by appropriate
+evidence.
+
+### Beginner Communication
+
+The project owner is a beginner.
+
+When reporting work:
+
+- Use straightforward language.
+- Name every file changed.
+- Explain where the result appears in Shopify.
+- Provide exact testing steps.
+- Clearly distinguish confirmed results from assumptions.
+- Explain errors without hiding technical details.
+- Do not proceed to publishing automatically.
+
 ## Theme Architecture
 
 **Key principles: focus on generating snippets, blocks, and sections; users may create templates using the theme editor**

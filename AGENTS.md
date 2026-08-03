@@ -38,10 +38,15 @@ Before making changes, read the relevant project documents:
   product presentation and trust principles.
 - `PROJECT_PLAN.md` for approved development phases, scope, acceptance criteria,
   testing requirements and project status.
+- `mockup.md` for approved page structure, section order, component layout,
+  responsive behaviour and storefront presentation.
+
 For any visual, layout, content, component, branding or styling change, read
 both `design.md` and `brand.md`.
 Before implementing any feature, confirm the relevant phase in
 `PROJECT_PLAN.md` and do not work beyond that phase unless explicitly approved.
+Before implementing a page or component, confirm its approved structure and
+behaviour in `mockup.md`.
 
 Use the following priority order when instructions conflict:
 

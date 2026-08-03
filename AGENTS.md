@@ -36,9 +36,12 @@ Before making changes, read the relevant project documents:
   behaviour, accessibility, motion and performance.
 - `brand.md` for brand identity, voice, messaging, logo direction, photography,
   product presentation and trust principles.
-
+- `PROJECT_PLAN.md` for approved development phases, scope, acceptance criteria,
+  testing requirements and project status.
 For any visual, layout, content, component, branding or styling change, read
 both `design.md` and `brand.md`.
+Before implementing any feature, confirm the relevant phase in
+`PROJECT_PLAN.md` and do not work beyond that phase unless explicitly approved.
 
 Use the following priority order when instructions conflict:
 

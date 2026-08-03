@@ -1,0 +1,1 @@
+/Users/yaman/Documents/Soft Rounds Website/Shopify Theme/AGENTS.md

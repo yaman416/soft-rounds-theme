@@ -124,7 +124,7 @@ CSS variables.
 
 ## Phase 2 — Header and Announcement Bar
 
-Status: Not started
+Status: Complete
 
 ### Objective
 
@@ -156,15 +156,22 @@ Create a clean, premium and accessible header using Shopify navigation settings.
 
 ### Acceptance criteria
 
-- [ ] Menu items remain managed in Shopify
-- [ ] Search works
-- [ ] Cart works
-- [ ] Account link works
-- [ ] Mobile drawer works
-- [ ] Keyboard navigation works
-- [ ] Touch targets are accessible
-- [ ] No hardcoded navigation links
-- [ ] No new Theme Check errors
+- [x] Menu items remain managed in Shopify
+- [x] Search works
+- [x] Cart works
+- [x] Account link works
+- [x] Mobile drawer works
+- [x] Keyboard navigation works
+- [x] Touch targets are accessible
+- [x] No hardcoded navigation links
+- [x] No new Theme Check errors
+
+### Notes
+
+- Final logo remains pending.
+- The temporary text-based store name is being used.
+- Navigation and footer links were configured in Shopify Admin.
+- Desktop and mobile navigation were visually tested.
 
 ---
 

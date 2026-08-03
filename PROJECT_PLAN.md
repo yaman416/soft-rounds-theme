@@ -81,7 +81,7 @@ Status: Complete
 
 ## Phase 1 — Global Design Tokens
 
-Status: Not started
+Status: Complete
 
 ### Objective
 
@@ -111,14 +111,14 @@ CSS variables.
 
 ### Acceptance criteria
 
-- [ ] Soft Rounds colour palette available in theme settings
+- [x] Soft Rounds colour palette available in theme settings
 - [ ] Typography options available in theme settings
-- [ ] Global CSS variables added
-- [ ] Buttons align with design system
-- [ ] Forms align with design system
-- [ ] Focus states remain visible
-- [ ] No new Theme Check errors
-- [ ] Desktop and mobile preview verified
+- [x] Global CSS variables added
+- [x] Buttons align with design system
+- [x] Forms align with design system
+- [x] Focus states remain visible
+- [x] No new Theme Check errors
+- [x] Desktop and mobile preview verified
 
 ---
 

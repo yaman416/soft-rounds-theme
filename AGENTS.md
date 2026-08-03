@@ -26,7 +26,30 @@ The brand should communicate:
 - Premium but approachable design
 - Confidence during long healthcare shifts
 
-### Design Source of Truth
+
+
+### Project Sources of Truth
+
+Before making changes, read the relevant project documents:
+
+- `design.md` for website interface, layout, components, spacing, responsive
+  behaviour, accessibility, motion and performance.
+- `brand.md` for brand identity, voice, messaging, logo direction, photography,
+  product presentation and trust principles.
+
+For any visual, layout, content, component, branding or styling change, read
+both `design.md` and `brand.md`.
+
+Use the following priority order when instructions conflict:
+
+1. Safety, legal accuracy and verified product information
+2. Explicit current instructions from the project owner
+3. `brand.md` for brand identity and communication
+4. `design.md` for interface behaviour and visual implementation
+5. Existing Dawn patterns and Shopify conventions
+6. General recommendations
+
+Do not introduce branding, language or visual decisions that conflict with these documents unless the project owner explicitly approves the change.
 
 Before making any visual, layout, content, component, or styling change, read:
 

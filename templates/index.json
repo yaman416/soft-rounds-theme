@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "image_banner": {
@@ -6,14 +15,21 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Browse our latest products",
+            "heading": "Comfort for Every Shift",
             "heading_size": "h0"
+          }
+        },
+        "text_6dpqKr": {
+          "type": "text",
+          "settings": {
+            "text": "Premium compression socks and healthcare apparel designed for professionals who spend long hours on their feet.",
+            "text_style": "body"
           }
         },
         "button": {
           "type": "buttons",
           "settings": {
-            "button_label_1": "Shop all",
+            "button_label_1": "Shop Now",
             "button_link_1": "shopify://collections/all",
             "button_style_secondary_1": true,
             "button_label_2": "",
@@ -24,38 +40,138 @@
       },
       "block_order": [
         "heading",
+        "text_6dpqKr",
         "button"
       ],
+      "name": "Hero",
       "settings": {
         "image_overlay_opacity": 40,
         "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
         "image_behavior": "none",
+        "desktop_content_position": "bottom-center",
         "desktop_content_alignment": "center",
+        "show_text_box": false,
         "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
         "stack_images_on_mobile": false,
+        "mobile_content_alignment": "center",
         "show_text_below": false
+      }
+    },
+    "collection_list_fWqAcF": {
+      "type": "collection-list",
+      "blocks": {
+        "featured_collection_nRqFDy": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "compression"
+          }
+        },
+        "featured_collection_dqnqG6": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "scrubs"
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_nRqFDy",
+        "featured_collection_dqnqG6"
+      ],
+      "name": "Shop by Category",
+      "settings": {
+        "title": "Shop by Category",
+        "heading_size": "h1",
+        "image_ratio": "square",
+        "columns_desktop": 2,
+        "color_scheme": "",
+        "show_view_all": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "multicolumn_MmW3nB": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_VR9Bg3": {
+          "type": "column",
+          "settings": {
+            "title": "Premium Comfort",
+            "text": "<p>Designed for long shifts with all-day comfort.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_xQpr9b": {
+          "type": "column",
+          "settings": {
+            "title": "Medical Compression",
+            "text": "<p>Graduated support to help reduce leg fatigue.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_Gy4Aad": {
+          "type": "column",
+          "settings": {
+            "title": "Premium Quality",
+            "text": "<p>Durable materials selected for everyday healthcare use.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_rHzim8": {
+          "type": "column",
+          "settings": {
+            "title": "Made for Healthcare",
+            "text": "<p>Thoughtfully designed for nurses, students and healthcare professionals.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_VR9Bg3",
+        "column_xQpr9b",
+        "column_Gy4Aad",
+        "column_rHzim8"
+      ],
+      "name": "Why Soft Rounds",
+      "settings": {
+        "title": "Why Soft Rounds",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "primary",
+        "color_scheme": "",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     },
     "featured_collection": {
       "type": "featured-collection",
+      "name": "Featured Products",
       "settings": {
-        "title": "Featured products",
+        "collection": "all",
+        "products_to_show": 4,
+        "title": "Featured Products",
         "heading_size": "h2",
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
         "columns_desktop": 4,
-        "color_scheme": "scheme-1",
+        "enable_desktop_slider": false,
         "full_width": false,
         "show_view_all": true,
         "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
+        "color_scheme": "scheme-1",
         "image_ratio": "adapt",
         "image_shape": "default",
         "show_secondary_image": true,
@@ -63,13 +179,99 @@
         "show_rating": false,
         "quick_add": "none",
         "columns_mobile": "2",
+        "swipe_on_mobile": false,
         "padding_top": 44,
         "padding_bottom": 36
+      }
+    },
+    "image_with_text_6pVqad": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_HD3VMN": {
+          "type": "heading",
+          "settings": {
+            "heading": "Created for People Who Care for Others",
+            "heading_size": "h1"
+          }
+        },
+        "text_HxR7wh": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Soft Rounds was created to provide healthcare professionals with thoughtfully designed essentials that deliver comfort, quality and confidence through every shift.</p>",
+            "text_style": "body"
+          }
+        },
+        "button_xDyDqR": {
+          "type": "button",
+          "settings": {
+            "button_label": "Our Story",
+            "button_link": "shopify://pages/about",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_HD3VMN",
+        "text_HxR7wh",
+        "button_xDyDqR"
+      ],
+      "name": "Created for People Who Care for Others",
+      "settings": {
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "",
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "newsletter_QgpJDk": {
+      "type": "newsletter",
+      "blocks": {
+        "heading_TBkrpr": {
+          "type": "heading",
+          "settings": {
+            "heading": "Join the Soft Rounds Community",
+            "heading_size": "h1"
+          }
+        },
+        "paragraph_QX7TY8": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Be the first to hear about new collections, product launches and exclusive offers designed for healthcare professionals.</p>"
+          }
+        },
+        "email_form_hUimJQ": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "heading_TBkrpr",
+        "paragraph_QX7TY8",
+        "email_form_hUimJQ"
+      ],
+      "name": "t:sections.newsletter.presets.name",
+      "settings": {
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
       }
     }
   },
   "order": [
     "image_banner",
-    "featured_collection"
+    "collection_list_fWqAcF",
+    "multicolumn_MmW3nB",
+    "featured_collection",
+    "image_with_text_6pVqad",
+    "newsletter_QgpJDk"
   ]
 }

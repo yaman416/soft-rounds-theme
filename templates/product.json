@@ -49,10 +49,31 @@
           "type": "description",
           "settings": {}
         },
-        "share": {
-          "type": "share",
+        "collapsible_tab_fDKMr7": {
+          "type": "collapsible_tab",
           "settings": {
-            "share_label": "Share"
+            "heading": "Materials and care",
+            "icon": "washing",
+            "content": "<p>Final fabric composition and care instructions will be added once production specifications are confirmed.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_VbAEyN": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Size guide",
+            "icon": "ruler",
+            "content": "<p>Please refer to the product-specific size guide before ordering. Final measurements will be added once supplier sizing is confirmed.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_KecTEr": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Shipping and returns",
+            "icon": "truck",
+            "content": "<p>Standard shipping within Australia is $10.99 AUD per order, with free standard shipping on orders over $100 AUD. Eligible unworn items may be returned in accordance with our Return and Refund Policy.</p>",
+            "page": ""
           }
         }
       },
@@ -64,7 +85,9 @@
         "quantity_selector",
         "buy_buttons",
         "description",
-        "share"
+        "collapsible_tab_fDKMr7",
+        "collapsible_tab_VbAEyN",
+        "collapsible_tab_KecTEr"
       ],
       "settings": {
         "enable_sticky_info": true,
@@ -85,6 +108,10 @@
     "disclosures": {
       "type": "disclosures",
       "settings": {
+        "heading": "Disclosures",
+        "heading_size": "h2",
+        "open_by_default": false,
+        "color_scheme": "",
         "padding_top": 36,
         "padding_bottom": 0
       }

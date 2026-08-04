@@ -11,8 +11,54 @@
   "name": "t:sections.footer.name",
   "type": "footer",
   "sections": {
+    "newsletter_c7edPb": {
+      "type": "newsletter",
+      "blocks": {
+        "heading_d4YUkT": {
+          "type": "heading",
+          "settings": {
+            "heading": "Join the Soft Rounds Community",
+            "heading_size": "h1"
+          }
+        },
+        "paragraph_wVaCeg": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Be the first to hear about new collections, product launches and exclusive offers designed for healthcare professionals.</p>"
+          }
+        },
+        "email_form_YfVLcq": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "heading_d4YUkT",
+        "paragraph_wVaCeg",
+        "email_form_YfVLcq"
+      ],
+      "name": "t:sections.newsletter.presets.name",
+      "settings": {
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
     "footer": {
       "type": "footer",
+      "blocks": {
+        "link_list_673dAa": {
+          "type": "link_list",
+          "settings": {
+            "heading": "",
+            "menu": "footer"
+          }
+        }
+      },
+      "block_order": [
+        "link_list_673dAa"
+      ],
       "settings": {
         "color_scheme": "scheme-1",
         "newsletter_enable": false,
@@ -30,6 +76,7 @@
     }
   },
   "order": [
+    "newsletter_c7edPb",
     "footer"
   ]
 }

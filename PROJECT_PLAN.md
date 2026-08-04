@@ -214,7 +214,7 @@ Create a professional, compact and configurable footer.
 
 ## Phase 4 — Homepage Structure
 
-Status: Not started
+Status: In Progress
 
 ### Objective
 
@@ -251,14 +251,24 @@ to key products.
 
 ### Acceptance criteria
 
-- [ ] Homepage order matches the approved structure
-- [ ] All major content editable in Shopify
-- [ ] No hardcoded products or collections
-- [ ] Hero works on mobile and desktop
-- [ ] Images use responsive Shopify image filters
-- [ ] No fake reviews
-- [ ] No unsupported claims
-- [ ] No new Theme Check errors
+- [x] Homepage order matches the approved structure
+- [x] All major content editable in Shopify
+- [x] No hardcoded products or collections
+- [x] Hero works on mobile and desktop
+- [x] Images use responsive Shopify image filters
+- [x] No fake reviews
+- [x] No unsupported claims
+- [x] No new Theme Check errors
+
+### Remaining work
+
+- Final logo
+- Real hero photography
+- Collection images
+- Real product images
+- Final product catalogue
+- Final homepage copy review
+- Final visual QA
 
 ---
 

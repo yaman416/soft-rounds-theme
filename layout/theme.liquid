@@ -15,6 +15,17 @@
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     {%- endunless -%}
 
+    {%- comment -%}
+      Soft Rounds design system type: Quicksand headings, Nunito Sans body.
+      Loaded from Google Fonts because neither family ships in the Shopify font picker.
+    {%- endcomment -%}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Nunito+Sans:opsz,wght@6..12,300..900&display=swap"
+    >
+
     <title>
       {{ page_title }}
       {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
@@ -246,6 +257,21 @@
         --variant-pills-shadow-blur-radius: {{ settings.variant_pills_shadow_blur }}px;
       }
 
+      /* Soft Rounds logo-matched display face. Declared here rather than in a
+         CSS asset so the font URL resolves through asset_url. Per the font
+         pack's own README this face is for logo-adjacent headings, packaging
+         and short display text only — never body copy or small text. Apply it
+         with the .sr-wordmark class, not by setting a global family. */
+      @font-face {
+        font-family: 'SoftRounds Custom';
+        src:
+          url('{{ 'SoftRoundsCustom-Regular.woff2' | asset_url }}') format('woff2'),
+          url('{{ 'SoftRoundsCustom-Regular.ttf' | asset_url }}') format('truetype');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
       *,
       *::before,
       *::after {
@@ -273,6 +299,14 @@
     {% endstyle %}
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
+
+    {%- comment -%}
+      Soft Rounds design system. Tokens must load after base.css so the token
+      values win the cascade; the component layer must load after the tokens.
+    {%- endcomment -%}
+    {{ 'storefront-import-tokens.css' | asset_url | stylesheet_tag }}
+    {{ 'component-softrounds.css' | asset_url | stylesheet_tag }}
+
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 
     {%- if settings.cart_type == 'drawer' -%}

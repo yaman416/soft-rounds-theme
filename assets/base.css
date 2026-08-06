@@ -302,8 +302,14 @@ h5,
   }
 }
 
+/* Heading scale mapped to the design system type roles in
+   storefront-import-tokens.css. Desktop sizes are the role sizes; mobile sizes
+   step down one role, matching how component-softrounds.css steps section
+   headings down at its 1080px / 744px breakpoints.
+     .h0 = hero 52px · h1 = display-xl 36px · h2 = display-lg 28px
+     h3  = display-md 22px · h4 = display-sm 18px */
 .h0 {
-  font-size: calc(var(--font-heading-scale) * 4rem);
+  font-size: calc(var(--font-heading-scale) * 3.6rem);
 }
 
 @media only screen and (min-width: 750px) {
@@ -314,37 +320,37 @@ h5,
 
 h1,
 .h1 {
-  font-size: calc(var(--font-heading-scale) * 3.4rem);
+  font-size: calc(var(--font-heading-scale) * 2.8rem);
 }
 
 @media only screen and (min-width: 750px) {
   h1,
   .h1 {
-    font-size: calc(var(--font-heading-scale) * 4.4rem);
+    font-size: calc(var(--font-heading-scale) * 3.6rem);
   }
 }
 
 h2,
 .h2 {
-  font-size: calc(var(--font-heading-scale) * 2.8rem);
+  font-size: calc(var(--font-heading-scale) * 2.2rem);
 }
 
 @media only screen and (min-width: 750px) {
   h2,
   .h2 {
-    font-size: calc(var(--font-heading-scale) * 3.4rem);
+    font-size: calc(var(--font-heading-scale) * 2.8rem);
   }
 }
 
 h3,
 .h3 {
-  font-size: calc(var(--font-heading-scale) * 2.2rem);
+  font-size: calc(var(--font-heading-scale) * 1.8rem);
 }
 
 @media only screen and (min-width: 750px) {
   h3,
   .h3 {
-    font-size: calc(var(--font-heading-scale) * 2.6rem);
+    font-size: calc(var(--font-heading-scale) * 2.2rem);
   }
 }
 
@@ -352,13 +358,13 @@ h4,
 .h4 {
   font-family: var(--font-heading-family);
   font-style: var(--font-heading-style);
-  font-size: calc(var(--font-heading-scale) * 1.8rem);
+  font-size: calc(var(--font-heading-scale) * 1.6rem);
 }
 
 @media only screen and (min-width: 750px) {
   h4,
   .h4 {
-    font-size: calc(var(--font-heading-scale) * 2rem);
+    font-size: calc(var(--font-heading-scale) * 1.8rem);
   }
 }
 
@@ -1231,7 +1237,8 @@ button.shopify-payment-button__button--unbranded {
 .customer button,
 button.shopify-payment-button__button--unbranded {
   min-width: calc(12rem + var(--buttons-border-width) * 2);
-  min-height: calc(4.6rem + var(--buttons-border-width) * 2);
+  /* 4.8rem = --button-height (48px), the design system touch-target minimum */
+  min-height: calc(4.8rem + var(--buttons-border-width) * 2);
 }
 
 .button,

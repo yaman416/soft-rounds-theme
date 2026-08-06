@@ -1,0 +1,133 @@
+{%- liquid
+  assign average = section.settings.average | plus: 0
+  assign filled = average | round
+-%}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="reviews sr-band--soft section-{{ section.id }}-padding">
+  <div class="sr-container">
+    <div class="sr-reviews">
+      <div class="sr-reviews__head">
+        <h2 class="sr-section-head__title">{{ section.settings.heading }}</h2>
+        {%- if average > 0 -%}
+          <span class="sr-stars" aria-label="{{ section.settings.average }} out of 5">
+            <span class="sr-stars__glyphs" aria-hidden="true">
+              {%- for i in (1..5) -%}
+                {%- if forloop.index <= filled -%}
+                  <span class="is-filled">{{- 'icon-star-solid.svg' | inline_asset_content -}}</span>
+                {%- else -%}
+                  <span>{{- 'icon-star.svg' | inline_asset_content -}}</span>
+                {%- endif -%}
+              {%- endfor -%}
+            </span>
+            <span class="sr-stars__value">{{ section.settings.average }}</span>
+            {%- if section.settings.total != blank -%}
+              <span class="sr-stars__count">({{ section.settings.total }})</span>
+            {%- endif -%}
+          </span>
+        {%- endif -%}
+      </div>
+
+      <ul class="sr-reviews__grid" role="list">
+        {%- for block in section.blocks -%}
+          <li class="sr-review" {{ block.shopify_attributes }}>
+            {%- if block.settings.rating > 0 -%}
+              <span class="sr-stars" aria-label="{{ block.settings.rating }} out of 5">
+                <span class="sr-stars__glyphs" aria-hidden="true">
+                  {%- for i in (1..5) -%}
+                    {%- if forloop.index <= block.settings.rating -%}
+                      <span class="is-filled">{{- 'icon-star-solid.svg' | inline_asset_content -}}</span>
+                    {%- else -%}
+                      <span>{{- 'icon-star.svg' | inline_asset_content -}}</span>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </span>
+              </span>
+            {%- endif -%}
+
+            <p class="sr-review__body">{{ block.settings.quote }}</p>
+
+            <div class="sr-review__meta">
+              {%- if block.settings.author != blank -%}
+                <span class="sr-review__author">{{ block.settings.author }}</span>
+              {%- endif -%}
+              {%- if block.settings.role != blank -%}
+                <span class="sr-review__role">{{ block.settings.role }}</span>
+              {%- endif -%}
+              {%- if block.settings.verified -%}
+                <span class="sr-badge sr-badge--soft">Verified</span>
+              {%- endif -%}
+            </div>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .reviews .sr-stars__glyphs span {
+    display: inline-flex;
+  }
+
+  .reviews .sr-stars__glyphs svg {
+    width: 14px;
+    height: 14px;
+    fill: var(--color-border-strong);
+  }
+
+  .reviews .sr-stars__glyphs span.is-filled svg {
+    fill: var(--color-coral);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Reviews",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What customers say" },
+    { "type": "text", "id": "average", "label": "Average rating", "info": "Leave blank unless you hold genuine review data. Do not estimate." },
+    { "type": "text", "id": "total", "label": "Total reviews", "info": "Leave blank unless you hold genuine review data. Do not estimate." },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding top", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding bottom", "default": 64 }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "range", "id": "rating", "min": 0, "max": 5, "step": 1, "label": "Rating", "default": 0 },
+        { "type": "textarea", "id": "quote", "label": "Quote", "info": "Use only wording a real customer actually wrote." },
+        { "type": "text", "id": "author", "label": "Author" },
+        { "type": "text", "id": "role", "label": "Role" },
+        { "type": "checkbox", "id": "verified", "label": "Verified", "info": "Tick only for a review tied to a confirmed order.", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reviews",
+      "blocks": [
+        { "type": "review", "settings": { "quote": "Hour eight and my legs still felt like legs. That has not happened in years.", "author": "Priya", "role": "ICU nurse, Melbourne" } },
+        { "type": "review", "settings": { "quote": "The cuff sits flat and never leaves a mark, even after a fourteen-hour shift.", "author": "Danielle", "role": "Midwife, Geelong" } },
+        { "type": "review", "settings": { "quote": "Work-friendly colours that do not look like hospital issue. I wear them off shift too.", "author": "Sam", "role": "Aged care, Ballarat" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -124,340 +124,260 @@ Avoid:
 - Cartoon medical imagery
 - Decorative script fonts
 - Medical crosses as the primary brand symbol
-- Rounded corners on every element
 - Fake reviews or artificial urgency
+
+Rounded corners are a deliberate part of this brand and are applied broadly.
+That is not the same as making everything a pill: buttons and small controls
+are fully rounded, panels and cards use the softer radii in section 11.
 
 ## 5. Colour System
 
-### Warm Background
+Every value in sections 5 to 13 exists as a CSS custom property in
+`assets/storefront-import-tokens.css`. That file is the machine-readable copy of
+this document. **Always style with the token, never with the raw hex.** If the
+two ever disagree, the token file is wrong and should be corrected to match this
+document — not the other way around.
 
-Name: Warm Ivory  
-Hex: `#F7F5F0`
+### Surface
 
-Use for:
+| Name | Hex | Token | Use |
+|---|---|---|---|
+| Warm Ivory | `#F7F5F0` | `--color-ivory`, `--surface-page` | The page floor. Every public page sits on this. |
+| Soft White | `#FFFFFF` | `--color-canvas`, `--surface-card` | Cards, forms, drawers, modals, navigation panels. Lifts off the ivory. |
+| Surface Soft | `#F1EDE4` | `--color-surface-soft`, `--surface-soft` | Quiet bands inside an ivory page, review cards, hover fills. |
+| Surface Strong | `#E9E4D9` | `--color-surface-strong` | Circular icon-button fills, the heavier of the two neutral fills. |
+| Cream | `#FBF8EE` | `--color-cream` | Benefit-icon discs and soft editorial tints. |
+| Blush | `#F9F0E8` | `--color-blush-bg`, `--surface-photo` | Photo plate backing while an image loads. |
+| Coral Wash | `#FFF3F4` | `--color-coral-wash`, `--surface-promo` | Promotional panels and the soft button variant. |
 
-- Main page background
-- Editorial sections
-- Large calm surfaces
+### Brand
 
-### Primary Surface
+| Name | Hex | Token | Use |
+|---|---|---|---|
+| Coral | `#F26B6B` | `--color-coral`, `--color-primary` | The single brand colour. Primary CTAs, the cart bubble, the active nav underline, filled star ratings, saved-heart state. |
+| Coral Press | `#E00B41` | `--color-coral-press` | Hover and pressed state on coral CTAs, and brand-coloured link text. |
+| Coral Soft | `#FFD1DA` | `--color-coral-soft` | Disabled CTAs, hover underline on nav links, text selection. |
 
-Name: Soft White  
-Hex: `#FFFFFF`
+Coral is used **scarcely**. Most pages should be ivory, white and ink with one
+or two coral moments. If a page has more than three coral elements competing in
+one viewport, remove some.
 
-Use for:
+### Text
 
-- Product cards
-- Forms
-- Navigation panels
-- Drawers
-- Modals
+| Name | Hex | Token | Use |
+|---|---|---|---|
+| Ink | `#222222` | `--color-ink`, `--text-heading` | Headings, nav, prices, most link text. Never pure black. |
+| Body | `#3F3F3F` | `--color-body`, `--text-body` | Running paragraph text where ink would feel heavy. |
+| Muted | `#6A6A6A` | `--color-muted`, `--text-muted` | Captions, product metadata, footer sub-labels, secondary information. |
+| Muted Soft | `#929292` | `--color-muted-soft` | Disabled text. Used sparingly. |
+| On Primary | `#FFFFFF` | `--color-on-primary` | Text on coral and on ink surfaces. |
 
-### Primary Text
+### Borders
 
-Name: Deep Charcoal  
-Hex: `#252724`
+| Name | Hex | Token | Use |
+|---|---|---|---|
+| Hairline | `#DDDDDD` | `--color-hairline`, `--border-default` | The default 1px rule — header base, footer splits, card outlines. |
+| Hairline Soft | `#EBEBEB` | `--color-hairline-soft` | Lighter divider inside long editorial copy. |
+| Border Strong | `#C1C1C1` | `--color-border-strong` | Heavier stroke on outline buttons and light swatches. |
 
-Use for:
+Focus and selection both use ink (`--border-focus`, `--border-selected`), never
+coral. Coral means "act"; ink means "selected".
 
-- Headings
-- Body text
-- Navigation
-- Important labels
+### Semantic
 
-### Secondary Text
+| Name | Hex | Token | Use |
+|---|---|---|---|
+| Sale / Error | `#C13515` | `--color-sale`, `--color-error` | Sale prices, sale badges, form validation errors. Deliberately distinct from coral. |
+| Error Hover | `#B32505` | `--color-error-hover` | Hover on error links. |
+| Success | `#4E7C59` | `--color-success` | Confirmation states. |
+| Coming Soon | `#460479` | `--color-coming-soon` | "Coming soon" badges and price placeholders only. |
+| Legal Link | `#428BFF` | `--color-legal-link` | Inline links inside legal copy only. |
 
-Name: Muted Charcoal  
-Hex: `#666A64`
+### Fabric Swatches
 
-Use for:
+These describe **products, never interface**. They exist so colour swatches on a
+product card match the garment. Do not use them for backgrounds, buttons or text.
 
-- Supporting text
-- Product metadata
-- Captions
-- Secondary information
-
-### Primary Brand Colour
-
-Name: Muted Slate Blue  
-Hex: `#718696`
-
-Use for:
-
-- Primary buttons
-- Active states
-- Links
-- Important accents
-
-### Secondary Brand Colour
-
-Name: Soft Sage  
-Hex: `#A9B5A3`
-
-Use for:
-
-- Supporting sections
-- Small accents
-- Product labels
-- Calm promotional panels
-
-### Warm Accent
-
-Name: Soft Clay  
-Hex: `#D69B88`
-
-Use sparingly for:
-
-- Promotional badges
-- Seasonal highlights
-- Small decorative details
-
-### Neutral Accent
-
-Name: Soft Sand  
-Hex: `#DDD2C2`
-
-Use for:
-
-- Borders
-- Secondary backgrounds
-- Editorial panels
-
-### Border Colour
-
-Name: Warm Grey  
-Hex: `#E4E0D8`
-
-### Success Colour
-
-Name: Muted Green  
-Hex: `#55715C`
-
-### Error Colour
-
-Name: Muted Red  
-Hex: `#A64E49`
+Blush `#EDAFB6` · Sage `#A8B79B` · Navy `#1F2A52` · Oat `#F1E7D6` ·
+Charcoal `#3B3F46` · Black `#16181C` · White `#FBFAF7` ·
+Dusty Rose `#C4798C` · Sky `#9FB8D4`
 
 ## 6. Colour Usage Rules
 
-- Use Warm Ivory as the main website background.
-- Use Soft White for cards and elevated surfaces.
-- Use Deep Charcoal for most text.
-- Use Muted Slate Blue for primary actions.
-- Use Soft Sage and Soft Clay as supporting accents only.
-- Do not use more than two accent colours in one section.
+- Warm Ivory is the page background. Soft White is for cards and raised surfaces.
+- Ink for headings and prices, Body for paragraphs, Muted for metadata.
+- Coral marks the primary action and nothing else. One primary action per view.
+- Selected and focused states are ink, never coral.
+- Sale red is not coral. Never substitute one for the other.
+- Fabric swatch colours describe products only.
 - Do not rely on colour alone to communicate meaning.
 - All text and controls must maintain accessible contrast.
 
 ## 7. Typography
 
-Use clean, highly readable sans-serif fonts.
+Two families, both loaded from Google Fonts in `layout/theme.liquid`:
 
-Preferred typography direction:
+- **Quicksand** (`--font-display`) — headings. Weights 300–700; the system uses
+  600 for nearly everything. Rounded terminals, which is why it carries the
+  brand.
+- **Nunito Sans** (`--font-sans`, `--font-body`) — body, interface, buttons,
+  labels, prices. Weights 300–900.
 
-- Headings: modern, confident and softly structured
-- Body: neutral, readable and practical
-- Interface labels: clear and compact
+Both fall back to `-apple-system, system-ui, sans-serif`.
+
+A third face, **SoftRounds Custom** (`.sr-wordmark`), is the logo-matched
+display font. Its non-logo characters are stylistically reconstructed rather
+than original and it has no bold, so it is restricted to short logo-adjacent
+display text. Never body copy, never small text, never a paragraph.
 
 Avoid:
 
 - Script fonts
-- Very thin font weights
+- Weights below 300
 - Excessive uppercase text
-- Decorative display fonts
-- Small body text
-
-### Suggested Shopify Font Direction
-
-Heading font:
-
-- A modern geometric or humanist sans-serif
-- Medium or semibold weight
-
-Body font:
-
-- Neutral sans-serif
-- Regular weight
-- Excellent readability on mobile
-
-Final fonts must be available through Shopify or loaded legally.
+- Body text below 14px
 
 ## 8. Type Scale
 
-### Desktop
+Every role below is a token triplet in `storefront-import-tokens.css`
+(`--type-<role>-size`, `-weight`, `-line`, and `-tracking` where non-zero).
 
-Display:
+| Role | Size | Weight | Line | Tracking | Use |
+|---|---|---|---|---|---|
+| `hero` | 52px | 600 | 1.05 | -1.2px | Homepage hero headline only |
+| `display-xl` | 36px | 600 | 1.15 | -0.6px | Section headings, page titles, collection titles |
+| `display-lg` | 28px | 600 | 1.2 | -0.4px | Product titles |
+| `display-md` | 22px | 600 | 1.3 | -0.2px | Category card titles, drawer headings |
+| `display-sm` | 18px | 700 | 1.35 | 0 | Sub-section titles |
+| `title-md` | 16px | 700 | 1.35 | 0 | Product card names, cart line items |
+| `title-sm` | 15px | 600 | 1.35 | 0 | Footer column heads |
+| `body-md` | 16px | 400 | 1.6 | 0 | Default running text |
+| `body-sm` | 14px | 400 | 1.5 | 0 | Card meta, review copy |
+| `price` | 17px | 700 | 1.3 | 0 | Card prices |
+| `price-lg` | 24px | 700 | 1.25 | -0.2px | Product page price |
+| `price-was` | 14px | 400 | 1.4 | 0 | Struck-through compare-at price |
+| `caption` | 13px | 600 | 1.4 | 0 | Form labels, spec chip labels |
+| `caption-sm` | 12px | 400 | 1.4 | 0 | Legal line, footer bottom |
+| `badge` | 11px | 700 | 1.2 | 0.2px | Card badges |
+| `micro-label` | 12px | 700 | 1.3 | 0 | Dense micro-labels |
+| `uppercase-tag` | 10px | 700 | 1.2 | 0.6px | Uppercase tags ("NEW") |
+| `button-md` | 15px | 700 | 1.25 | 0 | Primary button labels |
+| `button-sm` | 13px | 700 | 1.3 | 0 | Pill and chip labels |
+| `link` | 14px | 600 | 1.5 | 0 | Inline links |
+| `nav-link` | 15px | 600 | 1.3 | 0 | Header navigation |
 
-- Font size: 56px
-- Line height: 1.05
+Headings use Quicksand. Everything else uses Nunito Sans — including buttons,
+prices and card titles. This is deliberate: Quicksand carries brand warmth,
+Nunito Sans carries legibility at small sizes.
 
-Heading 1:
+### Responsive step-down
 
-- Font size: 44px
-- Line height: 1.1
-
-Heading 2:
-
-- Font size: 34px
-- Line height: 1.15
-
-Heading 3:
-
-- Font size: 26px
-- Line height: 1.2
-
-Heading 4:
-
-- Font size: 20px
-- Line height: 1.3
-
-Large body:
-
-- Font size: 18px
-- Line height: 1.6
-
-Body:
-
-- Font size: 16px
-- Line height: 1.6
-
-Small:
-
-- Font size: 14px
-- Line height: 1.5
-
-Caption:
-
-- Font size: 12px
-- Line height: 1.4
-
-### Mobile
-
-Display:
-
-- Font size: 38px
-
-Heading 1:
-
-- Font size: 34px
-
-Heading 2:
-
-- Font size: 28px
-
-Heading 3:
-
-- Font size: 22px
-
-Heading 4:
-
-- Font size: 18px
-
-Large body:
-
-- Font size: 17px
-
-Body:
-
-- Font size: 16px
-
-Small:
-
-- Font size: 14px
+Section headings drop one role at a time rather than scaling fluidly:
+`display-xl` at desktop, `display-lg` below 1080px, `display-md` below 744px.
+Dawn's generic `h1`–`h4` in `base.css` follow the same ladder.
 
 ## 9. Spacing System
 
-Use an 8-pixel-based spacing system.
+Base unit 4px, with a 2px micro-step.
 
-Spacing values:
+| Token | Value | Use |
+|---|---|---|
+| `--space-xxs` | 2px | Hairline nudges |
+| `--space-xs` | 4px | Micro spacing |
+| `--space-sm` | 8px | Compact spacing, card inner padding |
+| `--space-md` | 12px | Icon-to-text spacing |
+| `--space-base` | 16px | Standard internal spacing, grid gutters |
+| `--space-lg` | 24px | Card padding, footer column gutters |
+| `--space-xl` | 32px | Component spacing |
+| `--space-xxl` | 48px | Mobile section spacing |
+| `--space-section` | 64px | Desktop section band padding |
 
-- 4px: micro spacing
-- 8px: compact spacing
-- 12px: icon-to-text spacing
-- 16px: standard internal spacing
-- 24px: card spacing
-- 32px: component spacing
-- 48px: mobile section spacing
-- 64px: standard desktop section spacing
-- 96px: large desktop section spacing
-- 120px: large hero spacing where appropriate
+Bands are 64px vertical at desktop and 48px on mobile. Card grids stay tight at
+16px — open bands, dense grids.
 
 Avoid arbitrary spacing values unless required for responsive refinement.
 
 ## 10. Container System
 
-Maximum website width:
+| Token | Value | Use |
+|---|---|---|
+| `--container-page` | 1400px | Standard content width |
+| `--container-narrow` | 920px | Editorial reading width |
 
-- 1440px
+`--container-page` must stay equal to Dawn's `page_width` theme setting.
+Custom `.sr-*` sections read the token; Dawn's own sections read the setting.
+If they differ, section edges misalign vertically down the page.
 
-Standard content width:
+Horizontal page padding, matched between `.sr-container` and Dawn's
+`.page-width`:
 
-- 1280px
+- Mobile: 16px
+- 750px and up: 24px
+- 990px and up: 36px
 
-Editorial reading width:
+### Fixed dimensions
 
-- 760px
-
-Desktop horizontal page padding:
-
-- 32px to 48px
-
-Tablet horizontal page padding:
-
-- 24px
-
-Mobile horizontal page padding:
-
-- 16px
+Nav height 76px · announcement bar 40px · button height 48px (small 38px) ·
+input height 50px · size chip 46px · heart button 34px · swatch 22px
+(large 34px) · cart drawer 420px.
 
 ## 11. Border Radius
 
-Use rounded corners selectively.
+| Token | Value | Applies to |
+|---|---|---|
+| `--radius-sm` | 12px | Inputs, card media, cart line images |
+| `--radius-md` | 18px | Product cards, review cards, photo plates |
+| `--radius-lg` | 28px | Category cards, product media, cart drawer leading corners |
+| `--radius-xl` | 40px | Large editorial panels |
+| `--radius-full` | 9999px | Buttons, badges, chips, swatches, icon buttons, quantity steppers |
 
-- Small controls: 6px
-- Buttons and inputs: 8px
-- Product cards: 12px
-- Large media panels: 16px
-- Pills and tags: 999px
+Semantic aliases: `--radius-button` (full), `--radius-input` (sm),
+`--radius-card` (md), `--radius-photo` (md).
 
-Do not make every section or component pill-shaped.
+Buttons and small controls are fully rounded. Cards and panels use the 18–28px
+range. Nothing in the interface has a hard 0px corner except the page body.
 
 ## 12. Borders and Shadows
 
-Default border:
+Default border: 1px solid `--border-default` (`#DDDDDD`). Focus rings are 2px
+ink, offset 2px.
 
-- 1px solid `#E4E0D8`
+Three elevation tiers, all in `--shadow-*`:
 
-Default card shadow:
+| Token | Value | Use |
+|---|---|---|
+| `--shadow-soft` | `0 1px 2px rgba(0,0,0,.04), 0 6px 16px rgba(0,0,0,.06)` | Cards and floating badges at rest |
+| `--shadow-pop` | `0 2px 4px rgba(0,0,0,.05), 0 16px 32px rgba(0,0,0,.12)` | Cards on hover, paired with a `-4px` lift |
+| `--shadow-overlay` | `0 8px 40px rgba(0,0,0,.18)` | Cart drawer and modals |
 
-- `0 4px 20px rgba(37, 39, 36, 0.06)`
-
-Elevated overlay shadow:
-
-- `0 12px 40px rgba(37, 39, 36, 0.12)`
-
-Prefer spacing and borders over strong shadows.
+Shadows are wide and low-opacity — depth without weight. Never add a fourth
+tier; use spacing or a hairline instead.
 
 ## 13. Buttons
 
-### Primary Button
+All buttons are fully rounded, 48px minimum height (small variant 38px), label
+in Nunito Sans 15px/700, and squash to `scale(0.97)` on press. Focus shows a 2px
+ink outline at 2px offset.
 
-- Muted Slate Blue background
-- White text
-- 8px border radius
-- Minimum height of 48px
-- Medium font weight
-- Clear hover state
-- Clear focus state
+| Variant | Class | Fill | Label | Hover |
+|---|---|---|---|---|
+| Primary | `.sr-btn--primary` | Coral | White | Coral Press |
+| Secondary | `.sr-btn--secondary` | White, 1.5px ink border | Ink | Surface Soft fill |
+| Tertiary | `.sr-btn--tertiary` | None | Ink | Underline |
+| Soft | `.sr-btn--soft` | Coral Wash | Coral Press | Coral Soft |
+| Ink | `.sr-btn--ink` | Ink | White | Body |
 
-### Secondary Button
+Disabled primaries take the Coral Soft fill and `cursor: not-allowed`.
 
-- White or transparent background
-- Deep Charcoal text
-- Warm Grey border
-- Minimum height of 48px
-- Clear hover state
-- Clear focus state
+One primary button per view. If two actions look equally important, one of them
+is secondary.
+
+### Text Link
+
+- Clear underline or directional icon
+- Visible hover state
+- Visible keyboard focus
+- Must not rely on colour alone
 
 ### Text Link
 
@@ -710,11 +630,18 @@ At mobile widths:
 
 Animations should be subtle and purposeful.
 
-Recommended durations:
+Durations and easing are tokens:
 
-- Hover feedback: 150ms
-- Interface transitions: 200ms
-- Larger reveal transitions: maximum 350ms
+| Token | Value | Use |
+|---|---|---|
+| `--duration-fast` | 140ms | Hover and colour feedback |
+| `--duration-base` | 220ms | Interface transitions, card lift |
+| `--duration-slow` | 400ms | Image zoom on category cards |
+| `--ease-standard` | `cubic-bezier(0.2, 0, 0, 1)` | Everything by default |
+| `--ease-pop` | `cubic-bezier(0.34, 1.56, 0.64, 1)` | Button press and card lift only |
+
+`--ease-pop` overshoots slightly. That small bounce is the brand's one piece of
+playfulness — restrict it to press and lift, never to opacity or colour.
 
 Use:
 

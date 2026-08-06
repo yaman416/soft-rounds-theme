@@ -81,12 +81,36 @@ Status: Complete
 
 ## Phase 1 — Global Design Tokens
 
-Status: Complete
+Status: Complete — reworked 2026-08-05
 
 ### Objective
 
 Translate the Soft Rounds design system into reusable global theme settings and
 CSS variables.
+
+### 2026-08-05 rework
+
+The original Phase 1 built a slate-blue / sage / clay palette with no token
+layer — colours were written straight into `assets/base.css` and
+`config/settings_data.json`. That has been replaced by the coral design system
+ported from the earlier Soft Rounds build:
+
+- Added `assets/storefront-import-tokens.css` — the full token layer (colour,
+  type roles, spacing, shape, elevation, layout, motion) and the only place
+  design values are defined.
+- Added `assets/component-softrounds.css` — the `.sr-*` component classes plus
+  the Dawn selector overrides that retune cards, header, footer, collection,
+  product and cart drawer.
+- Repalette: Warm Ivory page floor `#F7F5F0`, Soft White cards, Ink `#222222`
+  text, Coral `#F26B6B` as the single accent. Slate blue, sage and clay are
+  retired.
+- Type: Quicksand headings and Nunito Sans body, loaded from Google Fonts in
+  `layout/theme.liquid`. Dawn's `h1`–`h4` scale in `base.css` remapped to the
+  token type roles.
+- `design.md` sections 5–13 and 24 rewritten to describe this system.
+
+Note: `--container-page` in the token file must stay equal to the `page_width`
+theme setting (currently 1400px), or custom sections misalign with Dawn's.
 
 ### Scope
 
@@ -260,12 +284,41 @@ to key products.
 - [x] No unsupported claims
 - [x] No new Theme Check errors
 
+### 2026-08-05 rebuild
+
+The stock-Dawn homepage (`image-banner`, `collection-list`, `multicolumn`,
+`featured-collection`) was replaced with the design-system sections ported from
+the earlier build. Existing copy was carried across; the brand-story
+`image-with-text` section was kept as-is.
+
+Current order: hero-storefront, category-tiles, featured-collection,
+feature-strip, image-with-text.
+
+Sections added: `hero-storefront`, `category-tiles`, `feature-strip`,
+`reviews`, `coming-soon`. Each gained the Dawn `{% style %}` padding block —
+the originals emitted `section-<id>-padding` on the wrapper but never defined
+it, so their padding settings did nothing.
+
+Claim-bearing and fabricated schema defaults were stripped from the ported
+sections (see Remaining work).
+
 ### Remaining work
 
 - Final logo
 - Real hero photography
 - Collection images
 - Real product images
+- **Products.** The store currently has 0 products, so the homepage grid shows
+  Dawn's placeholder cards and `/collections/all` is empty.
+- **Reviews section.** `sections/reviews.liquid` is installed but deliberately
+  not placed on the homepage. It shipped with fabricated reviews as schema
+  defaults (named authors, a 4.8/214 average, Verified pre-ticked). Those
+  defaults are now blank and the Verified checkbox defaults to off. Only add
+  this section once genuine review data exists.
+- **Self-hosting Quicksand and Nunito Sans.** They load from Google Fonts,
+  which is the sole source of the 3 new Theme Check `RemoteAsset` warnings and
+  a third-party request on every page. Serving the woff2 files from `assets/`
+  would clear both.
 - Final product catalogue
 - Final homepage copy review
 - Final visual QA

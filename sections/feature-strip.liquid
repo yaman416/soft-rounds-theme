@@ -1,0 +1,119 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="feature-strip color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <ul class="feature-strip__list sr-container" role="list">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign tints = 'sage,cream,blush,coral' | split: ','
+        assign tint_index = forloop.index0 | modulo: 4
+        assign tint = tints[tint_index]
+      -%}
+      <li class="sr-spec sr-spec--stack sr-spec--{{ tint }}" {{ block.shopify_attributes }}>
+        <span class="sr-spec__icon">{{ block.settings.icon | inline_asset_content }}</span>
+        <span class="sr-spec__label">{{ block.settings.label }}</span>
+      </li>
+    {%- endfor -%}
+  </ul>
+</div>
+
+{% stylesheet %}
+  .feature-strip__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-xl) var(--space-xxl);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  @media screen and (max-width: 744px) {
+    .feature-strip__list {
+      gap: var(--space-lg);
+    }
+
+    .feature-strip__list .sr-spec {
+      flex: 1 1 40%;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Feature strip",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon filename",
+          "info": "e.g. icon-leaf.svg",
+          "default": "icon-leaf.svg"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "info": "Material, shipping and returns claims must be verifiable."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feature strip",
+      "blocks": [
+        { "type": "feature", "settings": { "icon": "icon-leaf.svg", "label": "Bamboo blend" } },
+        { "type": "feature", "settings": { "icon": "icon-wind.svg", "label": "Breathable knit" } },
+        { "type": "feature", "settings": { "icon": "icon-truck.svg", "label": "Ships from Melbourne" } },
+        { "type": "feature", "settings": { "icon": "icon-shield-check.svg", "label": "60-day returns" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

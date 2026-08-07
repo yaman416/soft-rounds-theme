@@ -1,44 +1,55 @@
-/* Soft Rounds design tokens — ported from the Subtle SoftRounds design system handoff.
-   Consolidates tokens/{colors,typography,spacing,shape,elevation,layout,motion}.css */
+/* Soft Rounds design tokens — Direction C, "Modern Feminine Utility".
+   Source of truth: the Claude Design project "Soft Rounds Storefront Design",
+   file Direction-C-Modern-Feminine-Utility.dc.html.
+
+   This file is the machine-readable copy of design.md sections 5-13.
+   Always style with a token, never with a raw hex. If the two disagree,
+   design.md wins and this file should be corrected to match it. */
 
 :root {
   /* ================= Brand ================= */
-  --color-coral: #f26b6b;
-  --color-coral-press: #e00b41;
-  --color-coral-soft: #ffd1da;
-  --color-coral-wash: #fff3f4;
-  --color-cream: #fbf8ee;
-  --color-blush-bg: #f9f0e8;
+  /* Muted Slate Blue is the primary action colour — every primary CTA, the
+     "Why Soft Rounds" panel, focus rings, and checklist ticks. */
+  --color-slate: #718696;
+  --color-slate-press: #5f7382;
+  --color-slate-ring: rgba(113, 134, 150, 0.18);
+  --color-on-slate: #e6e9e5;
+
+  /* ================= Supporting accents ================= */
+  /* Sage and Clay are accents only — never a page background, never body text.
+     Clay carries counts and "New"; Sage carries the hero eyebrow. */
+  --color-sage: #a9b5a3;
+  --color-clay: #d69b88;
+  --color-sand: #ddd2c2;
 
   /* ================= Surface ================= */
-  /* Canvas is the card/panel white. Ivory is the page floor, so white cards
-     lift off the page instead of dissolving into it. */
-  --color-canvas: #ffffff;
+  /* Ivory is the page floor. White is the card/panel surface, so cards lift
+     off the page rather than dissolving into it. */
   --color-ivory: #f7f5f0;
-  /* Warmed one step off the original neutral greys (#f7f7f7 / #f2f2f2) so soft
-     fills sit in the same temperature family as the ivory page floor. */
-  --color-surface-soft: #f1ede4;
-  --color-surface-strong: #e9e4d9;
+  --color-canvas: #ffffff;
+  --color-surface-soft: #f7f5f0;
+  --color-surface-strong: #e4e0d8;
 
   /* ================= Hairlines ================= */
-  --color-hairline: #dddddd;
-  --color-hairline-soft: #ebebeb;
-  --color-border-strong: #c1c1c1;
+  --color-hairline: #e4e0d8;
+  --color-hairline-soft: #ebe8e1;
+  --color-border-strong: #252724;
 
   /* ================= Text ================= */
-  --color-ink: #222222;
-  --color-body: #3f3f3f;
-  --color-muted: #6a6a6a;
-  --color-muted-soft: #929292;
+  --color-ink: #252724;
+  --color-ink-hover: #3e4340;
+  --color-body: #666a64;
+  --color-muted: #666a64;
+  --color-muted-soft: #9b9c96;
   --color-on-primary: #ffffff;
 
   /* ================= Semantic ================= */
-  --color-sale: #c13515;
-  --color-success: #4e7c59;
-  --color-error: #c13515;
-  --color-error-hover: #b32505;
-  --color-legal-link: #428bff;
-  --color-coming-soon: #460479;
+  --color-sale: #a64e49;
+  --color-success: #55715c;
+  --color-error: #a64e49;
+  --color-error-hover: #8f423e;
+  --color-legal-link: #666a64;
+  --color-coming-soon: #718696;
 
   /* ================= Fabric swatches (product only, never UI) ================= */
   --fabric-blush: #edafb6;
@@ -52,21 +63,21 @@
   --fabric-sky: #9fb8d4;
 
   /* ================= Scrim ================= */
-  --color-scrim: rgba(0, 0, 0, 0.5);
-  --scrim-photo: rgba(34, 34, 34, 0.62);
-  --scrim-photo-mid: rgba(34, 34, 34, 0.18);
+  --color-scrim: rgba(37, 39, 36, 0.5);
+  --scrim-photo: rgba(37, 39, 36, 0.62);
+  --scrim-photo-mid: rgba(37, 39, 36, 0.18);
 
   /* ================= Semantic aliases ================= */
-  --color-primary: var(--color-coral);
-  --color-primary-active: var(--color-coral-press);
-  --color-primary-disabled: var(--color-coral-soft);
+  --color-primary: var(--color-slate);
+  --color-primary-active: var(--color-slate-press);
+  --color-primary-disabled: #b6c1c9;
 
   --text-heading: var(--color-ink);
   --text-body: var(--color-body);
   --text-muted: var(--color-muted);
   --text-disabled: var(--color-muted-soft);
-  --text-link: var(--color-ink);
-  --text-link-brand: var(--color-coral-press);
+  --text-link: var(--color-slate);
+  --text-link-hover: var(--color-ink);
   --text-sale: var(--color-sale);
   --text-error: var(--color-error);
   --text-legal-link: var(--color-legal-link);
@@ -76,107 +87,125 @@
   --surface-card: var(--color-canvas);
   --surface-soft: var(--color-surface-soft);
   --surface-strong: var(--color-surface-strong);
-  --surface-photo: var(--color-blush-bg);
-  --surface-promo: var(--color-coral-wash);
+  --surface-photo: var(--color-sand);
+  --surface-promo: var(--color-sand);
+  --surface-panel: var(--color-slate);
   --surface-inverse: var(--color-ink);
 
   --border-default: var(--color-hairline);
   --border-soft: var(--color-hairline-soft);
   --border-strong: var(--color-border-strong);
-  --border-focus: var(--color-ink);
+  --border-focus: var(--color-slate);
   --border-selected: var(--color-ink);
 
-  --action-primary-bg: var(--color-coral);
-  --action-primary-bg-active: var(--color-coral-press);
-  --action-primary-bg-disabled: var(--color-coral-soft);
+  --action-primary-bg: var(--color-slate);
+  --action-primary-bg-active: var(--color-slate-press);
+  --action-primary-bg-disabled: var(--color-primary-disabled);
   --action-primary-fg: var(--color-on-primary);
   --action-secondary-bg: var(--color-canvas);
   --action-secondary-fg: var(--color-ink);
-  --action-secondary-border: var(--color-ink);
+  --action-secondary-border: var(--color-hairline);
+  --action-dark-bg: var(--color-ink);
+  --action-dark-bg-active: var(--color-ink-hover);
 
   /* ================= Type families ================= */
-  --font-display: 'Quicksand', -apple-system, system-ui, sans-serif;
-  --font-sans: 'Nunito Sans', -apple-system, system-ui, 'Segoe UI', Roboto, sans-serif;
+  /* One workhorse family. Instrument Serif italic is an accent face used for a
+     single emphasised phrase inside a heading — never for a whole heading,
+     never for body copy. */
+  --font-display: 'Plus Jakarta Sans', -apple-system, system-ui, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, system-ui, 'Segoe UI', Roboto, sans-serif;
   --font-body: var(--font-sans);
+  --font-accent: 'Instrument Serif', Georgia, 'Times New Roman', serif;
 
   /* ================= Type roles ================= */
-  --type-hero-size: 52px;
+  --type-hero-size: 46px;
   --type-hero-weight: 600;
-  --type-hero-line: 1.05;
-  --type-hero-tracking: -1.2px;
-  --type-display-xl-size: 36px;
+  --type-hero-line: 1.08;
+  --type-hero-tracking: -0.02em;
+  --type-display-xl-size: 40px;
   --type-display-xl-weight: 600;
-  --type-display-xl-line: 1.15;
-  --type-display-xl-tracking: -0.6px;
-  --type-display-lg-size: 28px;
+  --type-display-xl-line: 1.12;
+  --type-display-xl-tracking: -0.02em;
+  --type-display-lg-size: 34px;
   --type-display-lg-weight: 600;
-  --type-display-lg-line: 1.2;
-  --type-display-lg-tracking: -0.4px;
-  --type-display-md-size: 22px;
+  --type-display-lg-line: 1.15;
+  --type-display-lg-tracking: -0.015em;
+  --type-display-md-size: 30px;
   --type-display-md-weight: 600;
-  --type-display-md-line: 1.3;
-  --type-display-md-tracking: -0.2px;
-  --type-display-sm-size: 18px;
-  --type-display-sm-weight: 700;
-  --type-display-sm-line: 1.35;
+  --type-display-md-line: 1.2;
+  --type-display-md-tracking: -0.015em;
+  --type-display-sm-size: 21px;
+  --type-display-sm-weight: 600;
+  --type-display-sm-line: 1.25;
   --type-display-sm-tracking: 0;
-  --type-title-md-size: 16px;
-  --type-title-md-weight: 700;
-  --type-title-md-line: 1.35;
-  --type-title-sm-size: 15px;
+  --type-title-md-size: 18px;
+  --type-title-md-weight: 600;
+  --type-title-md-line: 1.3;
+  --type-title-sm-size: 16px;
   --type-title-sm-weight: 600;
   --type-title-sm-line: 1.35;
+  --type-body-lg-size: 17px;
+  --type-body-lg-weight: 400;
+  --type-body-lg-line: 1.6;
   --type-body-md-size: 16px;
   --type-body-md-weight: 400;
   --type-body-md-line: 1.6;
-  --type-body-sm-size: 14px;
+  --type-body-sm-size: 14.5px;
   --type-body-sm-weight: 400;
-  --type-body-sm-line: 1.5;
-  --type-price-size: 17px;
-  --type-price-weight: 700;
-  --type-price-line: 1.3;
+  --type-body-sm-line: 1.55;
+  --type-price-size: 15px;
+  --type-price-weight: 500;
+  --type-price-line: 1;
   --type-price-lg-size: 24px;
-  --type-price-lg-weight: 700;
+  --type-price-lg-weight: 600;
   --type-price-lg-line: 1.25;
-  --type-price-lg-tracking: -0.2px;
-  --type-price-was-size: 14px;
+  --type-price-lg-tracking: -0.015em;
+  --type-price-was-size: 13px;
   --type-price-was-weight: 400;
   --type-price-was-line: 1.4;
   --type-caption-size: 13px;
-  --type-caption-weight: 600;
+  --type-caption-weight: 500;
   --type-caption-line: 1.4;
-  --type-caption-sm-size: 12px;
+  --type-caption-sm-size: 12.5px;
   --type-caption-sm-weight: 400;
-  --type-caption-sm-line: 1.4;
-  --type-badge-size: 11px;
-  --type-badge-weight: 700;
-  --type-badge-line: 1.2;
-  --type-badge-tracking: 0.2px;
+  --type-caption-sm-line: 1.5;
+  --type-badge-size: 11.5px;
+  --type-badge-weight: 600;
+  --type-badge-line: 1;
+  --type-badge-tracking: 0.08em;
   --type-micro-label-size: 12px;
-  --type-micro-label-weight: 700;
-  --type-micro-label-line: 1.3;
-  --type-uppercase-tag-size: 10px;
+  --type-micro-label-weight: 600;
+  --type-micro-label-line: 1;
+  --type-uppercase-tag-size: 10.5px;
   --type-uppercase-tag-weight: 700;
-  --type-uppercase-tag-line: 1.2;
-  --type-uppercase-tag-tracking: 0.6px;
+  --type-uppercase-tag-line: 1;
+  --type-uppercase-tag-tracking: 0.1em;
+  --type-eyebrow-size: 11px;
+  --type-eyebrow-weight: 600;
+  --type-eyebrow-line: 1;
+  --type-eyebrow-tracking: 0.16em;
+  --type-footer-head-size: 12px;
+  --type-footer-head-weight: 600;
+  --type-footer-head-line: 1;
+  --type-footer-head-tracking: 0.12em;
   --type-button-md-size: 15px;
-  --type-button-md-weight: 700;
-  --type-button-md-line: 1.25;
-  --type-button-sm-size: 13px;
-  --type-button-sm-weight: 700;
-  --type-button-sm-line: 1.3;
-  --type-link-size: 14px;
-  --type-link-weight: 600;
+  --type-button-md-weight: 600;
+  --type-button-md-line: 1;
+  --type-button-sm-size: 13.5px;
+  --type-button-sm-weight: 500;
+  --type-button-sm-line: 1;
+  --type-link-size: 14.5px;
+  --type-link-weight: 400;
   --type-link-line: 1.5;
-  --type-nav-link-size: 15px;
-  --type-nav-link-weight: 600;
-  --type-nav-link-line: 1.3;
+  --type-nav-link-size: 14px;
+  --type-nav-link-weight: 500;
+  --type-nav-link-line: 1;
 
+  --weight-light: 300;
   --weight-regular: 400;
   --weight-medium: 500;
   --weight-semibold: 600;
   --weight-bold: 700;
-  --weight-black: 800;
 
   /* ================= Spacing ================= */
   --space-xxs: 2px;
@@ -187,26 +216,29 @@
   --space-lg: 24px;
   --space-xl: 32px;
   --space-xxl: 48px;
-  --space-section: 64px;
+  --space-section: 80px;
 
   --pad-card: var(--space-lg);
-  --pad-card-meta: var(--space-base);
-  --gap-grid: var(--space-base);
-  --gap-footer-column: var(--space-lg);
+  --pad-card-meta: 20px;
+  --pad-panel: 48px;
+  --gap-grid: var(--space-lg);
+  --gap-footer-column: var(--space-xxl);
   --band-padding-y: var(--space-section);
 
   /* ================= Shape ================= */
+  /* Two radii carry the whole system: 16px for anything with a surface,
+     12px for anything you click or type into, 999px for pills and dots. */
   --radius-sm: 12px;
-  --radius-md: 18px;
-  --radius-lg: 28px;
-  --radius-xl: 40px;
-  --radius-full: 9999px;
+  --radius-md: 16px;
+  --radius-lg: 16px;
+  --radius-xl: 16px;
+  --radius-full: 999px;
 
   --border-hairline: 1px;
-  --border-focus-width: 2px;
-  --border-swatch: 2px;
+  --border-focus-width: 3px;
+  --border-swatch: 1px;
 
-  --radius-button: var(--radius-full);
+  --radius-button: var(--radius-sm);
   --radius-input: var(--radius-sm);
   --radius-card: var(--radius-md);
   --radius-photo: var(--radius-md);
@@ -214,48 +246,49 @@
 
   /* ================= Elevation ================= */
   --shadow-none: none;
-  --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.04), 0 6px 16px rgba(0, 0, 0, 0.06);
-  --shadow-pop: 0 2px 4px rgba(0, 0, 0, 0.05), 0 16px 32px rgba(0, 0, 0, 0.12);
-  --shadow-overlay: 0 8px 40px rgba(0, 0, 0, 0.18);
-  --lift-pop: -4px;
+  --shadow-soft: 0 4px 20px rgba(37, 39, 36, 0.06);
+  --shadow-pop: 0 12px 40px rgba(37, 39, 36, 0.12);
+  --shadow-overlay: 0 12px 40px rgba(37, 39, 36, 0.12);
+  --shadow-focus: 0 0 0 3px var(--color-slate-ring);
+  --lift-pop: 0px;
 
   /* ================= Layout ================= */
-  /* The design system documents ~1320px. Widened to 1400px to match Dawn's
-     page_width theme setting, so custom .sr-* sections and Dawn's own sections
-     share one content edge. Change both together or they will misalign. */
-  --container-page: 1400px;
-  --container-narrow: 920px;
-  --gutter-page: 24px;
-  --nav-height: 76px;
+  --container-page: 1440px;
+  --container-narrow: 760px;
+  --gutter-page: 40px;
+  --gutter-page-mobile: 16px;
+  --nav-height: 78px;
+  --nav-height-mobile: 62px;
   --announcement-height: 40px;
-  --button-height: 48px;
+  --button-height: 50px;
   --button-height-sm: 38px;
-  --input-height: 50px;
-  --swatch-size: 22px;
-  --swatch-size-lg: 34px;
-  --size-chip: 46px;
-  --heart-size: 34px;
+  --input-height: 52px;
+  --swatch-size: 15px;
+  --swatch-size-lg: 24px;
+  --size-chip: 36px;
+  --heart-size: 40px;
+  --icon-button-size: 42px;
   --cart-drawer-width: 420px;
 
   /* ================= Motion ================= */
   --duration-instant: 0ms;
-  --duration-fast: 140ms;
-  --duration-base: 220ms;
-  --duration-slow: 400ms;
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --duration-slow: 350ms;
   --ease-standard: cubic-bezier(0.2, 0, 0, 1);
   --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --transition-pop: transform var(--duration-base) var(--ease-pop), box-shadow var(--duration-base) var(--ease-standard);
+  --transition-pop: transform var(--duration-base) var(--ease-standard), box-shadow var(--duration-base) var(--ease-standard);
   --transition-color: background-color var(--duration-fast) var(--ease-standard),
     color var(--duration-fast) var(--ease-standard), border-color var(--duration-fast) var(--ease-standard);
   --transition-fade: opacity var(--duration-base) var(--ease-standard);
 
   /* ================= Dawn cascade overrides ================= */
   /* Dawn resolves fonts from these; point them at the design system families. */
-  --font-heading-family: 'Quicksand', -apple-system, system-ui, sans-serif;
+  --font-heading-family: 'Plus Jakarta Sans', -apple-system, system-ui, sans-serif;
   --font-heading-weight: 600;
-  --font-body-family: 'Nunito Sans', -apple-system, system-ui, 'Segoe UI', Roboto, sans-serif;
+  --font-body-family: 'Plus Jakarta Sans', -apple-system, system-ui, 'Segoe UI', Roboto, sans-serif;
   --font-body-weight: 400;
-  --font-body-weight-bold: 700;
+  --font-body-weight-bold: 600;
 }
 
 body {
@@ -272,9 +305,19 @@ h5,
 h6 {
   font-family: var(--font-display);
   font-weight: var(--weight-semibold);
+  color: var(--color-ink);
+}
+
+/* The one accent face. Wrap a single phrase inside a heading:
+   <h1>Premium comfort made for <em class="sr-accent">long shifts</em>.</h1> */
+.sr-accent {
+  font-family: var(--font-accent);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0;
 }
 
 ::selection {
-  background: var(--color-coral-soft);
+  background: var(--color-sand);
   color: var(--color-ink);
 }

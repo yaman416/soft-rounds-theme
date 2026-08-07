@@ -1,3 +1,9 @@
+{%- comment -%}
+  Direction C "Why Soft Rounds": a slate-blue panel holding a heading and four
+  icon columns. The panel is the only large block of brand colour on the page,
+  which is what makes it read as a statement rather than another card.
+{%- endcomment -%}
+
 {%- style -%}
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
@@ -10,78 +16,151 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  #shopify-section-{{ section.id }} .feature-c__grid {
+    --feature-columns: {{ section.settings.columns_desktop }};
+  }
 {%- endstyle -%}
 
-<div class="feature-strip color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
-  <ul class="feature-strip__list sr-container" role="list">
-    {%- for block in section.blocks -%}
-      {%- liquid
-        assign tints = 'sage,cream,blush,coral' | split: ','
-        assign tint_index = forloop.index0 | modulo: 4
-        assign tint = tints[tint_index]
-      -%}
-      <li class="sr-spec sr-spec--stack sr-spec--{{ tint }}" {{ block.shopify_attributes }}>
-        <span class="sr-spec__icon">{{ block.settings.icon | inline_asset_content }}</span>
-        <span class="sr-spec__label">{{ block.settings.label }}</span>
-      </li>
-    {%- endfor -%}
-  </ul>
+<div class="feature-c section-{{ section.id }}-padding">
+  <div class="sr-container">
+    <div class="feature-c__panel">
+      {%- if section.settings.title != blank -%}
+        <h2 class="feature-c__title">{{ section.settings.title }}</h2>
+      {%- endif -%}
+
+      <div class="feature-c__grid">
+        {%- for block in section.blocks -%}
+          <div class="feature-c__item" {{ block.shopify_attributes }}>
+            {%- if block.settings.icon != blank -%}
+              <span class="feature-c__icon">{{ block.settings.icon | inline_asset_content }}</span>
+            {%- endif -%}
+            {%- if block.settings.label != blank -%}
+              <h3 class="feature-c__label">{{ block.settings.label }}</h3>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <p class="feature-c__text">{{ block.settings.text }}</p>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
 </div>
 
 {% stylesheet %}
-  .feature-strip__list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: var(--space-xl) var(--space-xxl);
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  .feature-c__panel {
+    background: var(--surface-panel);
+    border-radius: var(--radius-card);
+    padding: var(--pad-panel) 44px;
   }
 
-  @media screen and (max-width: 744px) {
-    .feature-strip__list {
-      gap: var(--space-lg);
+  .feature-c__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: var(--weight-semibold);
+    line-height: 1.25;
+    color: var(--color-on-primary);
+  }
+
+  .feature-c__grid {
+    display: grid;
+    grid-template-columns: repeat(var(--feature-columns, 4), minmax(0, 1fr));
+    gap: 36px;
+    margin-top: var(--space-xl);
+  }
+
+  .feature-c__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.18);
+  }
+
+  .feature-c__icon svg {
+    width: 23px;
+    height: 23px;
+    color: var(--color-on-primary);
+  }
+
+  .feature-c__label {
+    margin: 16px 0 0;
+    font-family: var(--font-display);
+    font-size: var(--type-title-md-size);
+    font-weight: var(--type-title-md-weight);
+    line-height: var(--type-title-md-line);
+    color: var(--color-on-primary);
+  }
+
+  .feature-c__text {
+    margin: 7px 0 0;
+    font-family: var(--font-sans);
+    font-size: var(--type-body-sm-size);
+    line-height: 1.6;
+    color: var(--color-on-slate);
+    text-wrap: pretty;
+  }
+
+  @media screen and (max-width: 989px) {
+    .feature-c__panel {
+      padding: 28px 22px;
     }
 
-    .feature-strip__list .sr-spec {
-      flex: 1 1 40%;
+    .feature-c__title {
+      font-size: 22px;
+    }
+
+    .feature-c__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px 18px;
+      margin-top: 22px;
+    }
+
+    .feature-c__icon {
+      width: 40px;
+      height: 40px;
+    }
+
+    .feature-c__icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .feature-c__label {
+      margin-top: 12px;
+      font-size: 15.5px;
+    }
+
+    .feature-c__text {
+      margin-top: 5px;
+      font-size: 13.5px;
+      line-height: 1.55;
     }
   }
 {% endstylesheet %}
 
 {% schema %}
 {
-  "name": "Feature strip",
+  "name": "Why Soft Rounds",
   "tag": "section",
   "class": "section",
   "settings": [
-    {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "Color scheme",
-      "default": "scheme-1"
-    },
+    { "type": "text", "id": "title", "label": "Panel heading", "default": "Why Soft Rounds" },
     {
       "type": "range",
-      "id": "padding_top",
-      "label": "Padding top",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "default": 32
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Columns on desktop",
+      "default": 4
     },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "label": "Padding bottom",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "default": 32
-    }
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding top", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding bottom", "default": 0 }
   ],
   "blocks": [
     {
@@ -100,19 +179,19 @@
           "id": "label",
           "label": "Label",
           "info": "Material, shipping and returns claims must be verifiable."
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Supporting text"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Feature strip",
-      "blocks": [
-        { "type": "feature", "settings": { "icon": "icon-leaf.svg", "label": "Bamboo blend" } },
-        { "type": "feature", "settings": { "icon": "icon-wind.svg", "label": "Breathable knit" } },
-        { "type": "feature", "settings": { "icon": "icon-truck.svg", "label": "Ships from Melbourne" } },
-        { "type": "feature", "settings": { "icon": "icon-shield-check.svg", "label": "60-day returns" } }
-      ]
+      "name": "Why Soft Rounds",
+      "blocks": [{ "type": "feature" }, { "type": "feature" }, { "type": "feature" }, { "type": "feature" }]
     }
   ]
 }

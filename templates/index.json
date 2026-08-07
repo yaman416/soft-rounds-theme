@@ -11,46 +11,58 @@
   "sections": {
     "hero": {
       "type": "hero-storefront",
-      "blocks": {
-        "spec-comfort": {
-          "type": "spec",
-          "settings": { "icon": "icon-sparkles.svg", "label": "Premium comfort" }
-        },
-        "spec-support": {
-          "type": "spec",
-          "settings": { "icon": "icon-heart.svg", "label": "Graduated support" }
-        },
-        "spec-quality": {
-          "type": "spec",
-          "settings": { "icon": "icon-shield-check.svg", "label": "Durable materials" }
-        }
-      },
-      "block_order": ["spec-comfort", "spec-support", "spec-quality"],
       "name": "Hero",
       "settings": {
-        "eyebrow": "",
-        "heading": "Comfort for every shift.",
-        "text": "Premium compression socks and healthcare apparel designed for professionals who spend long hours on their feet.",
+        "eyebrow": "Socks & scrubs",
+        "heading": "Premium comfort made for ",
+        "heading_accent": "long shifts",
+        "heading_end": ".",
+        "text": "Soft, durable compression socks and healthcare scrubs designed for demanding workdays.",
         "button_label": "Shop compression socks",
         "button_link": "shopify://collections/compression",
-        "secondary_button_label": "Shop scrubs",
+        "secondary_button_label": "Explore scrubs",
         "secondary_button_link": "shopify://collections/scrubs",
-        "color_scheme": "scheme-1",
-        "padding_top": 64,
-        "padding_bottom": 64
+        "image_height": 600,
+        "image_height_mobile": 330,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "shortcuts": {
+      "type": "filter-pills",
+      "name": "Shortcut pills",
+      "blocks": {
+        "pill-socks": {
+          "type": "pill",
+          "settings": { "label": "Compression socks", "link": "shopify://collections/compression" }
+        },
+        "pill-scrubs": {
+          "type": "pill",
+          "settings": { "label": "Scrubs", "link": "shopify://collections/scrubs" }
+        },
+        "pill-all": {
+          "type": "pill",
+          "settings": { "label": "Shop all", "link": "shopify://collections/all" }
+        }
+      },
+      "block_order": ["pill-socks", "pill-scrubs", "pill-all"],
+      "settings": {
+        "label": "Popular right now",
+        "padding_top": 20,
+        "padding_bottom": 20
       }
     },
     "category_tiles": {
       "type": "category-tiles",
+      "name": "Shop by category",
       "blocks": {
         "tile-socks": {
           "type": "tile",
           "settings": {
-            "title": "Compression socks",
-            "caption": "Made for long shifts on your feet",
+            "title": "Compression Socks",
+            "caption": "Supportive comfort for long hours on your feet.",
             "fallback_image": "sr-socks-colour-range-flatlay.webp",
             "link": "shopify://collections/compression",
-            "cta": "Shop the range",
             "coming_soon": false
           }
         },
@@ -58,31 +70,76 @@
           "type": "tile",
           "settings": {
             "title": "Scrubs",
-            "caption": "Professional essentials, sold as separates",
+            "caption": "Soft, durable workwear designed for movement.",
             "fallback_image": "sr-scrubs-duo.webp",
             "link": "shopify://collections/scrubs",
-            "cta": "Shop the range",
             "coming_soon": false
           }
         }
       },
       "block_order": ["tile-socks", "tile-scrubs"],
-      "name": "Shop by category",
       "settings": {
         "title": "Shop by category",
+        "subtitle": "Start with what your shift needs most.",
+        "columns_desktop": 2,
         "color_scheme": "scheme-1",
-        "padding_top": 64,
-        "padding_bottom": 32
+        "padding_top": 80,
+        "padding_bottom": 0
+      }
+    },
+    "why": {
+      "type": "feature-strip",
+      "name": "Why Soft Rounds",
+      "blocks": {
+        "soft": {
+          "type": "feature",
+          "settings": {
+            "icon": "icon-leaf.svg",
+            "label": "Soft materials",
+            "text": "Fabrics chosen for softness against the skin through a full shift."
+          }
+        },
+        "durable": {
+          "type": "feature",
+          "settings": {
+            "icon": "icon-shield-check.svg",
+            "label": "Durable construction",
+            "text": "Reinforced seams and knits built for repeated wear and washing."
+          }
+        },
+        "shifts": {
+          "type": "feature",
+          "settings": {
+            "icon": "icon-heart.svg",
+            "label": "Made for long shifts",
+            "text": "Designed around standing, walking and moving between tasks."
+          }
+        },
+        "care": {
+          "type": "feature",
+          "settings": {
+            "icon": "icon-droplets.svg",
+            "label": "Easy-care essentials",
+            "text": "Simple washing instructions that suit a busy weekly routine."
+          }
+        }
+      },
+      "block_order": ["soft", "durable", "shifts", "care"],
+      "settings": {
+        "title": "Why Soft Rounds",
+        "columns_desktop": 4,
+        "padding_top": 80,
+        "padding_bottom": 0
       }
     },
     "product_grid": {
       "type": "featured-collection",
-      "name": "Shop the range",
+      "name": "Compression socks",
       "settings": {
-        "title": "Shop the range",
+        "title": "Compression socks for demanding shifts",
         "heading_size": "h1",
         "description": "",
-        "show_description": false,
+        "show_description": true,
         "description_style": "body",
         "collection": "compression",
         "products_to_show": 8,
@@ -90,102 +147,68 @@
         "color_scheme": "scheme-1",
         "full_width": false,
         "show_view_all": true,
-        "view_all_style": "link",
+        "view_all_style": "outline",
         "enable_desktop_slider": false,
         "swipe_on_mobile": false,
-        "image_ratio": "square",
+        "image_ratio": "portrait",
         "image_shape": "default",
         "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": false,
-        "quick_add": "standard",
+        "quick_add": "none",
         "columns_mobile": "2",
-        "padding_top": 32,
-        "padding_bottom": 64
+        "padding_top": 80,
+        "padding_bottom": 0
       }
     },
-    "trust_strip": {
-      "type": "feature-strip",
+    "story": {
+      "type": "story-split",
+      "name": "Our story",
       "blocks": {
-        "comfort": {
-          "type": "feature",
-          "settings": { "icon": "icon-sparkles.svg", "label": "Premium comfort" }
-        },
-        "compression": {
-          "type": "feature",
-          "settings": { "icon": "icon-heart.svg", "label": "Graduated compression" }
-        },
-        "quality": {
-          "type": "feature",
-          "settings": { "icon": "icon-shield-check.svg", "label": "Premium quality" }
-        },
-        "healthcare": {
-          "type": "feature",
-          "settings": { "icon": "icon-leaf.svg", "label": "Made for healthcare" }
-        }
+        "p1": { "type": "point", "settings": { "label": "Thoughtful fabric selection" } },
+        "p2": { "type": "point", "settings": { "label": "Functional fit" } },
+        "p3": { "type": "point", "settings": { "label": "Easy-care design" } }
       },
-      "block_order": ["comfort", "compression", "quality", "healthcare"],
-      "name": "Why Soft Rounds",
+      "block_order": ["p1", "p2", "p3"],
       "settings": {
+        "eyebrow": "Our story",
+        "heading": "Created for people who ",
+        "heading_accent": "care for others",
+        "heading_end": "",
+        "text": "Soft Rounds Australia is developing comfortable, reliable essentials for healthcare professionals and students working long, demanding shifts.",
+        "button_label": "Our story",
+        "button_link": "shopify://pages/about",
+        "layout": "copy_first",
+        "fallback_image_back": "sr-knit-detail-blush.webp",
+        "fallback_image_front": "sr-socks-packaging-blush.webp",
         "color_scheme": "scheme-1",
-        "padding_top": 16,
-        "padding_bottom": 48
+        "padding_top": 88,
+        "padding_bottom": 0
       }
     },
-    "image_with_text_6pVqad": {
-      "type": "image-with-text",
-      "blocks": {
-        "heading_HD3VMN": {
-          "type": "heading",
-          "settings": {
-            "heading": "Created for People Who Care for Others",
-            "heading_size": "h1"
-          }
-        },
-        "text_HxR7wh": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Soft Rounds was created to provide healthcare professionals with thoughtfully designed essentials that deliver comfort, quality and confidence through every shift.</p>",
-            "text_style": "body"
-          }
-        },
-        "button_xDyDqR": {
-          "type": "button",
-          "settings": {
-            "button_label": "Our Story",
-            "button_link": "shopify://pages/about",
-            "button_style_secondary": false
-          }
-        }
-      },
-      "block_order": [
-        "heading_HD3VMN",
-        "text_HxR7wh",
-        "button_xDyDqR"
-      ],
-      "name": "Created for People Who Care for Others",
+    "newsletter": {
+      "type": "newsletter-card",
+      "name": "Newsletter",
       "settings": {
-        "image": "shopify://shop_images/Ideas.png",
-        "height": "adapt",
-        "desktop_image_width": "medium",
-        "layout": "image_first",
-        "image_behavior": "none",
-        "content_layout": "no-overlap",
-        "desktop_content_position": "top",
-        "desktop_content_alignment": "left",
-        "mobile_content_alignment": "left",
-        "section_color_scheme": "",
-        "color_scheme": "",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "heading": "Join the Soft Rounds community",
+        "text": "Receive product updates, new releases and practical comfort tips.",
+        "label": "Email address",
+        "placeholder": "you@example.com.au",
+        "button_label": "Sign me up",
+        "success_text": "You're on the list.",
+        "disclaimer": "<p>By subscribing you agree to our Privacy Policy. Unsubscribe at any time.</p>",
+        "padding_top": 88,
+        "padding_bottom": 88
       }
     }
   },
   "order": [
     "hero",
+    "shortcuts",
     "category_tiles",
+    "why",
     "product_grid",
-    "trust_strip",
-    "image_with_text_6pVqad"
+    "story",
+    "newsletter"
   ]
 }

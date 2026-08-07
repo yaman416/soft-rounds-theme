@@ -1,3 +1,12 @@
+{%- comment -%}
+  Direction C hero: a full-bleed photograph with a floating ivory card laid over
+  its left edge. On mobile the card drops below the photo and overlaps it
+  upward, so the headline still sits against the image.
+
+  The heading is split into three fields rather than one so the merchant can
+  place the Instrument Serif italic accent without writing any HTML.
+{%- endcomment -%}
+
 {%- liquid
   assign hero_image = section.settings.image
 -%}
@@ -14,19 +23,57 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  #shopify-section-{{ section.id }} .hero-c__media {
+    height: {{ section.settings.image_height_mobile }}px;
+  }
+
+  @media screen and (min-width: 990px) {
+    #shopify-section-{{ section.id }} .hero-c__media {
+      height: {{ section.settings.image_height }}px;
+    }
+  }
 {%- endstyle -%}
 
-<div class="hero-storefront color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
-  <div class="hero-storefront__inner sr-container">
-    <div class="hero-storefront__content">
+<div class="hero-c section-{{ section.id }}-padding">
+  <div class="hero-c__media">
+    {%- if hero_image != blank -%}
+      {{
+        hero_image
+        | image_url: width: 2400
+        | image_tag: loading: 'eager', fetchpriority: 'high', alt: section.settings.heading, sizes: '100vw'
+      }}
+    {%- else -%}
+      <img
+        src="{{ 'sr-nurse-locker-room.webp' | asset_url }}"
+        alt="{{ section.settings.heading | escape }}"
+        loading="eager"
+        fetchpriority="high"
+        width="2400"
+        height="1000"
+      >
+    {%- endif -%}
+  </div>
+
+  <div class="hero-c__overlay">
+    <div class="hero-c__card">
       {%- if section.settings.eyebrow != blank -%}
-        <span class="sr-badge sr-badge--soft">{{ section.settings.eyebrow }}</span>
+        <span class="hero-c__eyebrow">{{ section.settings.eyebrow }}</span>
       {%- endif -%}
 
-      <h1 class="hero-storefront__heading">{{ section.settings.heading }}</h1>
-      <p class="hero-storefront__text">{{ section.settings.text }}</p>
+      <h1 class="hero-c__heading">
+        {{- section.settings.heading -}}
+        {%- if section.settings.heading_accent != blank -%}
+          <em class="sr-accent">{{ section.settings.heading_accent }}</em>
+        {%- endif -%}
+        {{- section.settings.heading_end -}}
+      </h1>
 
-      <div class="hero-storefront__actions">
+      {%- if section.settings.text != blank -%}
+        <p class="hero-c__text">{{ section.settings.text }}</p>
+      {%- endif -%}
+
+      <div class="hero-c__actions">
         {%- if section.settings.button_label != blank -%}
           <a href="{{ section.settings.button_link }}" class="sr-btn sr-btn--primary">
             {{ section.settings.button_label }}
@@ -40,118 +87,176 @@
       </div>
 
       {%- if section.blocks.size > 0 -%}
-        <ul class="hero-storefront__specs" role="list">
+        <ul class="hero-c__specs" role="list">
           {%- for block in section.blocks -%}
-            {%- liquid
-              assign tints = 'sage,cream,blush' | split: ','
-              assign tint = tints[forloop.index0] | default: 'cream'
-            -%}
-            <li class="sr-spec sr-spec--{{ tint }}" {{ block.shopify_attributes }}>
-              <span class="sr-spec__icon">{{ block.settings.icon | inline_asset_content }}</span>
-              <span class="sr-spec__label">{{ block.settings.label }}</span>
+            <li class="hero-c__spec" {{ block.shopify_attributes }}>
+              <span class="hero-c__spec-icon">{{ block.settings.icon | inline_asset_content }}</span>
+              <span class="hero-c__spec-label">{{ block.settings.label }}</span>
             </li>
           {%- endfor -%}
         </ul>
       {%- endif -%}
     </div>
-
-    <div class="hero-storefront__media">
-      <div class="sr-photo hero-storefront__plate">
-        {%- if hero_image != blank -%}
-          {{
-            hero_image
-            | image_url: width: 1400
-            | image_tag: loading: 'eager', alt: section.settings.heading, sizes: '(min-width: 1080px) 50vw, 100vw'
-          }}
-        {%- else -%}
-          <img
-            src="{{ 'sr-nurse-locker-room.webp' | asset_url }}"
-            alt="{{ section.settings.heading | escape }}"
-            loading="eager"
-            width="1400"
-            height="1050"
-          >
-        {%- endif -%}
-      </div>
-    </div>
   </div>
 </div>
 
 {% stylesheet %}
-  .hero-storefront__inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-xxl);
+  .hero-c {
+    position: relative;
+    background: var(--color-sand);
+  }
+
+  .hero-c__media {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-c__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .hero-c__card {
+    background: var(--color-ivory);
+    border-radius: var(--radius-card);
+    padding: 44px;
+    box-shadow: var(--shadow-pop);
+    pointer-events: auto;
+  }
+
+  .hero-c__eyebrow {
+    display: inline-flex;
     align-items: center;
+    height: 30px;
+    padding: 0 13px;
+    border-radius: var(--radius-full);
+    background: var(--color-sage);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--type-badge-size);
+    font-weight: var(--type-badge-weight);
+    line-height: 1;
+    letter-spacing: var(--type-badge-tracking);
+    text-transform: uppercase;
   }
 
-  .hero-storefront__content {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-base);
-  }
-
-  .hero-storefront__heading {
+  .hero-c__heading {
+    margin: 20px 0 0;
     font-family: var(--font-display);
     font-size: var(--type-hero-size);
     font-weight: var(--type-hero-weight);
     line-height: var(--type-hero-line);
     letter-spacing: var(--type-hero-tracking);
     color: var(--color-ink);
-    margin: 0;
-  }
-
-  .hero-storefront__text {
-    font-family: var(--font-sans);
-    font-size: var(--type-body-md-size);
-    line-height: var(--type-body-md-line);
-    color: var(--text-body);
-    max-width: 44rem;
     text-wrap: pretty;
-    margin: 0;
   }
 
-  .hero-storefront__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-md);
-    margin-top: var(--space-sm);
+  .hero-c__text {
+    margin: 16px 0 0;
+    font-family: var(--font-sans);
+    font-size: var(--type-body-lg-size);
+    line-height: var(--type-body-lg-line);
+    color: var(--text-muted);
+    text-wrap: pretty;
   }
 
-  .hero-storefront__specs {
+  .hero-c__actions {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-xl);
+    gap: 10px;
+    margin: 28px 0 0;
+  }
+
+  .hero-c__specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
     list-style: none;
-    margin: var(--space-lg) 0 0;
+    margin: 24px 0 0;
     padding: 0;
   }
 
-  .hero-storefront__plate {
-    aspect-ratio: 4 / 3;
-    border-radius: var(--radius-xl);
+  .hero-c__spec {
+    display: flex;
+    align-items: center;
+    gap: 9px;
   }
 
-  @media screen and (max-width: 1080px) {
-    .hero-storefront__inner {
-      grid-template-columns: 1fr;
-      gap: var(--space-xl);
+  .hero-c__spec-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    flex: none;
+    border-radius: var(--radius-full);
+    background: var(--color-canvas);
+  }
+
+  .hero-c__spec-icon svg {
+    width: 17px;
+    height: 17px;
+    color: var(--color-slate);
+  }
+
+  .hero-c__spec-label {
+    font-family: var(--font-sans);
+    font-size: var(--type-caption-size);
+    font-weight: var(--weight-medium);
+    color: var(--color-ink);
+  }
+
+  /* Mobile and tablet: the card sits below the photo and rides up over it. */
+  .hero-c__overlay {
+    padding: 0 var(--gutter-page-mobile);
+    margin-top: -56px;
+    position: relative;
+  }
+
+  @media screen and (max-width: 989px) {
+    .hero-c__card {
+      padding: 24px;
     }
 
-    .hero-storefront__heading {
-      font-size: var(--type-display-xl-size);
-      letter-spacing: var(--type-display-xl-tracking);
+    .hero-c__heading {
+      margin-top: 14px;
+      font-size: 32px;
+      line-height: 1.1;
     }
 
-    .hero-storefront__specs {
-      gap: var(--space-lg);
+    .hero-c__text {
+      margin-top: 12px;
+      font-size: 15.5px;
+    }
+
+    .hero-c__actions {
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .hero-c__actions .sr-btn {
+      width: 100%;
     }
   }
 
-  @media screen and (max-width: 744px) {
-    .hero-storefront__specs {
-      gap: var(--space-base) var(--space-lg);
+  /* Desktop: the card floats inside the photo. */
+  @media screen and (min-width: 990px) {
+    .hero-c__overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      padding: 0 64px;
+      margin-top: 0;
+      pointer-events: none;
+    }
+
+    .hero-c__card {
+      width: 520px;
+      max-width: 100%;
     }
   }
 {% endstylesheet %}
@@ -162,17 +267,20 @@
   "tag": "section",
   "class": "section",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow badge", "info": "Product claims here must be verifiable." },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Comfort for every shift." },
-    { "type": "textarea", "id": "text", "label": "Text" },
-    { "type": "text", "id": "button_label", "label": "Button label" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow badge", "info": "Small uppercase pill above the heading. Product claims here must be verifiable.", "default": "Socks & scrubs" },
+    { "type": "text", "id": "heading", "label": "Heading — first part", "default": "Premium comfort made for " },
+    { "type": "text", "id": "heading_accent", "label": "Heading — accent phrase", "info": "Shown in the serif italic accent face. Leave blank for none.", "default": "long shifts" },
+    { "type": "text", "id": "heading_end", "label": "Heading — last part", "info": "Usually just the full stop.", "default": "." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Soft, durable compression socks and healthcare scrubs designed for demanding workdays." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop compression socks" },
     { "type": "url", "id": "button_link", "label": "Button link" },
-    { "type": "text", "id": "secondary_button_label", "label": "Secondary button label" },
+    { "type": "text", "id": "secondary_button_label", "label": "Secondary button label", "default": "Explore scrubs" },
     { "type": "url", "id": "secondary_button_link", "label": "Secondary button link" },
     { "type": "image_picker", "id": "image", "label": "Image (optional, falls back to bundled photo)" },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
-    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding top", "default": 64 },
-    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding bottom", "default": 64 }
+    { "type": "range", "id": "image_height", "min": 400, "max": 800, "step": 20, "unit": "px", "label": "Image height (desktop)", "default": 600 },
+    { "type": "range", "id": "image_height_mobile", "min": 240, "max": 520, "step": 10, "unit": "px", "label": "Image height (mobile)", "default": 330 },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding top", "default": 0 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding bottom", "default": 0 }
   ],
   "blocks": [
     {
@@ -185,15 +293,6 @@
       ]
     }
   ],
-  "presets": [
-    {
-      "name": "Hero (storefront)",
-      "blocks": [
-        { "type": "spec", "settings": { "icon": "icon-leaf.svg", "label": "Bamboo blend" } },
-        { "type": "spec", "settings": { "icon": "icon-wind.svg", "label": "Breathable" } },
-        { "type": "spec", "settings": { "icon": "icon-heart.svg", "label": "All-day support" } }
-      ]
-    }
-  ]
+  "presets": [{ "name": "Hero (storefront)" }]
 }
 {% endschema %}

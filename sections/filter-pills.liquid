@@ -1,0 +1,129 @@
+{%- comment -%}
+  Direction C "Popular right now": a row of shortcut pills directly under the
+  hero. These are ordinary links to collections or pages — they do not filter
+  anything on this page, they are entry points into the catalogue.
+
+  Scrolls sideways on mobile rather than wrapping, so the row stays one line.
+{%- endcomment -%}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{%- if section.blocks.size > 0 -%}
+  <div class="pills-c section-{{ section.id }}-padding">
+    <div class="sr-container pills-c__inner">
+      {%- if section.settings.label != blank -%}
+        <span class="pills-c__label">{{ section.settings.label }}</span>
+      {%- endif -%}
+
+      <ul class="pills-c__list" role="list">
+        {%- for block in section.blocks -%}
+          <li {{ block.shopify_attributes }}>
+            <a href="{{ block.settings.link | default: '#' }}" class="sr-btn sr-btn--sm sr-btn--chip">
+              {{ block.settings.label }}
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .pills-c {
+    background: var(--surface-card);
+    border-bottom: 1px solid var(--border-default);
+  }
+
+  .pills-c__inner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .pills-c__label {
+    flex: none;
+    margin-right: 6px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: var(--weight-medium);
+    line-height: 1;
+    color: var(--text-muted);
+  }
+
+  .pills-c__list {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .pills-c__list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pills-c__list > li {
+    flex: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .pills-c__label {
+      display: none;
+    }
+
+    .pills-c__inner {
+      /* Let the row bleed to the screen edge so the last pill is clearly cut,
+         signalling that it scrolls. */
+      padding-right: 0;
+    }
+
+    .pills-c__list {
+      padding-right: var(--gutter-page-mobile);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Shortcut pills",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Row label", "default": "Popular right now" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 60, "step": 2, "unit": "px", "label": "Padding top", "default": 20 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 60, "step": 2, "unit": "px", "label": "Padding bottom", "default": 20 }
+  ],
+  "blocks": [
+    {
+      "type": "pill",
+      "name": "Pill",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shortcut pills",
+      "blocks": [{ "type": "pill" }, { "type": "pill" }, { "type": "pill" }, { "type": "pill" }]
+    }
+  ]
+}
+{% endschema %}

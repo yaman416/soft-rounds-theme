@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "softrounds-theme",
+      "runtimeExecutable": "shopify",
+      "runtimeArgs": ["theme", "dev", "--store", "uutvrb-bu.myshopify.com"],
+      "port": 9292
+    }
+  ]
+}

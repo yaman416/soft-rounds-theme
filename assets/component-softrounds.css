@@ -92,32 +92,32 @@
   justify-content: center;
   gap: var(--space-sm);
   font-family: var(--font-sans);
-  font-weight: var(--weight-bold);
-  border: 1.5px solid transparent;
+  font-weight: var(--weight-semibold);
+  border: 1px solid transparent;
   border-radius: var(--radius-button);
   cursor: pointer;
   text-decoration: none;
   white-space: nowrap;
-  padding: 13px 26px;
+  padding: 0 24px;
   min-height: var(--button-height);
   font-size: var(--type-button-md-size);
   line-height: var(--type-button-md-line);
-  transition: var(--transition-color), transform var(--duration-fast) var(--ease-pop);
-}
-
-.sr-btn:active {
-  transform: scale(0.97);
+  transition: var(--transition-color);
 }
 
 .sr-btn:focus-visible {
-  outline: var(--border-focus-width) solid var(--border-focus);
-  outline-offset: 2px;
+  outline: none;
+  border-color: var(--color-slate);
+  box-shadow: var(--shadow-focus);
 }
 
+/* Small variant is the pill chip: filter rows, category tags, "Popular now". */
 .sr-btn--sm {
-  padding: 9px 18px;
+  padding: 0 16px;
   min-height: var(--button-height-sm);
+  border-radius: var(--radius-full);
   font-size: var(--type-button-sm-size);
+  font-weight: var(--weight-medium);
   line-height: var(--type-button-sm-line);
 }
 
@@ -131,7 +131,7 @@
 }
 
 .sr-btn--primary:hover {
-  background: var(--color-coral-press);
+  background: var(--color-slate-press);
   color: var(--action-primary-fg);
 }
 
@@ -165,22 +165,43 @@
 }
 
 .sr-btn--soft {
-  background: var(--color-coral-wash);
-  color: var(--color-coral-press);
+  background: var(--surface-soft);
+  color: var(--color-slate-press);
 }
 
 .sr-btn--soft:hover {
-  background: var(--color-coral-soft);
+  background: var(--color-sand);
 }
 
 .sr-btn--ink {
-  background: var(--color-ink);
-  color: var(--color-canvas);
+  background: var(--action-dark-bg);
+  color: var(--color-ivory);
 }
 
 .sr-btn--ink:hover {
-  background: var(--color-body);
-  color: var(--color-canvas);
+  background: var(--action-dark-bg-active);
+  color: var(--color-ivory);
+}
+
+/* Outline chip — the resting state of a filter pill. Border darkens on hover
+   rather than filling, so a row of them stays quiet. */
+.sr-btn--chip {
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  border-color: var(--border-default);
+  border-radius: var(--radius-full);
+}
+
+.sr-btn--chip:hover {
+  border-color: var(--color-ink);
+}
+
+.sr-btn--chip[aria-pressed='true'],
+.sr-btn--chip.is-active {
+  background: var(--color-ink);
+  border-color: var(--color-ink);
+  color: var(--color-ivory);
+  font-weight: var(--weight-semibold);
 }
 
 .sr-btn .icon,
@@ -225,7 +246,7 @@
 }
 
 .sr-badge--bestseller {
-  background: var(--color-coral);
+  background: var(--color-slate);
   color: var(--color-on-primary);
 }
 
@@ -240,12 +261,12 @@
 }
 
 .sr-badge--soft {
-  background: var(--color-coral-wash);
-  color: var(--color-coral-press);
+  background: var(--surface-soft);
+  color: var(--color-slate-press);
 }
 
 .sr-badge--cream {
-  background: var(--color-cream);
+  background: var(--color-sand);
   color: var(--color-ink);
 }
 
@@ -350,7 +371,7 @@
   height: 52px;
   flex: 0 0 auto;
   border-radius: var(--radius-full);
-  background: var(--color-cream);
+  background: var(--color-sand);
 }
 
 .sr-spec__icon svg {
@@ -367,8 +388,8 @@
   background: rgba(237, 175, 182, 0.3);
 }
 
-.sr-spec--coral .sr-spec__icon {
-  background: var(--color-coral-wash);
+.sr-spec--slate .sr-spec__icon {
+  background: var(--surface-soft);
 }
 
 .sr-spec__label {
@@ -510,7 +531,7 @@
 }
 
 .sr-stars__glyphs svg.is-filled {
-  color: var(--color-coral);
+  color: var(--color-slate);
 }
 
 .sr-stars__value {
@@ -611,7 +632,7 @@
   font-family: var(--font-sans);
   font-size: var(--type-button-sm-size);
   font-weight: var(--weight-bold);
-  background: var(--color-coral);
+  background: var(--color-slate);
   color: var(--color-on-primary);
   transform: translateX(0);
   transition: transform var(--duration-fast) var(--ease-standard);
@@ -826,28 +847,31 @@
 }
 
 /* ============================================================
-   Dawn buttons — pill, coral, and the press squish.
-   Dawn paints background on .button::after, so that is what we target.
+   Dawn buttons — 12px radius, slate fill, no press transform.
+   Radius and colour come from the theme settings; this block carries the
+   type and the focus ring, which the settings cannot express.
    ============================================================ */
 .button,
 .shopify-challenge__button,
 .customer button {
   font-family: var(--font-sans);
-  font-weight: var(--weight-bold);
+  font-weight: var(--weight-semibold);
   font-size: var(--type-button-md-size);
   letter-spacing: 0;
   min-height: var(--button-height);
-  transition: transform var(--duration-fast) var(--ease-pop);
+  transition: var(--transition-color);
 }
 
-.button:active {
-  transform: scale(0.97);
+.button:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
 }
 
 /* ============================================================
-   Header / nav — 76px sticky, coral active underline, coral cart bubble
+   Header / nav — 78px, white surface, pill nav items, dark cart button
    ============================================================ */
 .header-wrapper {
+  background: var(--color-canvas);
   border-bottom: 1px solid var(--border-default);
 }
 
@@ -859,79 +883,112 @@
 .header__heading-link,
 .header__heading {
   font-family: var(--font-display);
-  font-weight: var(--weight-bold);
+  font-weight: var(--weight-semibold);
 }
 
-/* The menu item below drops Dawn's 1.2rem padding to 2px so the coral active
-   underline hugs the label rather than floating wider than it. That padding was
-   also what separated the items, so the separation moves to a gap on the list. */
+/* Direction C nav items are pills, not underlines: the hover and active state
+   is a filled rounded rectangle behind the label. Dawn's 1.2rem padding is
+   replaced by the pill's own padding, and the list gets a small gap so the
+   pills sit apart without touching. */
 .header__inline-menu .list-menu--inline {
-  gap: var(--space-lg);
+  gap: 6px;
 }
 
 .header__menu-item {
-  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: var(--button-height-sm);
+  padding: 0 16px;
+  border-radius: var(--radius-full);
   font-family: var(--font-sans);
   font-size: var(--type-nav-link-size);
   font-weight: var(--type-nav-link-weight);
   line-height: var(--type-nav-link-line);
-  color: var(--text-body);
+  color: var(--color-ink);
   letter-spacing: 0;
-  padding: 8px 2px;
   text-decoration: none;
+  transition: var(--transition-color);
 }
 
 .header__menu-item span {
   text-decoration: none;
 }
 
-.header__menu-item::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 2px;
-  border-radius: 2px;
-  background: transparent;
-  transition: background-color var(--duration-fast) var(--ease-standard);
-}
-
 .header__menu-item:hover {
+  background: var(--surface-soft);
   color: var(--color-ink);
-}
-
-.header__menu-item:hover::after {
-  background: var(--color-coral-soft);
 }
 
 .header__menu-item[aria-current='page'],
 .header__active-menu-item {
+  background: var(--surface-soft);
   color: var(--color-ink);
+  font-weight: var(--weight-semibold);
   text-decoration: none;
 }
 
-.header__menu-item[aria-current='page']::after {
-  background: var(--color-coral);
+.header__menu-item[aria-current='page']:hover {
+  background: var(--surface-strong);
 }
 
+/* Cart count rides on Clay — the one place the warm accent appears in the
+   header, so the count reads as a notification rather than an action. */
 .header__icons .cart-count-bubble {
-  background: var(--color-coral);
-  color: var(--color-on-primary);
+  background: var(--color-clay);
+  color: var(--color-ink);
   border-radius: var(--radius-full);
   font-family: var(--font-sans);
   font-size: 10px;
   font-weight: var(--weight-bold);
 }
 
+/* Header utility circles — account and search sit in outlined circles. */
+.header__icon:not(.header__icon--cart) {
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+  width: var(--icon-button-size);
+  height: var(--icon-button-size);
+  transition: var(--transition-color);
+}
+
+.header__icon:not(.header__icon--cart):hover {
+  border-color: var(--color-ink);
+}
+
+/* Cart is the one dark button in the header. */
+.header__icon--cart {
+  border-radius: var(--radius-full);
+  background: var(--action-dark-bg);
+  color: var(--color-ivory);
+  height: var(--icon-button-size);
+  padding: 0 14px;
+  transition: var(--transition-color);
+}
+
+.header__icon--cart:hover {
+  background: var(--action-dark-bg-active);
+}
+
+.header__icon--cart .icon {
+  color: var(--color-ivory);
+}
+
 /* ============================================================
    Announcement bar
    ============================================================ */
+/* Sand bar, charcoal text — the calmest strip on the page. */
+.announcement-bar,
+.announcement-bar__link {
+  background: var(--color-sand);
+  color: var(--color-ink);
+}
+
 .announcement-bar__message {
   font-family: var(--font-sans);
-  font-size: var(--type-button-sm-size);
-  font-weight: var(--weight-bold);
-  letter-spacing: 0;
+  font-size: 12px;
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.04em;
+  color: var(--color-ink);
   min-height: var(--announcement-height);
   padding: 8px var(--space-base);
 }
@@ -943,21 +1000,45 @@
   border-top: 1px solid var(--border-default);
 }
 
-.footer-block__heading {
-  font-family: var(--font-sans);
-  font-size: var(--type-title-sm-size);
-  font-weight: var(--weight-bold);
-  color: var(--color-ink);
-  letter-spacing: 0;
+.footer {
+  background: var(--color-canvas);
 }
 
-.footer__content-top .list-menu__item--link,
-.footer-block__details-content .list-menu__item--link {
+/* Footer column heads are the small uppercase label, not a title. */
+.footer-block__heading {
+  font-family: var(--font-sans);
+  font-size: var(--type-footer-head-size);
+  font-weight: var(--type-footer-head-weight);
+  line-height: var(--type-footer-head-line);
+  letter-spacing: var(--type-footer-head-tracking);
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+/* section-footer.css loads after this file and sets the link colour at the same
+   specificity, so these selectors carry an extra .footer to win on their own
+   merit rather than relying on load order. */
+.footer .footer__content-top .list-menu__item--link,
+.footer .footer-block__details-content .list-menu__item--link {
   font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   line-height: var(--type-body-sm-line);
-  color: var(--color-ink);
+  color: var(--text-muted);
   width: fit-content;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.footer .footer__content-top .list-menu__item--link:hover,
+.footer .footer-block__details-content .list-menu__item--link:hover {
+  color: var(--color-ink);
+}
+
+/* Payment chips are outlined tiles, not full-colour badges. */
+.footer .payment-list .list-payment__item {
+  border: 1px solid var(--border-default);
+  border-radius: 6px;
+  background: var(--surface-soft);
+  padding: 4px 6px;
 }
 
 .footer__content-bottom {
@@ -1074,7 +1155,7 @@
   }
 }
 
-/* Size / variant chips — invert to ink when selected, never coral */
+/* Size / variant chips — invert to ink when selected, never slate */
 .product-form__input .form__label,
 fieldset.product-form__input legend {
   font-family: var(--font-sans);
@@ -1106,7 +1187,7 @@ fieldset.product-form__input legend {
   border-color: var(--color-ink);
 }
 
-/* Colour swatches — navy ring with a white gap, never a coral ring, never a tick */
+/* Colour swatches — navy ring with a white gap, never a slate ring, never a tick */
 .swatch-input__input:checked + .swatch-input__label,
 .swatch-input__input:active + .swatch-input__label {
   box-shadow: 0 0 0 2px var(--color-canvas), 0 0 0 4px var(--color-ink);

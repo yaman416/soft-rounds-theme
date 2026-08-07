@@ -1,3 +1,9 @@
+{%- comment -%}
+  Direction C category card: a white card with the image on top and the label
+  block beneath it, closed by a circular arrow. The text sits below the photo
+  rather than over it, so no scrim and no photo-safe colour is needed.
+{%- endcomment -%}
+
 {%- style -%}
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
@@ -10,17 +16,26 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  #shopify-section-{{ section.id }} .category-c__grid {
+    --category-columns: {{ section.settings.columns_desktop }};
+  }
 {%- endstyle -%}
 
-<div class="category-tiles color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+<div class="category-c color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
   <div class="sr-container">
-    {%- if section.settings.title != blank -%}
-      <div class="sr-section-head">
-        <h2 class="sr-section-head__title">{{ section.settings.title }}</h2>
+    {%- if section.settings.title != blank or section.settings.subtitle != blank -%}
+      <div class="category-c__head">
+        {%- if section.settings.title != blank -%}
+          <h2 class="category-c__title">{{ section.settings.title }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subtitle != blank -%}
+          <p class="category-c__subtitle">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
       </div>
     {%- endif -%}
 
-    <div class="category-tiles__grid">
+    <div class="category-c__grid">
       {%- for block in section.blocks -%}
         {%- liquid
           assign is_soon = block.settings.coming_soon
@@ -31,15 +46,15 @@
         -%}
         <a
           href="{{ target }}"
-          class="sr-category{% if is_soon %} sr-category--soon{% endif %}"
+          class="category-c__card"
           {{ block.shopify_attributes }}
         >
-          <div class="sr-photo category-tiles__plate">
+          <div class="category-c__plate">
             {%- if block.settings.image != blank -%}
               {{
                 block.settings.image
                 | image_url: width: 1200
-                | image_tag: loading: 'lazy', alt: block.settings.title, sizes: '(min-width: 1080px) 50vw, 100vw'
+                | image_tag: loading: 'lazy', alt: block.settings.title, sizes: '(min-width: 990px) 33vw, 100vw'
               }}
             {%- elsif block.settings.fallback_image != blank -%}
               <img
@@ -50,34 +65,25 @@
                 height="900"
               >
             {%- endif -%}
+
+            {%- if is_soon -%}
+              <span class="category-c__badge">Coming soon</span>
+            {%- elsif block.settings.badge != blank -%}
+              <span class="category-c__badge">{{ block.settings.badge }}</span>
+            {%- endif -%}
           </div>
 
-          <span class="sr-category__scrim" aria-hidden="true"></span>
-
-          {%- if is_soon -%}
-            <span class="sr-category__badge">
-              <span class="sr-badge sr-badge--soon sr-badge--uppercase sr-badge--float">Coming soon</span>
-            </span>
-          {%- elsif block.settings.badge != blank -%}
-            <span class="sr-category__badge">
-              <span class="sr-badge sr-badge--cream sr-badge--float">{{ block.settings.badge }}</span>
-            </span>
-          {%- endif -%}
-
-          <span class="sr-category__body">
-            <span class="sr-category__title">{{ block.settings.title }}</span>
-            {%- if block.settings.caption != blank -%}
-              <span class="sr-category__caption">{{ block.settings.caption }}</span>
-            {%- endif -%}
-            <span class="sr-category__cta">
-              {%- if is_soon -%}
-                {{ block.settings.soon_cta | default: 'Notify me' }}
-              {%- else -%}
-                {{ block.settings.cta | default: 'Shop the range' }}
+          <div class="category-c__body">
+            <div>
+              <h3 class="category-c__name">{{ block.settings.title }}</h3>
+              {%- if block.settings.caption != blank -%}
+                <p class="category-c__caption">{{ block.settings.caption }}</p>
               {%- endif -%}
-              {{- 'icon-arrow.svg' | inline_asset_content -}}
+            </div>
+            <span class="category-c__arrow" aria-hidden="true">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </span>
-          </span>
+          </div>
         </a>
       {%- endfor -%}
     </div>
@@ -85,31 +91,148 @@
 </div>
 
 {% stylesheet %}
-  .category-tiles__grid {
+  .category-c__head {
+    margin-bottom: 28px;
+  }
+
+  .category-c__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--type-display-lg-size);
+    font-weight: var(--type-display-lg-weight);
+    line-height: var(--type-display-lg-line);
+    letter-spacing: var(--type-display-lg-tracking);
+    color: var(--color-ink);
+  }
+
+  .category-c__subtitle {
+    margin: 8px 0 0;
+    font-family: var(--font-sans);
+    font-size: var(--type-body-md-size);
+    line-height: var(--type-body-md-line);
+    color: var(--text-muted);
+  }
+
+  .category-c__grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-xl);
+    grid-template-columns: repeat(var(--category-columns, 3), minmax(0, 1fr));
+    gap: var(--space-lg);
   }
 
-  .category-tiles__plate {
-    aspect-ratio: 16 / 10;
-    border-radius: var(--radius-lg);
+  .category-c__card {
+    display: block;
+    background: var(--surface-card);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    color: var(--color-ink);
+    text-decoration: none;
+    box-shadow: var(--shadow-soft);
+    transition: box-shadow var(--duration-base) var(--ease-standard);
   }
 
-  .category-tiles .sr-category__title,
-  .category-tiles .sr-category__caption,
-  .category-tiles .sr-category__cta {
+  .category-c__card:hover {
+    box-shadow: var(--shadow-pop);
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+
+  .category-c__plate {
+    position: relative;
+    height: 300px;
+    background: var(--surface-photo);
+  }
+
+  .category-c__plate img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     display: block;
   }
 
-  .category-tiles .sr-category__cta {
-    width: fit-content;
+  .category-c__badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 6px 12px;
+    border-radius: var(--radius-full);
+    background: var(--color-clay);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--type-uppercase-tag-size);
+    font-weight: var(--type-uppercase-tag-weight);
+    line-height: 1;
+    letter-spacing: var(--type-uppercase-tag-tracking);
+    text-transform: uppercase;
   }
 
-  @media screen and (max-width: 744px) {
-    .category-tiles__grid {
-      grid-template-columns: 1fr;
+  .category-c__body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-base);
+    padding: 22px 24px 24px;
+  }
+
+  .category-c__name {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--type-display-sm-size);
+    font-weight: var(--type-display-sm-weight);
+    line-height: var(--type-display-sm-line);
+    color: var(--color-ink);
+  }
+
+  .category-c__caption {
+    margin: 6px 0 0;
+    font-family: var(--font-sans);
+    font-size: var(--type-body-sm-size);
+    line-height: var(--type-body-sm-line);
+    color: var(--text-muted);
+  }
+
+  .category-c__arrow {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--heart-size);
+    height: var(--heart-size);
+    border-radius: var(--radius-full);
+    background: var(--surface-soft);
+    color: var(--color-ink);
+    transition: background-color var(--duration-fast) var(--ease-standard);
+  }
+
+  .category-c__card:hover .category-c__arrow {
+    background: var(--surface-strong);
+  }
+
+  @media screen and (max-width: 989px) {
+    .category-c__grid {
+      grid-template-columns: minmax(0, 1fr);
       gap: var(--space-base);
+    }
+
+    .category-c__title {
+      font-size: 26px;
+      line-height: 1.2;
+    }
+
+    .category-c__plate {
+      height: 200px;
+    }
+
+    .category-c__body {
+      padding: 18px 18px 20px;
+    }
+
+    .category-c__name {
+      font-size: 19px;
+    }
+
+    .category-c__arrow {
+      width: 38px;
+      height: 38px;
     }
   }
 {% endstylesheet %}
@@ -120,51 +243,40 @@
   "tag": "section",
   "class": "section",
   "settings": [
-    { "type": "text", "id": "title", "label": "Section title", "default": "Two ranges" },
+    { "type": "text", "id": "title", "label": "Section title", "default": "Shop by category" },
+    { "type": "text", "id": "subtitle", "label": "Section subtitle", "default": "Start with what your shift needs most." },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Columns on desktop",
+      "default": 3
+    },
     { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
-    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding top", "default": 64 },
-    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding bottom", "default": 64 }
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding top", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding bottom", "default": 0 }
   ],
   "blocks": [
     {
       "type": "tile",
       "name": "Tile",
       "settings": [
-        { "type": "text", "id": "title", "label": "Title", "default": "Premium compression socks" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Compression Socks" },
         { "type": "text", "id": "caption", "label": "Caption" },
         { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "text", "id": "fallback_image", "label": "Bundled image filename", "info": "Used when no image is picked, e.g. sr-daisy-blush-pair-flat.webp" },
+        { "type": "text", "id": "fallback_image", "label": "Bundled image filename", "info": "Used when no image is picked, e.g. sr-socks-colour-range-flatlay.webp" },
         { "type": "url", "id": "link", "label": "Link" },
-        { "type": "text", "id": "cta", "label": "CTA label", "default": "Shop the range" },
-        { "type": "text", "id": "badge", "label": "Badge" },
-        { "type": "checkbox", "id": "coming_soon", "label": "Coming soon", "default": false },
-        { "type": "text", "id": "soon_cta", "label": "Coming soon CTA", "default": "Notify me" }
+        { "type": "text", "id": "badge", "label": "Badge", "info": "Only use a badge that is factually accurate." },
+        { "type": "checkbox", "id": "coming_soon", "label": "Coming soon", "default": false }
       ]
     }
   ],
   "presets": [
     {
       "name": "Category tiles",
-      "blocks": [
-        {
-          "type": "tile",
-          "settings": {
-            "title": "Premium compression socks",
-            "caption": "20–30 mmHg · Bamboo blend",
-            "fallback_image": "sr-socks-colour-range-flatlay.webp",
-            "badge": "Best seller"
-          }
-        },
-        {
-          "type": "tile",
-          "settings": {
-            "title": "Premium scrubs",
-            "caption": "Four-way stretch · Sold as separates",
-            "fallback_image": "sr-scrubs-duo.webp",
-            "coming_soon": true
-          }
-        }
-      ]
+      "blocks": [{ "type": "tile" }, { "type": "tile" }, { "type": "tile" }]
     }
   ]
 }

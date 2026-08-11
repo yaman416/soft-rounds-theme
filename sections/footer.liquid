@@ -30,6 +30,7 @@
 <footer class="footer color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
   {%- liquid
     assign has_social_icons = true
+    assign brand_description_text = settings.brand_description | strip_html | strip
     if settings.social_facebook_link == blank and settings.social_instagram_link == blank and settings.social_youtube_link == blank and settings.social_tiktok_link == blank and settings.social_twitter_link == blank and settings.social_pinterest_link == blank and settings.social_snapchat_link == blank and settings.social_tumblr_link == blank and settings.social_vimeo_link == blank
       assign has_social_icons = false
     endif
@@ -121,12 +122,33 @@
                               width: settings.brand_image_width
                           }}
                         </div>
+                      {%- elsif block.settings.show_approved_wordmark -%}
+                        <div class="footer-block__approved-brand">
+                          <img
+                            src="{{ 'sr-monogram.png' | asset_url }}"
+                            class="footer-block__approved-monogram"
+                            alt=""
+                            width="44"
+                            height="35"
+                            loading="lazy"
+                          >
+                          <img
+                            src="{{ 'sr-wordmark.png' | asset_url }}"
+                            class="footer-block__approved-wordmark"
+                            alt="{{ shop.name | escape }}"
+                            width="148"
+                            height="37"
+                            loading="lazy"
+                          >
+                        </div>
                       {%- endif -%}
                       {%- if settings.brand_headline != blank -%}
                         <h2 class="footer-block__heading rte">{{ settings.brand_headline }}</h2>
                       {%- endif -%}
-                      {%- if settings.brand_description != blank -%}
+                      {%- if brand_description_text != blank -%}
                         <div class="rte">{{ settings.brand_description }}</div>
+                      {%- elsif block.settings.fallback_description != blank -%}
+                        <div class="rte footer-block__brand-description">{{ block.settings.fallback_description }}</div>
                       {%- endif -%}
                       {%- if block.settings.show_social and has_social_icons -%}
                         {%- render 'social-icons', class: 'footer__list-social' -%}
@@ -353,6 +375,18 @@
         {
           "type": "paragraph",
           "content": "t:sections.footer.blocks.brand_information.settings.paragraph.content"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_approved_wordmark",
+          "default": true,
+          "label": "Show approved Soft Rounds logo when no brand image is set"
+        },
+        {
+          "type": "richtext",
+          "id": "fallback_description",
+          "default": "<p>Premium comfort essentials designed for healthcare professionals.</p>",
+          "label": "Brand description fallback"
         },
         {
           "type": "checkbox",

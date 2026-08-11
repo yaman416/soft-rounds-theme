@@ -1,12 +1,12 @@
-{% comment %}
+{% doc %}
   Renders a header search modal. Should be used with 'header.liquid'
 
-  Accepts:
-  - input_id: {String} Id for the search input element (required)
+  @param {string} input_id - Id for the search input element.
+  @param {string} [label] - Visible desktop label for the search trigger.
 
-  Usage:
+  @example
   {% render 'header-search', input_id: 'My-Id'%}
-{% endcomment %}
+{% enddoc %}
 
 <details-modal class="header__search">
   <details>
@@ -22,6 +22,13 @@
         <span class="svg-wrapper header__icon-close">
           {{- 'icon-close.svg' | inline_asset_content -}}
         </span>
+      </span>
+      <span class="header__search-label small-hide">
+        {%- if label != blank -%}
+          {{- label | escape -}}
+        {%- else -%}
+          {{- 'general.search.search' | t -}}
+        {%- endif -%}
       </span>
     </summary>
     <div

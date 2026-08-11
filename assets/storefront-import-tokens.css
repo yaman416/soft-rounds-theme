@@ -29,6 +29,7 @@
   --color-canvas: #ffffff;
   --color-surface-soft: #f7f5f0;
   --color-surface-strong: #e4e0d8;
+  --color-skeleton: #ece9e2;
 
   /* ================= Hairlines ================= */
   --color-hairline: #e4e0d8;
@@ -87,6 +88,7 @@
   --surface-card: var(--color-canvas);
   --surface-soft: var(--color-surface-soft);
   --surface-strong: var(--color-surface-strong);
+  --surface-skeleton: var(--color-skeleton);
   --surface-photo: var(--color-sand);
   --surface-promo: var(--color-sand);
   --surface-panel: var(--color-slate);
@@ -254,6 +256,7 @@
 
   /* ================= Layout ================= */
   --container-page: 1440px;
+  --container-content: 1280px;
   --container-narrow: 760px;
   --gutter-page: 40px;
   --gutter-page-mobile: 16px;
@@ -269,6 +272,9 @@
   --heart-size: 40px;
   --icon-button-size: 42px;
   --cart-drawer-width: 420px;
+  --collection-sidebar-width: 260px;
+  --product-panel-width: 480px;
+  --tap-target-min: 44px;
 
   /* ================= Motion ================= */
   --duration-instant: 0ms;

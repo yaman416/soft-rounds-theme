@@ -143,7 +143,7 @@
       endif
 
       if section.settings.logo_position == 'top-center' or section.settings.menu == blank
-        render 'header-search', input_id: 'Search-In-Modal-1'
+        render 'header-search', input_id: 'Search-In-Modal-1', label: section.settings.search_label
       endif
     -%}
 
@@ -172,7 +172,14 @@
             }}
           </div>
         {%- else -%}
-          <span class="h2">{{ shop.name }}</span>
+          <img
+            src="{{ 'sr-wordmark.png' | asset_url }}"
+            class="header__heading-logo header__heading-logo--fallback motion-reduce"
+            alt="{{ shop.name | escape }}"
+            width="148"
+            height="37"
+            loading="eager"
+          >
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
@@ -215,7 +222,14 @@
             }}
           </div>
         {%- else -%}
-          <span class="h2">{{ shop.name }}</span>
+          <img
+            src="{{ 'sr-wordmark.png' | asset_url }}"
+            class="header__heading-logo header__heading-logo--fallback motion-reduce"
+            alt="{{ shop.name | escape }}"
+            width="148"
+            height="37"
+            loading="eager"
+          >
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
@@ -247,7 +261,7 @@
           </localization-form>
         {%- endif -%}
       </div>
-      {% render 'header-search', input_id: 'Search-In-Modal' %}
+      {% render 'header-search', input_id: 'Search-In-Modal', label: section.settings.search_label %}
 
       {%- if shop.customer_accounts_enabled -%}
         <a
@@ -291,7 +305,7 @@
         {% else %}
           <span class="svg-wrapper">{{ 'icon-cart.svg' | inline_asset_content }}</span>
         {% endif %}
-        <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
+        <span class="header__cart-label small-hide">{{ 'templates.cart.cart' | t }}</span>
         {%- if cart != empty -%}
           <div class="cart-count-bubble">
             {%- if cart.item_count < 100 -%}
@@ -518,6 +532,12 @@
       "id": "menu",
       "default": "main-menu",
       "label": "t:sections.header.settings.menu.label"
+    },
+    {
+      "type": "text",
+      "id": "search_label",
+      "label": "Desktop search label",
+      "default": "Search socks, scrubs, sizes"
     },
     {
       "type": "select",

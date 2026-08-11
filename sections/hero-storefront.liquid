@@ -104,6 +104,7 @@
   .hero-c {
     position: relative;
     background: var(--color-sand);
+    overflow: hidden;
   }
 
   .hero-c__media {
@@ -121,7 +122,8 @@
   .hero-c__card {
     background: var(--color-ivory);
     border-radius: var(--radius-card);
-    padding: 44px;
+    border: var(--border-hairline) solid var(--border-default);
+    padding: var(--space-xl) var(--space-lg) var(--space-lg);
     box-shadow: var(--shadow-pop);
     pointer-events: auto;
   }
@@ -129,21 +131,26 @@
   .hero-c__eyebrow {
     display: inline-flex;
     align-items: center;
-    height: 30px;
-    padding: 0 13px;
-    border-radius: var(--radius-full);
-    background: var(--color-sage);
-    color: var(--color-ink);
+    gap: var(--space-md);
+    color: var(--color-slate);
     font-family: var(--font-sans);
-    font-size: var(--type-badge-size);
-    font-weight: var(--type-badge-weight);
-    line-height: 1;
-    letter-spacing: var(--type-badge-tracking);
+    font-size: var(--type-eyebrow-size);
+    font-weight: var(--type-eyebrow-weight);
+    line-height: var(--type-eyebrow-line);
+    letter-spacing: var(--type-eyebrow-tracking);
     text-transform: uppercase;
   }
 
+  .hero-c__eyebrow::before {
+    width: var(--space-xl);
+    height: var(--border-hairline);
+    background: currentColor;
+    content: '';
+  }
+
   .hero-c__heading {
-    margin: 20px 0 0;
+    max-width: 10.5em;
+    margin: var(--space-lg) 0 0;
     font-family: var(--font-display);
     font-size: var(--type-hero-size);
     font-weight: var(--type-hero-weight);
@@ -154,7 +161,8 @@
   }
 
   .hero-c__text {
-    margin: 16px 0 0;
+    max-width: 38ch;
+    margin: var(--space-base) 0 0;
     font-family: var(--font-sans);
     font-size: var(--type-body-lg-size);
     line-height: var(--type-body-lg-line);
@@ -165,8 +173,8 @@
   .hero-c__actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    margin: 28px 0 0;
+    gap: var(--space-md);
+    margin: var(--space-lg) 0 0;
   }
 
   .hero-c__specs {
@@ -211,34 +219,41 @@
   /* Mobile and tablet: the card sits below the photo and rides up over it. */
   .hero-c__overlay {
     padding: 0 var(--gutter-page-mobile);
-    margin-top: -56px;
+    margin-top: calc(var(--space-lg) * -1);
     position: relative;
   }
 
   @media screen and (max-width: 989px) {
     .hero-c__card {
-      padding: 24px;
+      padding: var(--space-lg);
+      box-shadow: var(--shadow-soft);
     }
 
     .hero-c__heading {
-      margin-top: 14px;
+      max-width: 11em;
+      margin-top: var(--space-base);
       font-size: 32px;
       line-height: 1.1;
     }
 
     .hero-c__text {
-      margin-top: 12px;
+      margin-top: var(--space-md);
       font-size: 15.5px;
     }
 
     .hero-c__actions {
       flex-direction: column;
-      gap: 10px;
-      margin-top: 20px;
+      gap: var(--space-md);
+      margin-top: var(--space-lg);
     }
 
     .hero-c__actions .sr-btn {
       width: 100%;
+    }
+
+    .hero-c__specs {
+      gap: var(--space-base);
+      margin-top: var(--space-lg);
     }
   }
 
@@ -248,15 +263,16 @@
       position: absolute;
       inset: 0;
       display: flex;
-      align-items: center;
-      padding: 0 64px;
+      align-items: flex-end;
+      padding: var(--space-xxl) clamp(var(--space-xl), 4.45vw, 64px);
       margin-top: 0;
       pointer-events: none;
     }
 
     .hero-c__card {
-      width: 520px;
+      width: min(520px, 46vw);
       max-width: 100%;
+      padding: 42px 44px;
     }
   }
 {% endstylesheet %}

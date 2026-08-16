@@ -11,30 +11,6 @@
   "name": "t:sections.header.name",
   "type": "header",
   "sections": {
-    "announcement-bar": {
-      "type": "announcement-bar",
-      "blocks": {
-        "announcement-bar-0": {
-          "type": "announcement",
-          "settings": {
-            "text": "Premium comfort made for long shifts.",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "announcement-bar-0"
-      ],
-      "settings": {
-        "auto_rotate": false,
-        "change_slides_speed": 5,
-        "color_scheme": "scheme-1",
-        "show_line_separator": true,
-        "show_social": false,
-        "enable_country_selector": false,
-        "enable_language_selector": false
-      }
-    },
     "header": {
       "type": "header",
       "settings": {
@@ -53,10 +29,38 @@
         "padding_top": 20,
         "padding_bottom": 20
       }
+    },
+    "utility-bar": {
+      "type": "utility-bar",
+      "blocks": {
+        "shipping": {
+          "type": "message",
+          "settings": {
+            "text": "Australia wide shipping",
+            "icon": "icon-truck.svg"
+          }
+        },
+        "shifts": {
+          "type": "message",
+          "settings": {
+            "text": "Designed for long shifts",
+            "icon": "icon-heart.svg"
+          }
+        }
+      },
+      "block_order": [
+        "shipping",
+        "shifts"
+      ],
+      "settings": {
+        "show_currency": true,
+        "show_account": true,
+        "account_label": "Account"
+      }
     }
   },
   "order": [
-    "announcement-bar",
+    "utility-bar",
     "header"
   ]
 }

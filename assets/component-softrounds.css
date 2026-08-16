@@ -107,7 +107,7 @@
 
 .sr-btn:focus-visible {
   outline: none;
-  border-color: var(--color-slate);
+  border-color: var(--border-focus);
   box-shadow: var(--shadow-focus);
 }
 
@@ -131,7 +131,7 @@
 }
 
 .sr-btn--primary:hover {
-  background: var(--color-slate-press);
+  background: var(--action-primary-bg-active);
   color: var(--action-primary-fg);
 }
 
@@ -142,6 +142,7 @@
 }
 
 .sr-btn--secondary {
+  min-height: var(--button-height-secondary);
   background: var(--action-secondary-bg);
   color: var(--action-secondary-fg);
   border-color: var(--action-secondary-border);
@@ -166,7 +167,7 @@
 
 .sr-btn--soft {
   background: var(--surface-soft);
-  color: var(--color-slate-press);
+  color: var(--color-sage-text);
 }
 
 .sr-btn--soft:hover {
@@ -246,8 +247,8 @@
 }
 
 .sr-badge--bestseller {
-  background: var(--color-slate);
-  color: var(--color-on-primary);
+  background: var(--color-sage);
+  color: var(--color-navy);
 }
 
 .sr-badge--sale {
@@ -256,13 +257,13 @@
 }
 
 .sr-badge--soon {
-  background: var(--color-coming-soon);
+  background: var(--color-navy);
   color: #fff;
 }
 
 .sr-badge--soft {
   background: var(--surface-soft);
-  color: var(--color-slate-press);
+  color: var(--color-sage-text);
 }
 
 .sr-badge--cream {
@@ -531,7 +532,7 @@
 }
 
 .sr-stars__glyphs svg.is-filled {
-  color: var(--color-slate);
+  color: var(--color-sage-text);
 }
 
 .sr-stars__value {
@@ -632,7 +633,7 @@
   font-family: var(--font-sans);
   font-size: var(--type-button-sm-size);
   font-weight: var(--weight-bold);
-  background: var(--color-slate);
+  background: var(--color-sage);
   color: var(--color-on-primary);
   transform: translateX(0);
   transition: transform var(--duration-fast) var(--ease-standard);
@@ -850,7 +851,7 @@
 
 /* Coming-soon treatment — these classes exist in card-product.liquid but had no rules */
 .coming-soon-badge {
-  background: var(--color-coming-soon);
+  background: var(--color-navy);
   color: #fff;
   border: none;
 }
@@ -859,7 +860,7 @@
   font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   font-weight: var(--weight-bold);
-  color: var(--color-coming-soon);
+  color: var(--color-navy);
 }
 
 /* ============================================================
@@ -884,214 +885,141 @@
 }
 
 /* ============================================================
-   Header / nav — 78px, white surface, pill nav items, dark cart button
+   Header / nav — 96px, warm header surface, uppercase nav
+   The utility bar above it is a separate section (sections/utility-bar.liquid).
    ============================================================ */
 .header-wrapper {
-  background: var(--color-canvas);
-  border-bottom: 1px solid var(--border-default);
+  background: var(--surface-header);
+  border-bottom: none;
 }
 
-.header {
+/* section-header.css sets .header padding at the same specificity and loads
+   later, so this carries the wrapper class to win. The 84px logo plus the
+   link's own padding sets the real height; min-height is only a floor. */
+.header-wrapper .header {
+  max-width: var(--container-page);
   min-height: var(--nav-height);
+  padding-top: 0;
+  padding-bottom: 0;
   align-items: center;
+  gap: clamp(16px, 3vw, 44px);
 }
 
 .header__heading-link,
 .header__heading {
   font-family: var(--font-display);
-  font-weight: var(--weight-semibold);
+  font-weight: var(--weight-bold);
+  color: var(--color-ink);
 }
 
-.header__heading-logo--fallback {
-  display: block;
+/* The cloud logo is wide, so it is given real height rather than Dawn's
+   default cap. Swap to the monogram at mobile by uploading it as the
+   mobile logo in the theme editor. */
+.header__heading-logo {
+  max-height: 84px;
   width: auto;
-  height: 23px;
-  object-fit: contain;
 }
 
-/* Direction C nav items are pills, not underlines: the hover and active state
-   is a filled rounded rectangle behind the label. Dawn's 1.2rem padding is
-   replaced by the pill's own padding, and the list gets a small gap so the
-   pills sit apart without touching. */
+/* Nav links are uppercase, tracked, and change to sage on hover. No pill,
+   no underline: this generation keeps the header quiet. */
 .header__inline-menu .list-menu--inline {
-  gap: 6px;
+  gap: clamp(14px, 2vw, 30px);
 }
 
 .header__menu-item {
   display: inline-flex;
   align-items: center;
-  height: var(--button-height-sm);
-  padding: 0 16px;
-  border-radius: var(--radius-full);
+  gap: 6px;
+  padding: 8px 0;
+  border-radius: 0;
+  background: none;
   font-family: var(--font-sans);
   font-size: var(--type-nav-link-size);
   font-weight: var(--type-nav-link-weight);
   line-height: var(--type-nav-link-line);
+  letter-spacing: var(--type-nav-link-tracking);
+  text-transform: uppercase;
   color: var(--color-ink);
-  letter-spacing: 0;
   text-decoration: none;
-  transition: var(--transition-color);
+  transition: color var(--duration-fast) var(--ease-standard);
 }
 
 .header__menu-item span {
   text-decoration: none;
 }
 
-.header__menu-item:hover {
-  background: var(--surface-soft);
-  color: var(--color-ink);
-}
-
+.header__menu-item:hover,
 .header__menu-item[aria-current='page'],
 .header__active-menu-item {
-  background: var(--surface-soft);
-  color: var(--color-ink);
-  font-weight: var(--weight-semibold);
+  background: none;
+  color: var(--color-sage-text);
   text-decoration: none;
 }
 
-.header__menu-item[aria-current='page']:hover {
-  background: var(--surface-strong);
-}
-
-/* Cart count rides on Clay — the one place the warm accent appears in the
-   header, so the count reads as a notification rather than an action. */
-.header__icons .cart-count-bubble {
-  background: var(--color-clay);
-  color: var(--color-ink);
-  border-radius: var(--radius-full);
-  font-family: var(--font-sans);
-  font-size: 10px;
+.header__menu-item[aria-current='page'] {
   font-weight: var(--weight-bold);
 }
 
-.header__search-label,
-.header__cart-label {
-  font-family: var(--font-sans);
-  font-size: var(--type-nav-link-size);
-  font-weight: var(--weight-medium);
-  line-height: 1;
-  white-space: nowrap;
-}
-
-.header__search-label {
-  display: none;
-  justify-content: flex-start;
-  color: var(--text-muted);
-  text-decoration: none;
-}
-
-/* Header utility circles — account and search sit in outlined circles. */
-.header__icon:not(.header__icon--cart) {
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-full);
+/* Header controls are plain 44px circles that tint on hover. */
+.header__icons .header__icon {
   width: var(--icon-button-size);
   height: var(--icon-button-size);
-  transition: var(--transition-color);
-}
-
-.header__icon:not(.header__icon--cart):hover {
-  border-color: var(--color-ink);
-}
-
-/* Cart is the one dark button in the header. */
-.header__icon--cart {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 9px;
+  border: none;
   border-radius: var(--radius-full);
-  background: var(--action-dark-bg);
-  color: var(--color-ivory);
-  height: var(--icon-button-size);
-  width: auto;
-  min-width: 98px;
-  padding: 0 16px;
+  background: transparent;
+  color: var(--color-ink);
   transition: var(--transition-color);
 }
 
-.header__icon--cart:hover {
-  background: var(--action-dark-bg-active);
+.header__icons .header__icon:hover {
+  background: var(--color-sand);
+  color: var(--color-ink);
 }
 
-.header__icon--cart .icon {
-  color: var(--color-ivory);
+.header__icons .header__icon .icon {
+  color: currentColor;
 }
 
-@media screen and (min-width: 990px) {
-  .header__icons {
-    gap: 10px;
-  }
+/* Cart count rides on sage, the one accent fill in the header. */
+.header__icons .cart-count-bubble {
+  background: var(--color-sage);
+  color: var(--color-navy);
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0;
+}
 
-  .header__search .header__icon--search {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 10px;
-    width: clamp(190px, 16.5vw, 238px);
-    height: var(--icon-button-size);
-    padding: 0 16px;
-    background: var(--surface-soft);
-    color: var(--text-muted);
-    border-radius: var(--radius-full);
-  }
-
-  /* Dawn gives the icon wrapper its 44px icon-button footprint, which inside
-     the 238px search field left the label 150px for 173px of text. Both the
-     outer span and the inner .svg-wrapper need shrinking to the glyph.
-     These selectors carry three classes deliberately: base.css styles
-     `.header__icon span` (0,1,1), which outscores a lone class. */
-  .header__search .header__icon--search > span:first-child,
-  .header__search .header__icon--search .svg-wrapper:not(.header__icon-close) {
-    display: flex;
-    flex: 0 0 auto;
-    width: auto;
-    height: auto;
-  }
-
-  .header__search .header__icon--search .icon-search {
-    width: 17px;
-    height: 17px;
-  }
-
-  /* text-overflow only applies to a block box. Dawn's `.header__icon span`
-     rule was forcing display:flex here, so the ellipsis never rendered and the
-     placeholder cut off mid-word. */
-  .header__search .header__icon--search .header__search-label {
-    display: block;
-    flex: 1 1 auto;
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .header__search .header__icon--search:hover {
-    background: var(--surface-soft);
-  }
-
-  .header__icon--cart .cart-count-bubble {
-    position: static;
-    flex: 0 0 auto;
-    margin-left: 1px;
-  }
+/* This generation's header carries a plain search icon, so Dawn's inline
+   search label and the previous cart text label are both hidden. Three
+   classes deliberately: base.css styles `.header__icon span` (0,1,1), which
+   outscores a lone class. */
+.header__icons .header__search .header__search-label,
+.header__icons .header__icon .header__cart-label,
+.header__search-label,
+.header__cart-label {
+  display: none;
 }
 
 /* ============================================================
    Announcement bar
    ============================================================ */
-/* Sand bar, charcoal text — the calmest strip on the page. */
+/* Superseded by sections/utility-bar.liquid. These rules only apply if a
+   merchant re-adds Dawn's announcement bar in the theme editor. */
 .announcement-bar,
 .announcement-bar__link {
-  background: var(--color-sand);
-  color: var(--color-ink);
+  background: var(--color-navy);
+  color: var(--color-on-navy-soft);
 }
 
 .announcement-bar__message {
   font-family: var(--font-sans);
   font-size: 12px;
   font-weight: var(--weight-medium);
-  letter-spacing: 0.04em;
-  color: var(--color-ink);
+  letter-spacing: var(--type-utility-tracking);
+  text-transform: uppercase;
+  color: var(--color-on-navy-soft);
   min-height: var(--announcement-height);
   padding: 8px var(--space-base);
 }
@@ -1099,23 +1027,27 @@
 /* ============================================================
    Footer
    ============================================================ */
+/* The footer is a deep navy block. Everything inside it inverts, so the rules
+   below set colours against navy rather than against the page. */
 .footer {
-  border-top: 1px solid var(--border-default);
+  background: var(--color-navy);
+  border-top: none;
+  color: var(--color-on-navy-soft);
 }
 
-.footer {
-  background: var(--color-canvas);
-}
-
-/* Footer column heads are the small uppercase label, not a title. */
-.footer-block__heading {
+.footer .footer-block__heading {
   font-family: var(--font-sans);
   font-size: var(--type-footer-head-size);
   font-weight: var(--type-footer-head-weight);
   line-height: var(--type-footer-head-line);
   letter-spacing: var(--type-footer-head-tracking);
   text-transform: uppercase;
-  color: var(--color-ink);
+  color: var(--color-on-navy);
+}
+
+.footer .rte,
+.footer .footer__content-top p {
+  color: var(--color-on-navy-soft);
 }
 
 /* section-footer.css loads after this file and sets the link colour at the same
@@ -1126,34 +1058,44 @@
   font-family: var(--font-sans);
   font-size: var(--type-body-sm-size);
   line-height: var(--type-body-sm-line);
-  color: var(--text-muted);
+  color: var(--color-on-navy-soft);
   width: fit-content;
   transition: color var(--duration-fast) var(--ease-standard);
 }
 
 .footer .footer__content-top .list-menu__item--link:hover,
 .footer .footer-block__details-content .list-menu__item--link:hover {
-  color: var(--color-ink);
+  color: var(--color-sage);
 }
 
-/* Payment chips are outlined tiles, not full-colour badges. */
+/* Social and utility icons inherit the inverted text colour. */
+.footer .list-social__link {
+  color: var(--color-on-navy-soft);
+}
+
+.footer .list-social__link:hover {
+  color: var(--color-sage);
+}
+
+/* Payment chips read as faint outlines on navy, not bright tiles. */
 .footer .payment-list .list-payment__item {
-  border: 1px solid var(--border-default);
+  border: 1px solid var(--veil-on-dark-border);
   border-radius: 6px;
-  background: var(--surface-soft);
+  background: var(--veil-on-dark);
   padding: 4px 6px;
 }
 
 .footer__content-bottom {
-  border-top: 1px solid var(--border-default);
+  border-top: 1px solid var(--veil-on-dark-border);
 }
 
 .footer__content-bottom,
 .footer__copyright,
-.copyright__content {
+.copyright__content,
+.footer .copyright__content a {
   font-family: var(--font-sans);
   font-size: var(--type-caption-sm-size);
-  color: var(--text-muted);
+  color: var(--color-on-navy-soft);
 }
 
 .footer .payment-list .icon--full-color,

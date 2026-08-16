@@ -172,14 +172,33 @@
             }}
           </div>
         {%- else -%}
+          {%- comment -%}
+            Bundled fallback so the store shows the real mark before a logo is
+            uploaded in the theme editor. asset_img_url resizes the 2038px
+            source, so the 1.2MB original is never sent to a browser.
+
+            When "Use monogram on mobile" is on, the wide cloud is swapped for
+            the square monogram at narrow widths. Both are rendered and one is
+            hidden by CSS, which keeps it working inside the theme editor.
+          {%- endcomment -%}
           <img
-            src="{{ 'sr-wordmark.png' | asset_url }}"
-            class="header__heading-logo header__heading-logo--fallback motion-reduce"
+            src="{{ 'logo-cloud-dark.png' | asset_img_url: '400x' }}"
+            class="header__heading-logo header__heading-logo--fallback header__heading-logo--cloud motion-reduce"
             alt="{{ shop.name | escape }}"
-            width="148"
-            height="37"
+            width="200"
+            height="200"
             loading="eager"
           >
+          {%- if section.settings.mobile_monogram -%}
+            <img
+              src="{{ 'logo-monogram-dark.png' | asset_img_url: '200x' }}"
+              class="header__heading-logo header__heading-logo--fallback header__heading-logo--monogram motion-reduce"
+              alt="{{ shop.name | escape }}"
+              width="100"
+              height="100"
+              loading="eager"
+            >
+          {%- endif -%}
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
@@ -222,14 +241,33 @@
             }}
           </div>
         {%- else -%}
+          {%- comment -%}
+            Bundled fallback so the store shows the real mark before a logo is
+            uploaded in the theme editor. asset_img_url resizes the 2038px
+            source, so the 1.2MB original is never sent to a browser.
+
+            When "Use monogram on mobile" is on, the wide cloud is swapped for
+            the square monogram at narrow widths. Both are rendered and one is
+            hidden by CSS, which keeps it working inside the theme editor.
+          {%- endcomment -%}
           <img
-            src="{{ 'sr-wordmark.png' | asset_url }}"
-            class="header__heading-logo header__heading-logo--fallback motion-reduce"
+            src="{{ 'logo-cloud-dark.png' | asset_img_url: '400x' }}"
+            class="header__heading-logo header__heading-logo--fallback header__heading-logo--cloud motion-reduce"
             alt="{{ shop.name | escape }}"
-            width="148"
-            height="37"
+            width="200"
+            height="200"
             loading="eager"
           >
+          {%- if section.settings.mobile_monogram -%}
+            <img
+              src="{{ 'logo-monogram-dark.png' | asset_img_url: '200x' }}"
+              class="header__heading-logo header__heading-logo--fallback header__heading-logo--monogram motion-reduce"
+              alt="{{ shop.name | escape }}"
+              width="100"
+              height="100"
+              loading="eager"
+            >
+          {%- endif -%}
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
@@ -486,6 +524,13 @@
   "class": "section-header",
   "max_blocks": 3,
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "mobile_monogram",
+      "label": "Use monogram on mobile",
+      "info": "Swaps the wide cloud wordmark for the square SR monogram on narrow screens. Only applies while the bundled logo is in use, not to a logo uploaded above.",
+      "default": false
+    },
     {
       "type": "select",
       "id": "logo_position",

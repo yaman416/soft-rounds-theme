@@ -10,7 +10,12 @@
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
     {%- else -%}
-      <link rel="icon" type="image/png" href="{{ 'sr-monogram.png' | asset_url }}">
+      {%- comment -%}
+        The monogram is the mark intended for the favicon, app icon and any
+        tight space. Resized from the 2038px source rather than served raw.
+      {%- endcomment -%}
+      <link rel="icon" type="image/png" href="{{ 'logo-monogram-dark.png' | asset_img_url: '48x' }}">
+      <link rel="apple-touch-icon" href="{{ 'logo-monogram-dark.png' | asset_img_url: '180x' }}">
     {%- endif -%}
 
     {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}

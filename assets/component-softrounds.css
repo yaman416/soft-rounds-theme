@@ -913,12 +913,30 @@
   color: var(--color-ink);
 }
 
-/* The cloud logo is wide, so it is given real height rather than Dawn's
-   default cap. Swap to the monogram at mobile by uploading it as the
-   mobile logo in the theme editor. */
+/* The cloud logo is square artwork with transparent padding, so it is sized by
+   height and left to find its own width. */
 .header__heading-logo {
   max-height: 84px;
   width: auto;
+}
+
+/* Monogram swap. Both marks are rendered and one is hidden, so the change
+   still works inside the theme editor where Liquid is not re-evaluated on
+   resize. When the toggle is off, only the cloud exists and these rules do
+   nothing. */
+.header__heading-logo--monogram {
+  display: none;
+}
+
+@media screen and (max-width: 749px) {
+  .header__heading-link:has(.header__heading-logo--monogram) .header__heading-logo--cloud {
+    display: none;
+  }
+
+  .header__heading-logo--monogram {
+    display: block;
+    max-height: 56px;
+  }
 }
 
 /* Nav links are uppercase, tracked, and change to sage on hover. No pill,
@@ -1678,4 +1696,11 @@ fieldset.product-form__input legend {
   background: transparent;
   padding-left: 0;
   padding-right: 0;
+}
+
+/* The footer sits on navy, so it takes the light cloud logo. */
+.footer .footer__logo,
+.footer__content-top .footer-block--brand img {
+  max-height: 76px;
+  width: auto;
 }

@@ -13,17 +13,17 @@
       "type": "hero-storefront",
       "name": "Hero",
       "settings": {
-        "eyebrow": "Socks & scrubs",
-        "heading": "Premium comfort made for ",
-        "heading_accent": "long shifts",
-        "heading_end": ".",
-        "text": "Soft, durable compression socks and healthcare scrubs designed for demanding workdays.",
+        "eyebrow": "Compression socks",
+        "heading": "Premium comfort made for long shifts",
+        "text": "Soft, supportive compression socks designed to keep you comfortable from the first step to the last.",
         "button_label": "Shop compression socks",
         "button_link": "shopify://collections/compression",
-        "secondary_button_label": "Explore scrubs",
-        "secondary_button_link": "shopify://collections/scrubs",
-        "image_height": 600,
-        "image_height_mobile": 330,
+        "roundel_label": "Graduated compression",
+        "roundel_figure": "",
+        "roundel_unit": "mmHg",
+        "rating_word": "",
+        "rating_score": "",
+        "rating_source": "",
         "padding_top": 0,
         "padding_bottom": 0
       }
@@ -34,18 +34,31 @@
       "blocks": {
         "pill-socks": {
           "type": "pill",
-          "settings": { "label": "Compression socks", "link": "shopify://collections/compression" }
+          "settings": {
+            "label": "Compression socks",
+            "link": "shopify://collections/compression"
+          }
         },
         "pill-scrubs": {
           "type": "pill",
-          "settings": { "label": "Scrubs", "link": "shopify://collections/scrubs" }
+          "settings": {
+            "label": "Scrubs",
+            "link": "shopify://collections/scrubs"
+          }
         },
         "pill-all": {
           "type": "pill",
-          "settings": { "label": "Shop all", "link": "shopify://collections/all" }
+          "settings": {
+            "label": "Shop all",
+            "link": "shopify://collections/all"
+          }
         }
       },
-      "block_order": ["pill-socks", "pill-scrubs", "pill-all"],
+      "block_order": [
+        "pill-socks",
+        "pill-scrubs",
+        "pill-all"
+      ],
       "settings": {
         "label": "Popular right now",
         "padding_top": 20,
@@ -77,7 +90,10 @@
           }
         }
       },
-      "block_order": ["tile-socks", "tile-scrubs"],
+      "block_order": [
+        "tile-socks",
+        "tile-scrubs"
+      ],
       "settings": {
         "title": "Shop by category",
         "subtitle": "Start with what your shift needs most.",
@@ -89,46 +105,51 @@
     },
     "why": {
       "type": "feature-strip",
-      "name": "Why Soft Rounds",
+      "name": "Benefits",
       "blocks": {
-        "soft": {
+        "b1": {
+          "type": "feature",
+          "settings": {
+            "icon": "icon-wind.svg",
+            "label": "Breathable knit",
+            "text": "Soft, breathable fabrics that stay comfortable through a full shift."
+          }
+        },
+        "b2": {
           "type": "feature",
           "settings": {
             "icon": "icon-leaf.svg",
-            "label": "Soft materials",
-            "text": "Fabrics chosen for softness against the skin through a full shift."
+            "label": "Everyday support",
+            "text": "Graduated support designed for long hours on your feet."
           }
         },
-        "durable": {
+        "b3": {
           "type": "feature",
           "settings": {
-            "icon": "icon-shield-check.svg",
-            "label": "Durable construction",
-            "text": "Reinforced seams and knits built for repeated wear and washing."
-          }
-        },
-        "shifts": {
-          "type": "feature",
-          "settings": {
-            "icon": "icon-heart.svg",
-            "label": "Made for long shifts",
+            "icon": "icon-stopwatch.svg",
+            "label": "All-day comfort",
             "text": "Designed around standing, walking and moving between tasks."
           }
         },
-        "care": {
+        "b4": {
           "type": "feature",
           "settings": {
-            "icon": "icon-droplets.svg",
-            "label": "Easy-care essentials",
-            "text": "Simple washing instructions that suit a busy weekly routine."
+            "icon": "icon-shield-check.svg",
+            "label": "Premium quality",
+            "text": "Durable construction, made to last through repeated washing."
           }
         }
       },
-      "block_order": ["soft", "durable", "shifts", "care"],
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ],
       "settings": {
-        "title": "Why Soft Rounds",
-        "columns_desktop": 4,
-        "padding_top": 80,
+        "title": "",
+        "min_column_width": 230,
+        "padding_top": 32,
         "padding_bottom": 0
       }
     },
@@ -165,11 +186,30 @@
       "type": "story-split",
       "name": "Our story",
       "blocks": {
-        "p1": { "type": "point", "settings": { "label": "Thoughtful fabric selection" } },
-        "p2": { "type": "point", "settings": { "label": "Functional fit" } },
-        "p3": { "type": "point", "settings": { "label": "Easy-care design" } }
+        "p1": {
+          "type": "point",
+          "settings": {
+            "label": "Thoughtful fabric selection"
+          }
+        },
+        "p2": {
+          "type": "point",
+          "settings": {
+            "label": "Functional fit"
+          }
+        },
+        "p3": {
+          "type": "point",
+          "settings": {
+            "label": "Easy-care design"
+          }
+        }
       },
-      "block_order": ["p1", "p2", "p3"],
+      "block_order": [
+        "p1",
+        "p2",
+        "p3"
+      ],
       "settings": {
         "eyebrow": "Our story",
         "heading": "Created for people who ",

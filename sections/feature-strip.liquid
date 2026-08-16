@@ -1,7 +1,13 @@
 {%- comment -%}
-  Direction C "Why Soft Rounds": a slate-blue panel holding a heading and four
-  icon columns. The panel is the only large block of brand colour on the page,
-  which is what makes it read as a statement rather than another card.
+  Benefits strip: a single warm card split into equal cells.
+
+  The dividers use the design's own trick: a 1px grid gap over a per-cell
+  right-edge box-shadow. When the grid wraps, a cell that ends a row simply
+  paints its shadow off the edge of the rounded container, so no floating rule
+  is ever left hanging. Do not swap this for borders.
+
+  Icon disc fills cycle sage, sage, slate-grey, navy so a four-up row reads as
+  a set rather than four identical chips.
 {%- endcomment -%}
 
 {%- style -%}
@@ -17,180 +23,179 @@
     }
   }
 
-  #shopify-section-{{ section.id }} .feature-c__grid {
-    --feature-columns: {{ section.settings.columns_desktop }};
+  #shopify-section-{{ section.id }} .benefits-n__grid {
+    --benefit-min: {{ section.settings.min_column_width }}px;
   }
 {%- endstyle -%}
 
-<div class="feature-c section-{{ section.id }}-padding">
-  <div class="sr-container">
-    <div class="feature-c__panel">
-      {%- if section.settings.title != blank -%}
-        <h2 class="feature-c__title">{{ section.settings.title }}</h2>
-      {%- endif -%}
+<div class="benefits-n section-{{ section.id }}-padding">
+  <div class="benefits-n__inner">
+    {%- if section.settings.title != blank -%}
+      <h2 class="benefits-n__title">{{ section.settings.title }}</h2>
+    {%- endif -%}
 
-      <div class="feature-c__grid">
-        {%- for block in section.blocks -%}
-          <div class="feature-c__item" {{ block.shopify_attributes }}>
-            {%- if block.settings.icon != blank -%}
-              <span class="feature-c__icon">{{ block.settings.icon | inline_asset_content }}</span>
-            {%- endif -%}
+    <div class="benefits-n__grid">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign tints = 'sage,sage,slate,navy' | split: ','
+          assign tint_index = forloop.index0 | modulo: 4
+          assign tint = tints[tint_index]
+        -%}
+        <div class="benefits-n__cell" {{ block.shopify_attributes }}>
+          {%- if block.settings.icon != blank -%}
+            <span class="benefits-n__disc benefits-n__disc--{{ tint }}" aria-hidden="true">
+              <span class="sr-icon" style="--sr-icon: url({{ block.settings.icon | asset_url }})"></span>
+            </span>
+          {%- endif -%}
+          <div>
             {%- if block.settings.label != blank -%}
-              <h3 class="feature-c__label">{{ block.settings.label }}</h3>
+              <h3 class="benefits-n__label">{{ block.settings.label }}</h3>
             {%- endif -%}
             {%- if block.settings.text != blank -%}
-              <p class="feature-c__text">{{ block.settings.text }}</p>
+              <p class="benefits-n__text">{{ block.settings.text }}</p>
             {%- endif -%}
           </div>
-        {%- endfor -%}
-      </div>
+        </div>
+      {%- endfor -%}
     </div>
   </div>
 </div>
 
 {% stylesheet %}
-  .feature-c__panel {
-    background: var(--surface-panel);
-    border-radius: var(--radius-card);
-    padding: var(--pad-panel) 44px;
+  .benefits-n__inner {
+    max-width: var(--container-page);
+    margin: 0 auto;
+    padding: 0 var(--gutter-page);
   }
 
-  .feature-c__title {
-    margin: 0;
+  .benefits-n__title {
+    margin: 0 0 20px;
     font-family: var(--font-display);
-    font-size: 26px;
-    font-weight: var(--weight-semibold);
-    line-height: 1.25;
-    color: var(--color-on-primary);
+    font-size: var(--type-section-size);
+    font-weight: var(--type-section-weight);
+    line-height: var(--type-section-line);
+    letter-spacing: var(--type-section-tracking);
+    color: var(--color-ink);
   }
 
-  .feature-c__grid {
+  .benefits-n__grid {
+    background: var(--surface-card);
+    border-radius: var(--radius-card);
+    overflow: hidden;
     display: grid;
-    grid-template-columns: repeat(var(--feature-columns, 4), minmax(0, 1fr));
-    gap: 36px;
-    margin-top: var(--space-xl);
+    grid-template-columns: repeat(auto-fit, minmax(min(var(--benefit-min, 230px), 100%), 1fr));
+    gap: 1px;
   }
 
-  .feature-c__icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 46px;
-    height: 46px;
+  .benefits-n__cell {
+    background: var(--surface-card);
+    box-shadow: 1px 0 0 0 var(--color-hairline);
+    padding: clamp(22px, 2.6vw, 28px);
+    display: flex;
+    gap: var(--space-base);
+    align-items: flex-start;
+  }
+
+  .benefits-n__disc {
+    width: 52px;
+    height: 52px;
+    flex: none;
     border-radius: var(--radius-full);
-    background: rgba(255, 255, 255, 0.18);
+    display: grid;
+    place-items: center;
   }
 
-  .feature-c__icon svg {
+  .benefits-n__disc .sr-icon {
     width: 23px;
     height: 23px;
-    color: var(--color-on-primary);
   }
 
-  .feature-c__label {
-    margin: 16px 0 0;
-    font-family: var(--font-display);
-    font-size: var(--type-title-md-size);
-    font-weight: var(--type-title-md-weight);
-    line-height: var(--type-title-md-line);
-    color: var(--color-on-primary);
+  .benefits-n__disc--sage {
+    background: var(--color-sage);
+    color: var(--color-navy);
   }
 
-  .feature-c__text {
+  .benefits-n__disc--slate {
+    background: #7d8d9c;
+    color: var(--color-on-navy);
+  }
+
+  .benefits-n__disc--navy {
+    background: var(--color-navy);
+    color: var(--color-on-navy);
+  }
+
+  /* Deliberately Instrument Sans, not Outfit: at 12.5px the tracked sans reads
+     as a label, which is what this is. */
+  .benefits-n__label {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 12.5px;
+    font-weight: var(--weight-semibold);
+    letter-spacing: 0.07em;
+    color: var(--color-ink);
+  }
+
+  .benefits-n__text {
     margin: 7px 0 0;
     font-family: var(--font-sans);
-    font-size: var(--type-body-sm-size);
-    line-height: 1.6;
-    color: var(--color-on-slate);
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--color-body);
     text-wrap: pretty;
-  }
-
-  @media screen and (max-width: 989px) {
-    .feature-c__panel {
-      padding: 28px 22px;
-    }
-
-    .feature-c__title {
-      font-size: 22px;
-    }
-
-    .feature-c__grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 24px 18px;
-      margin-top: 22px;
-    }
-
-    .feature-c__icon {
-      width: 40px;
-      height: 40px;
-    }
-
-    .feature-c__icon svg {
-      width: 20px;
-      height: 20px;
-    }
-
-    .feature-c__label {
-      margin-top: 12px;
-      font-size: 15.5px;
-    }
-
-    .feature-c__text {
-      margin-top: 5px;
-      font-size: 13.5px;
-      line-height: 1.55;
-    }
   }
 {% endstylesheet %}
 
 {% schema %}
 {
-  "name": "Why Soft Rounds",
+  "name": "Benefits strip",
   "tag": "section",
   "class": "section",
   "settings": [
-    { "type": "text", "id": "title", "label": "Panel heading", "default": "Why Soft Rounds" },
+    { "type": "text", "id": "title", "label": "Section title", "info": "Optional. Leave blank for a bare strip." },
     {
       "type": "range",
-      "id": "columns_desktop",
-      "min": 2,
-      "max": 4,
-      "step": 1,
-      "label": "Columns on desktop",
-      "default": 4
+      "id": "min_column_width",
+      "min": 180,
+      "max": 340,
+      "step": 10,
+      "unit": "px",
+      "label": "Minimum column width",
+      "info": "Columns reflow automatically. Lower means more columns fit.",
+      "default": 230
     },
-    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding top", "default": 80 },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding top", "default": 32 },
     { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding bottom", "default": 0 }
   ],
   "blocks": [
     {
       "type": "feature",
-      "name": "Feature",
+      "name": "Benefit",
       "settings": [
         {
           "type": "text",
           "id": "icon",
           "label": "Icon filename",
-          "info": "e.g. icon-leaf.svg",
-          "default": "icon-leaf.svg"
+          "info": "A file in assets/, for example icon-wind.svg",
+          "default": "icon-wind.svg"
         },
         {
           "type": "text",
           "id": "label",
-          "label": "Label",
-          "info": "Material, shipping and returns claims must be verifiable."
+          "label": "Label"
         },
         {
           "type": "textarea",
           "id": "text",
-          "label": "Supporting text"
+          "label": "Supporting text",
+          "info": "Health and performance wording must be defensible. Compression may be described as a support level only, never as treating or preventing a condition."
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Why Soft Rounds",
+      "name": "Benefits strip",
       "blocks": [{ "type": "feature" }, { "type": "feature" }, { "type": "feature" }, { "type": "feature" }]
     }
   ]

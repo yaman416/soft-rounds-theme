@@ -1,10 +1,13 @@
 {%- comment -%}
-  Direction C hero: a full-bleed photograph with a floating ivory card laid over
-  its left edge. On mobile the card drops below the photo and overlaps it
-  upward, so the headline still sits against the image.
+  Navy-generation hero: copy on a sand band at the left, a full-bleed
+  photograph at the right carrying a sage roundel.
 
-  The heading is split into three fields rather than one so the merchant can
-  place the Instrument Serif italic accent without writing any HTML.
+  Two honesty guards are built in:
+  - The rating row is empty by default. The design file's own pre-launch notes
+    say the "4.9 from 1,200+ reviews" figure was taken from a reference mockup
+    and must be wired to a real review platform or removed.
+  - The roundel figure is blank by default. Compression may be described as a
+    support level only, and the number must match the supplier spec sheet.
 {%- endcomment -%}
 
 {%- liquid
@@ -23,257 +26,260 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
-
-  #shopify-section-{{ section.id }} .hero-c__media {
-    height: {{ section.settings.image_height_mobile }}px;
-  }
-
-  @media screen and (min-width: 990px) {
-    #shopify-section-{{ section.id }} .hero-c__media {
-      height: {{ section.settings.image_height }}px;
-    }
-  }
 {%- endstyle -%}
 
-<div class="hero-c section-{{ section.id }}-padding">
-  <div class="hero-c__media">
-    {%- if hero_image != blank -%}
-      {{
-        hero_image
-        | image_url: width: 2400
-        | image_tag: loading: 'eager', fetchpriority: 'high', alt: section.settings.heading, sizes: '100vw'
-      }}
-    {%- else -%}
-      <img
-        src="{{ 'sr-nurse-locker-room.webp' | asset_url }}"
-        alt="{{ section.settings.heading | escape }}"
-        loading="eager"
-        fetchpriority="high"
-        width="2400"
-        height="1000"
-      >
-    {%- endif -%}
-  </div>
-
-  <div class="hero-c__overlay">
-    <div class="hero-c__card">
+<div class="hero-n section-{{ section.id }}-padding">
+  <div class="hero-n__grid">
+    <div class="hero-n__copy">
       {%- if section.settings.eyebrow != blank -%}
-        <span class="hero-c__eyebrow">{{ section.settings.eyebrow }}</span>
+        <p class="sr-eyebrow hero-n__eyebrow">{{ section.settings.eyebrow }}</p>
       {%- endif -%}
 
-      <h1 class="hero-c__heading">
-        {{- section.settings.heading -}}
-        {%- if section.settings.heading_accent != blank -%}
-          <em class="sr-accent">{{ section.settings.heading_accent }}</em>
-        {%- endif -%}
-        {{- section.settings.heading_end -}}
-      </h1>
+      <h1 class="hero-n__heading">{{ section.settings.heading }}</h1>
 
       {%- if section.settings.text != blank -%}
-        <p class="hero-c__text">{{ section.settings.text }}</p>
+        <p class="hero-n__text">{{ section.settings.text }}</p>
       {%- endif -%}
 
-      <div class="hero-c__actions">
-        {%- if section.settings.button_label != blank -%}
-          <a href="{{ section.settings.button_link }}" class="sr-btn sr-btn--primary">
-            {{ section.settings.button_label }}
-          </a>
-        {%- endif -%}
-        {%- if section.settings.secondary_button_label != blank -%}
-          <a href="{{ section.settings.secondary_button_link }}" class="sr-btn sr-btn--secondary">
-            {{ section.settings.secondary_button_label }}
-          </a>
-        {%- endif -%}
-      </div>
+      {%- if section.settings.button_label != blank -%}
+        <a href="{{ section.settings.button_link }}" class="hero-n__cta">
+          {{ section.settings.button_label }}
+          <span class="hero-n__cta-circle" aria-hidden="true">
+            <span class="sr-icon" style="--sr-icon: url({{ 'icon-arrow.svg' | asset_url }})"></span>
+          </span>
+        </a>
+      {%- endif -%}
 
-      {%- if section.blocks.size > 0 -%}
-        <ul class="hero-c__specs" role="list">
-          {%- for block in section.blocks -%}
-            <li class="hero-c__spec" {{ block.shopify_attributes }}>
-              <span class="hero-c__spec-icon">{{ block.settings.icon | inline_asset_content }}</span>
-              <span class="hero-c__spec-label">{{ block.settings.label }}</span>
-            </li>
-          {%- endfor -%}
-        </ul>
+      {%- comment -%}
+        Only renders when the merchant has supplied a genuine, sourced rating.
+      {%- endcomment -%}
+      {%- if section.settings.rating_score != blank and section.settings.rating_source != blank -%}
+        <div class="hero-n__rating">
+          {%- if section.settings.rating_word != blank -%}
+            <span class="hero-n__rating-word">{{ section.settings.rating_word }}</span>
+          {%- endif -%}
+          <span class="hero-n__stars" aria-hidden="true">
+            {%- for i in (1..5) -%}
+              <span class="hero-n__star">
+                <span class="sr-icon" style="--sr-icon: url({{ 'icon-star-solid.svg' | asset_url }})"></span>
+              </span>
+            {%- endfor -%}
+          </span>
+          <span class="hero-n__rating-text">{{ section.settings.rating_score }}</span>
+          <span class="hero-n__rating-source">{{ section.settings.rating_source }}</span>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="hero-n__media">
+      {%- if hero_image != blank -%}
+        {{
+          hero_image
+          | image_url: width: 1800
+          | image_tag: loading: 'eager', fetchpriority: 'high', alt: section.settings.heading, sizes: '(min-width: 750px) 50vw, 100vw'
+        }}
+      {%- else -%}
+        <img
+          src="{{ 'sr-nurse-locker-room.webp' | asset_url }}"
+          alt="{{ section.settings.heading | escape }}"
+          loading="eager"
+          fetchpriority="high"
+          width="1800"
+          height="1400"
+        >
+      {%- endif -%}
+
+      {%- if section.settings.roundel_figure != blank -%}
+        <div class="hero-n__roundel">
+          <div>
+            {%- if section.settings.roundel_label != blank -%}
+              <div class="hero-n__roundel-label">{{ section.settings.roundel_label }}</div>
+            {%- endif -%}
+            <div class="hero-n__roundel-figure">{{ section.settings.roundel_figure }}</div>
+            {%- if section.settings.roundel_unit != blank -%}
+              <div class="hero-n__roundel-unit">{{ section.settings.roundel_unit }}</div>
+            {%- endif -%}
+          </div>
+        </div>
       {%- endif -%}
     </div>
   </div>
 </div>
 
 {% stylesheet %}
-  .hero-c {
-    position: relative;
+  .hero-n {
     background: var(--color-sand);
-    overflow: hidden;
   }
 
-  .hero-c__media {
+  .hero-n__grid {
+    max-width: var(--container-page);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
+    align-items: stretch;
+  }
+
+  .hero-n__copy {
+    padding: clamp(32px, 4vw, 64px) var(--gutter-page);
+    align-self: center;
+  }
+
+  .hero-n__eyebrow {
+    margin: 0;
+    font-size: 12px;
+  }
+
+  .hero-n__heading {
+    margin: 18px 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(36px, 4.8vw, 58px);
+    font-weight: var(--weight-bold);
+    line-height: 1.04;
+    letter-spacing: -0.018em;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  .hero-n__text {
+    margin: 22px 0 0;
+    max-width: 42ch;
+    font-family: var(--font-sans);
+    font-size: var(--type-body-md-size);
+    line-height: var(--type-body-md-line);
+    color: var(--color-body);
+    text-wrap: pretty;
+  }
+
+  /* The CTA carries a circled arrow rather than a plain label. */
+  .hero-n__cta {
+    margin: 30px 0 0;
+    height: var(--button-height-secondary);
+    padding: 0 10px 0 26px;
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+    border-radius: var(--radius-button);
+    background: var(--color-navy);
+    color: var(--color-on-navy);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: var(--weight-semibold);
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: var(--transition-color);
+  }
+
+  .hero-n__cta:hover {
+    background: var(--color-navy-hover);
+    color: var(--color-on-navy);
+  }
+
+  .hero-n__cta-circle {
+    width: 34px;
+    height: 34px;
+    border-radius: var(--radius-full);
+    background: rgba(251, 246, 242, 0.14);
+    display: grid;
+    place-items: center;
+  }
+
+  .hero-n__cta-circle .sr-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .hero-n__rating {
+    margin: 30px 0 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .hero-n__rating-word,
+  .hero-n__rating-source {
+    font-family: var(--font-sans);
+    font-size: 12.5px;
+    font-weight: var(--weight-semibold);
+    color: var(--color-ink);
+  }
+
+  .hero-n__rating-text {
+    font-family: var(--font-sans);
+    font-size: 12.5px;
+    color: var(--color-body);
+  }
+
+  .hero-n__stars {
+    display: flex;
+    gap: 2px;
+  }
+
+  .hero-n__star {
+    width: 19px;
+    height: 19px;
+    display: grid;
+    place-items: center;
+    background: var(--color-sage-text);
+    color: var(--color-on-navy);
+  }
+
+  .hero-n__star .sr-icon {
+    width: 12px;
+    height: 12px;
+  }
+
+  .hero-n__media {
     position: relative;
-    overflow: hidden;
+    min-height: 420px;
+    background: var(--surface-photo);
   }
 
-  .hero-c__media img {
+  .hero-n__media img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
   }
 
-  .hero-c__card {
-    background: var(--color-ivory);
-    border-radius: var(--radius-card);
-    border: var(--border-hairline) solid var(--border-default);
-    padding: var(--space-xl) var(--space-lg) var(--space-lg);
-    box-shadow: var(--shadow-pop);
-    pointer-events: auto;
+  .hero-n__roundel {
+    position: absolute;
+    right: clamp(16px, 3vw, 40px);
+    bottom: 56px;
+    width: 124px;
+    height: 124px;
+    border-radius: var(--radius-full);
+    background: var(--color-sage);
+    color: var(--color-navy);
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: 12px;
   }
 
-  .hero-c__eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-md);
-    color: var(--color-slate);
+  .hero-n__roundel-label {
     font-family: var(--font-sans);
-    font-size: var(--type-eyebrow-size);
-    font-weight: var(--type-eyebrow-weight);
-    line-height: var(--type-eyebrow-line);
-    letter-spacing: var(--type-eyebrow-tracking);
+    font-size: 9.5px;
+    font-weight: var(--weight-semibold);
+    letter-spacing: 0.1em;
+    line-height: 1.35;
     text-transform: uppercase;
   }
 
-  .hero-c__eyebrow::before {
-    width: var(--space-xl);
-    height: var(--border-hairline);
-    background: currentColor;
-    content: '';
-  }
-
-  .hero-c__heading {
-    max-width: 10.5em;
-    margin: var(--space-lg) 0 0;
+  .hero-n__roundel-figure {
+    margin-top: 4px;
     font-family: var(--font-display);
-    font-size: var(--type-hero-size);
-    font-weight: var(--type-hero-weight);
-    line-height: var(--type-hero-line);
-    letter-spacing: var(--type-hero-tracking);
-    color: var(--color-ink);
-    text-wrap: pretty;
+    font-size: 25px;
+    font-weight: var(--weight-bold);
+    letter-spacing: -0.01em;
   }
 
-  .hero-c__text {
-    max-width: 38ch;
-    margin: var(--space-base) 0 0;
+  .hero-n__roundel-unit {
     font-family: var(--font-sans);
-    font-size: var(--type-body-lg-size);
-    line-height: var(--type-body-lg-line);
-    color: var(--text-muted);
-    text-wrap: pretty;
-  }
-
-  .hero-c__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-md);
-    margin: var(--space-lg) 0 0;
-  }
-
-  .hero-c__specs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-lg);
-    list-style: none;
-    margin: 24px 0 0;
-    padding: 0;
-  }
-
-  .hero-c__spec {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-  }
-
-  .hero-c__spec-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 34px;
-    height: 34px;
-    flex: none;
-    border-radius: var(--radius-full);
-    background: var(--color-canvas);
-  }
-
-  .hero-c__spec-icon svg {
-    width: 17px;
-    height: 17px;
-    color: var(--color-slate);
-  }
-
-  .hero-c__spec-label {
-    font-family: var(--font-sans);
-    font-size: var(--type-caption-size);
+    font-size: 11px;
     font-weight: var(--weight-medium);
-    color: var(--color-ink);
-  }
-
-  /* Mobile and tablet: the card sits below the photo and rides up over it. */
-  .hero-c__overlay {
-    padding: 0 var(--gutter-page-mobile);
-    margin-top: calc(var(--space-lg) * -1);
-    position: relative;
-  }
-
-  @media screen and (max-width: 989px) {
-    .hero-c__card {
-      padding: var(--space-lg);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .hero-c__heading {
-      max-width: 11em;
-      margin-top: var(--space-base);
-      font-size: 32px;
-      line-height: 1.1;
-    }
-
-    .hero-c__text {
-      margin-top: var(--space-md);
-      font-size: 15.5px;
-    }
-
-    .hero-c__actions {
-      flex-direction: column;
-      gap: var(--space-md);
-      margin-top: var(--space-lg);
-    }
-
-    .hero-c__actions .sr-btn {
-      width: 100%;
-    }
-
-    .hero-c__specs {
-      gap: var(--space-base);
-      margin-top: var(--space-lg);
-    }
-  }
-
-  /* Desktop: the card floats inside the photo. */
-  @media screen and (min-width: 990px) {
-    .hero-c__overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: flex-end;
-      padding: var(--space-xxl) clamp(var(--space-xl), 4.45vw, 64px);
-      margin-top: 0;
-      pointer-events: none;
-    }
-
-    .hero-c__card {
-      width: min(520px, 46vw);
-      max-width: 100%;
-      padding: 42px 44px;
-    }
   }
 {% endstylesheet %}
 
@@ -283,31 +289,28 @@
   "tag": "section",
   "class": "section",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow badge", "info": "Small uppercase pill above the heading. Product claims here must be verifiable.", "default": "Socks & scrubs" },
-    { "type": "text", "id": "heading", "label": "Heading — first part", "default": "Premium comfort made for " },
-    { "type": "text", "id": "heading_accent", "label": "Heading — accent phrase", "info": "Shown in the serif italic accent face. Leave blank for none.", "default": "long shifts" },
-    { "type": "text", "id": "heading_end", "label": "Heading — last part", "info": "Usually just the full stop.", "default": "." },
-    { "type": "textarea", "id": "text", "label": "Text", "default": "Soft, durable compression socks and healthcare scrubs designed for demanding workdays." },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Compression socks" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Premium comfort made for long shifts" },
+    { "type": "textarea", "id": "text", "label": "Text", "info": "Describe comfort and support. Do not imply diagnosis, prevention or treatment." },
     { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop compression socks" },
     { "type": "url", "id": "button_link", "label": "Button link" },
-    { "type": "text", "id": "secondary_button_label", "label": "Secondary button label", "default": "Explore scrubs" },
-    { "type": "url", "id": "secondary_button_link", "label": "Secondary button link" },
     { "type": "image_picker", "id": "image", "label": "Image (optional, falls back to bundled photo)" },
-    { "type": "range", "id": "image_height", "min": 400, "max": 800, "step": 20, "unit": "px", "label": "Image height (desktop)", "default": 600 },
-    { "type": "range", "id": "image_height_mobile", "min": 240, "max": 520, "step": 10, "unit": "px", "label": "Image height (mobile)", "default": 330 },
+    {
+      "type": "header",
+      "content": "Roundel"
+    },
+    { "type": "text", "id": "roundel_label", "label": "Roundel label", "default": "Graduated compression" },
+    { "type": "text", "id": "roundel_figure", "label": "Roundel figure", "info": "Leave blank until the supplier spec sheet is confirmed. Describe a support level only, for example 15-20." },
+    { "type": "text", "id": "roundel_unit", "label": "Roundel unit", "default": "mmHg" },
+    {
+      "type": "header",
+      "content": "Rating"
+    },
+    { "type": "text", "id": "rating_word", "label": "Rating word", "info": "For example: Excellent" },
+    { "type": "text", "id": "rating_score", "label": "Rating summary", "info": "Only fill this in with a genuine figure from a real review platform. Invented ratings breach the brand's content rules and Australian Consumer Law." },
+    { "type": "text", "id": "rating_source", "label": "Review platform name", "info": "Required before the rating row will display." },
     { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding top", "default": 0 },
     { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding bottom", "default": 0 }
-  ],
-  "blocks": [
-    {
-      "type": "spec",
-      "name": "Spec chip",
-      "limit": 3,
-      "settings": [
-        { "type": "text", "id": "icon", "label": "Icon filename", "info": "e.g. icon-leaf.svg", "default": "icon-leaf.svg" },
-        { "type": "text", "id": "label", "label": "Label", "info": "Material and performance claims must be verifiable." }
-      ]
-    }
   ],
   "presets": [{ "name": "Hero (storefront)" }]
 }

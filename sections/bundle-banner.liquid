@@ -1,0 +1,253 @@
+{%- comment -%}
+  Navy bundle banner: copy on the left carrying the light monogram, a
+  photograph on the right with a sage roundel.
+
+  The saving figure is blank by default. A discount claim must match a real
+  offer that is actually configured in Shopify.
+{%- endcomment -%}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="bundle-n section-{{ section.id }}-padding">
+  <div class="bundle-n__inner">
+    <div class="bundle-n__panel">
+      <div class="bundle-n__copy">
+        {%- if section.settings.show_monogram -%}
+          <img
+            src="{{ 'logo-monogram-light.png' | asset_img_url: '160x' }}"
+            alt=""
+            class="bundle-n__monogram"
+            width="80"
+            height="80"
+            loading="lazy"
+          >
+        {%- endif -%}
+
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="bundle-n__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+
+        <h2 class="bundle-n__heading">{{ section.settings.heading }}</h2>
+
+        {%- if section.settings.text != blank -%}
+          <p class="bundle-n__text">{{ section.settings.text }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_link }}" class="bundle-n__cta">
+            {{ section.settings.button_label }}
+            <span class="bundle-n__cta-circle" aria-hidden="true">
+              <span class="sr-icon" style="--sr-icon: url({{ 'icon-arrow.svg' | asset_url }})"></span>
+            </span>
+          </a>
+        {%- endif -%}
+      </div>
+
+      <div class="bundle-n__media">
+        {%- if section.settings.image != blank -%}
+          {{
+            section.settings.image
+            | image_url: width: 1400
+            | image_tag: loading: 'lazy', alt: section.settings.heading, sizes: '(min-width: 750px) 50vw, 100vw'
+          }}
+        {%- else -%}
+          <img
+            src="{{ 'sr-socks-colour-range-flatlay.webp' | asset_url }}"
+            alt="{{ section.settings.heading | escape }}"
+            loading="lazy"
+            width="1400"
+            height="900"
+          >
+        {%- endif -%}
+
+        {%- if section.settings.roundel_figure != blank -%}
+          <div class="bundle-n__roundel">
+            <div>
+              {%- if section.settings.roundel_label != blank -%}
+                <div class="bundle-n__roundel-label">{{ section.settings.roundel_label }}</div>
+              {%- endif -%}
+              <div class="bundle-n__roundel-figure">{{ section.settings.roundel_figure }}</div>
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .bundle-n__inner {
+    max-width: var(--container-page);
+    margin: 0 auto;
+    padding: 0 var(--gutter-page);
+  }
+
+  .bundle-n__panel {
+    background: var(--color-navy);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    align-items: center;
+  }
+
+  .bundle-n__copy {
+    padding: clamp(28px, 3.5vw, 44px);
+  }
+
+  .bundle-n__monogram {
+    height: 46px;
+    width: auto;
+    display: block;
+    margin: 0 0 16px -4px;
+  }
+
+  .bundle-n__eyebrow {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: var(--type-eyebrow-size);
+    font-weight: var(--type-eyebrow-weight);
+    line-height: var(--type-eyebrow-line);
+    letter-spacing: var(--type-eyebrow-tracking);
+    text-transform: uppercase;
+    color: var(--color-sage);
+  }
+
+  .bundle-n__heading {
+    margin: 14px 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(26px, 3vw, 34px);
+    font-weight: var(--weight-bold);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--color-on-navy);
+  }
+
+  .bundle-n__text {
+    margin: 14px 0 0;
+    max-width: 34ch;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(251, 246, 242, 0.74);
+    text-wrap: pretty;
+  }
+
+  /* Sage pill on navy: the one place the accent carries an action. */
+  .bundle-n__cta {
+    margin: 26px 0 0;
+    height: 44px;
+    padding: 0 10px 0 22px;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    border-radius: var(--radius-full);
+    background: var(--color-sage);
+    color: var(--color-navy);
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: var(--weight-semibold);
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: var(--transition-color);
+  }
+
+  .bundle-n__cta:hover {
+    background: #9aac9a;
+    color: var(--color-navy);
+  }
+
+  .bundle-n__cta-circle {
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-full);
+    background: rgba(16, 34, 47, 0.14);
+    display: grid;
+    place-items: center;
+  }
+
+  .bundle-n__cta-circle .sr-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .bundle-n__media {
+    position: relative;
+    align-self: stretch;
+    min-height: 260px;
+  }
+
+  .bundle-n__media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .bundle-n__roundel {
+    position: absolute;
+    right: clamp(14px, 2vw, 28px);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 104px;
+    height: 104px;
+    border-radius: var(--radius-full);
+    background: var(--color-sage);
+    color: var(--color-navy);
+    display: grid;
+    place-items: center;
+    text-align: center;
+  }
+
+  .bundle-n__roundel-label {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: var(--weight-semibold);
+    letter-spacing: 0.09em;
+    line-height: 1.35;
+    text-transform: uppercase;
+  }
+
+  .bundle-n__roundel-figure {
+    font-family: var(--font-display);
+    font-size: 27px;
+    font-weight: var(--weight-bold);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Bundle banner",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "checkbox", "id": "show_monogram", "label": "Show monogram", "default": true },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Bundle and save" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Sock bundles" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Save more when you bundle your favourites. Mix, match and save." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop bundles" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "image_picker", "id": "image", "label": "Image (optional, falls back to bundled photo)" },
+    { "type": "header", "content": "Roundel" },
+    { "type": "text", "id": "roundel_label", "label": "Roundel label", "default": "Save up to" },
+    { "type": "text", "id": "roundel_figure", "label": "Roundel figure", "info": "Leave blank unless a matching discount is actually configured in Shopify. For example: 15%" }
+  ],
+  "presets": [{ "name": "Bundle banner" }]
+}
+{% endschema %}

@@ -1,94 +1,116 @@
 /*
  * ------------------------------------------------------------
  * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
 {
   "sections": {
     "hero": {
-      "type": "hero-storefront",
+      "type": "cloud-hero",
       "name": "Hero",
-      "settings": {
-        "eyebrow": "Compression socks",
-        "heading": "Premium comfort made for long shifts",
-        "text": "Soft, supportive compression socks designed to keep you comfortable from the first step to the last.",
-        "button_label": "Shop compression socks",
-        "button_link": "shopify://collections/compression",
-        "roundel_label": "Graduated compression",
-        "roundel_figure": "",
-        "roundel_unit": "mmHg",
-        "rating_word": "",
-        "rating_score": "",
-        "rating_source": "",
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
-    },
-    "benefits": {
-      "type": "feature-strip",
-      "name": "Benefits",
       "blocks": {
-        "b1": {
+        "f1": {
           "type": "feature",
           "settings": {
             "icon": "icon-wind.svg",
-            "label": "Breathable knit",
-            "text": "Soft, breathable fabrics that stay comfortable through a full shift."
+            "label": "Breathable knit"
           }
         },
-        "b2": {
+        "f2": {
           "type": "feature",
           "settings": {
-            "icon": "icon-leaf.svg",
-            "label": "Everyday support",
-            "text": "Graduated support designed for long hours on your feet."
+            "icon": "icon-heart.svg",
+            "label": "Cushioned sole"
           }
         },
-        "b3": {
+        "f3": {
           "type": "feature",
           "settings": {
-            "icon": "icon-stopwatch.svg",
-            "label": "All-day comfort",
-            "text": "Designed around standing, walking and moving between tasks."
-          }
-        },
-        "b4": {
-          "type": "feature",
-          "settings": {
-            "icon": "icon-shield-check.svg",
-            "label": "Premium quality",
-            "text": "Durable construction, made to last through repeated washing."
+            "icon": "icon-washing.svg",
+            "label": "Machine washable"
           }
         }
       },
-      "block_order": ["b1", "b2", "b3", "b4"],
+      "block_order": [
+        "f1",
+        "f2",
+        "f3"
+      ],
       "settings": {
-        "title": "",
-        "min_column_width": 230,
-        "padding_top": 32,
-        "padding_bottom": 0
+        "eyebrow": "Made for nurses and support workers",
+        "heading": "Socks that stay soft all shift",
+        "text": "Cushioned, breathable compression socks designed around standing, walking and moving between tasks.",
+        "button_label": "Shop compression socks",
+        "button_link": "shopify://collections/compression",
+        "button2_label": "Choose your size",
+        "button2_link": "",
+        "card_figure": "",
+        "card_label": "mmHg graduated support",
+        "badge_text": ""
       }
     },
-    "product_grid": {
-      "type": "featured-collection",
-      "name": "Shop compression socks",
+    "benefits": {
+      "type": "cloud-benefits",
+      "name": "Benefits",
+      "blocks": {
+        "b1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "icon-wind.svg",
+            "title": "Breathes on a long day",
+            "text": "A knit that moves air instead of holding heat inside a work shoe."
+          }
+        },
+        "b2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "icon-heart.svg",
+            "title": "Cushioned where it counts",
+            "text": "Extra padding under the heel and ball of the foot, flat seams across the toes."
+          }
+        },
+        "b3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "icon-stopwatch.svg",
+            "title": "Holds its shape",
+            "text": "A ribbed cuff that stays up through a long shift and recovers after a cool wash."
+          }
+        },
+        "b4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "icon-shield-check.svg",
+            "title": "Honest about the rest",
+            "text": "A support level, not a treatment. Every material and delivery claim is checked first."
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ],
       "settings": {
-        "title": "Shop compression socks",
+        "heading": "Built around the way a shift actually goes"
+      }
+    },
+    "range": {
+      "type": "featured-collection",
+      "name": "Shop the range",
+      "settings": {
+        "title": "Shop the range",
         "heading_size": "h2",
         "description": "",
         "show_description": false,
-        "description_style": "body",
         "collection": "compression",
-        "products_to_show": 5,
-        "columns_desktop": 5,
+        "products_to_show": 4,
+        "columns_desktop": 4,
         "color_scheme": "scheme-1",
         "full_width": false,
         "show_view_all": true,
-        "view_all_style": "link",
+        "view_all_style": "outline",
         "enable_desktop_slider": false,
         "swipe_on_mobile": false,
         "image_ratio": "portrait",
@@ -98,70 +120,128 @@
         "show_rating": false,
         "quick_add": "none",
         "columns_mobile": "2",
-        "padding_top": 32,
-        "padding_bottom": 0
+        "padding_top": 28,
+        "padding_bottom": 40
       }
     },
-    "bundles": {
-      "type": "bundle-banner",
-      "name": "Sock bundles",
+    "support": {
+      "type": "cloud-support",
+      "name": "Support level",
+      "blocks": {
+        "r1": {
+          "type": "row",
+          "settings": {
+            "icon": "icon-ruler.svg",
+            "title": "Measure the widest part of your calf",
+            "text": "Size chart numbers are placeholders until the supplier spec sheet lands."
+          }
+        },
+        "r2": {
+          "type": "row",
+          "settings": {
+            "icon": "icon-tick.svg",
+            "title": "Snug at the calf, never pinching",
+            "text": "If it digs in behind the knee, the size is wrong, not the sock."
+          }
+        },
+        "r3": {
+          "type": "row",
+          "settings": {
+            "icon": "icon-return.svg",
+            "title": "Wrong size, easy swap",
+            "text": "Unworn returns and exchanges within 30 days."
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3"
+      ],
       "settings": {
-        "show_monogram": true,
-        "eyebrow": "Bundle and save",
-        "heading": "Sock bundles",
-        "text": "Save more when you bundle your favourites. Mix, match and save.",
-        "button_label": "Shop bundles",
-        "button_link": "shopify://collections/all",
-        "roundel_label": "Save up to",
-        "roundel_figure": "",
-        "padding_top": 32,
-        "padding_bottom": 0
+        "heading": "What a graduated support level actually means",
+        "text": "Firmest at the ankle, easing as it moves up the calf. It is a support level, not a treatment. If you have a medical condition, check with your clinician first.",
+        "button_label": "Open the size guide",
+        "button_link": ""
+      }
+    },
+    "story": {
+      "type": "cloud-story",
+      "name": "Story",
+      "settings": {
+        "tag": "Soft Rounds Australia",
+        "heading": "Healthcare essentials, made softer on purpose",
+        "text": "Two categories to begin with: compression socks and scrubs. Both made for nurses, students, aged-care and disability-support workers who spend the day on their feet.",
+        "button_label": "Read our story",
+        "button_link": "shopify://pages/about"
+      }
+    },
+    "newsletter": {
+      "type": "cloud-newsletter",
+      "name": "Newsletter",
+      "settings": {
+        "heading": "Stay in the loop",
+        "text": "New colours, restocks and practical notes on shift comfort. One email at a time, no filler.",
+        "label": "Email address",
+        "placeholder": "you@example.com",
+        "button_label": "Sign me up",
+        "success_text": "You are on the list.",
+        "disclaimer": "Unsubscribe any time. Your details stay with Soft Rounds."
       }
     },
     "trust": {
-      "type": "trust-strip",
+      "type": "cloud-trust",
       "name": "Trust strip",
       "blocks": {
         "t1": {
           "type": "item",
           "settings": {
             "icon": "icon-truck.svg",
-            "label": "Australia wide shipping",
-            "text": "Fast and reliable"
+            "title": "Australia wide dispatch",
+            "text": ""
           }
         },
         "t2": {
           "type": "item",
           "settings": {
             "icon": "icon-return.svg",
-            "label": "Easy returns",
-            "text": ""
+            "title": "30 day returns",
+            "text": "Unworn, with packaging"
           }
         },
         "t3": {
           "type": "item",
           "settings": {
             "icon": "icon-padlock.svg",
-            "label": "Secure payments",
-            "text": "Shop with confidence"
+            "title": "Secure payments",
+            "text": ""
           }
         },
         "t4": {
           "type": "item",
           "settings": {
-            "icon": "icon-heart.svg",
-            "label": "Friendly support",
-            "text": "We're here to help"
+            "icon": "icon-chat-bubble.svg",
+            "title": "Real people",
+            "text": ""
           }
         }
       },
-      "block_order": ["t1", "t2", "t3", "t4"],
-      "settings": {
-        "min_column_width": 215,
-        "padding_top": 32,
-        "padding_bottom": 44
-      }
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "settings": {}
     }
   },
-  "order": ["hero", "benefits", "product_grid", "bundles", "trust"]
+  "order": [
+    "hero",
+    "benefits",
+    "range",
+    "support",
+    "story",
+    "newsletter",
+    "trust"
+  ]
 }

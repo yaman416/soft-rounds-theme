@@ -1,0 +1,192 @@
+{%- comment -%}
+  Cloud footer: dark band, light cloud logo, link columns from Shopify menus,
+  round social buttons, and a legal bar.
+{%- endcomment -%}
+
+<footer class="cloud-foot">
+  <div class="cloud-foot__inner">
+    <div class="cloud-foot__brand">
+      <img
+        src="{{ 'logo-cloud-light.png' | asset_img_url: '400x' }}"
+        alt="{{ shop.name | escape }}"
+        class="cloud-foot__logo"
+        width="200"
+        height="200"
+        loading="lazy"
+      >
+      {%- if section.settings.blurb != blank -%}
+        <p class="cloud-foot__blurb">{{ section.settings.blurb }}</p>
+      {%- endif -%}
+
+      <div class="cloud-foot__social">
+        {%- if settings.social_instagram_link != blank -%}
+          <a href="{{ settings.social_instagram_link }}" class="cloud-foot__social-btn" aria-label="Instagram">
+            <span class="sr-icon" style="--sr-icon: url({{ 'icon-instagram.svg' | asset_url }})" aria-hidden="true"></span>
+          </a>
+        {%- endif -%}
+        {%- if settings.social_facebook_link != blank -%}
+          <a href="{{ settings.social_facebook_link }}" class="cloud-foot__social-btn" aria-label="Facebook">
+            <span class="sr-icon" style="--sr-icon: url({{ 'icon-facebook.svg' | asset_url }})" aria-hidden="true"></span>
+          </a>
+        {%- endif -%}
+        {%- if settings.social_tiktok_link != blank -%}
+          <a href="{{ settings.social_tiktok_link }}" class="cloud-foot__social-btn" aria-label="TikTok">
+            <span class="sr-icon" style="--sr-icon: url({{ 'icon-tiktok.svg' | asset_url }})" aria-hidden="true"></span>
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- for block in section.blocks -%}
+      <div class="cloud-foot__col" {{ block.shopify_attributes }}>
+        {%- if block.settings.heading != blank -%}
+          <h4 class="cloud-foot__col-head">{{ block.settings.heading }}</h4>
+        {%- endif -%}
+        {%- if block.settings.menu != blank -%}
+          <div class="cloud-foot__links">
+            {%- for link in block.settings.menu.links -%}
+              <a href="{{ link.url }}">{{ link.title }}</a>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+
+  <div class="cloud-foot__legal-wrap">
+    <div class="cloud-foot__legal">
+      <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</span>
+      <div class="cloud-foot__legal-links">
+        {%- if section.settings.legal_menu != blank -%}
+          {%- for link in section.settings.legal_menu.links -%}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% stylesheet %}
+  .cloud-foot {
+    background: var(--color-ink);
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  .cloud-foot__inner {
+    max-width: var(--container-page);
+    margin: 0 auto;
+    padding: clamp(36px, 4vw, 60px) var(--gutter-page) 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr));
+    gap: clamp(26px, 3vw, 44px);
+  }
+
+  .cloud-foot__logo {
+    height: 70px;
+    width: auto;
+    display: block;
+    margin-left: -6px;
+  }
+
+  .cloud-foot__blurb {
+    margin-top: 14px;
+    max-width: 26ch;
+    font-size: var(--type-body-xs-size);
+    line-height: 1.6;
+  }
+
+  .cloud-foot__social {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+  }
+
+  .cloud-foot__social-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.1);
+    display: grid;
+    place-items: center;
+    color: var(--color-on-dark);
+    transition: var(--transition-color);
+  }
+
+  .cloud-foot__social-btn:hover {
+    background: var(--color-blue);
+    color: var(--color-on-dark);
+  }
+
+  .cloud-foot__social-btn .sr-icon {
+    width: 19px;
+    height: 19px;
+  }
+
+  .cloud-foot__col-head {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: var(--weight-bold);
+    color: var(--color-on-dark);
+  }
+
+  .cloud-foot__links {
+    margin-top: 14px;
+    display: grid;
+    gap: 10px;
+    font-size: var(--type-body-xs-size);
+  }
+
+  .cloud-foot__links a:hover {
+    color: var(--color-sky);
+  }
+
+  .cloud-foot__legal-wrap {
+    max-width: var(--container-page);
+    margin: 0 auto;
+    padding: 0 var(--gutter-page);
+  }
+
+  .cloud-foot__legal {
+    margin-top: clamp(28px, 4vw, 44px);
+    padding: 20px 0 28px;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.62);
+  }
+
+  /* Wraps because a real store menu can carry more legal links than the two
+     in the design. Without this the row forces the page to scroll sideways. */
+  .cloud-foot__legal-links {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    row-gap: 8px;
+    min-width: 0;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Cloud footer",
+  "settings": [
+    { "type": "text", "id": "blurb", "label": "Blurb", "default": "Premium comfort made for long shifts." },
+    { "type": "link_list", "id": "legal_menu", "label": "Legal menu" }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Link column",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading" },
+        { "type": "link_list", "id": "menu", "label": "Menu" }
+      ]
+    }
+  ]
+}
+{% endschema %}

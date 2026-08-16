@@ -1,0 +1,56 @@
+{%- comment -%}
+  Cloud announcement: a dark strip above the header. The icon takes the sky
+  accent; the text is centred and wraps rather than truncating.
+{%- endcomment -%}
+
+{%- if section.settings.text != blank -%}
+  <div class="cloud-ann">
+    <div class="cloud-ann__inner">
+      {%- if section.settings.icon != blank -%}
+        <span class="sr-icon cloud-ann__icon" style="--sr-icon: url({{ section.settings.icon | asset_url }})" aria-hidden="true"></span>
+      {%- endif -%}
+      {{ section.settings.text }}
+    </div>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .cloud-ann {
+    background: var(--color-ink);
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .cloud-ann__inner {
+    max-width: var(--container-page);
+    margin: 0 auto;
+    padding: 11px var(--gutter-page);
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    text-align: center;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: var(--weight-medium);
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+  }
+
+  .cloud-ann__icon {
+    width: 17px;
+    height: 17px;
+    color: var(--color-sky);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Cloud announcement",
+  "settings": [
+    { "type": "text", "id": "icon", "label": "Icon filename", "default": "icon-truck.svg" },
+    { "type": "text", "id": "text", "label": "Text", "info": "Dispatch times and returns windows must match what the store actually offers." }
+  ]
+}
+{% endschema %}

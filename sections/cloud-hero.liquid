@@ -1,0 +1,379 @@
+{%- comment -%}
+  Cloud hero: a pale blue band with two blurred colour blooms, copy on the
+  left, and the photograph masked into an organic blob rather than a rounded
+  rectangle. A scalloped edge joins the band to the page below.
+
+  The support figure and the returns badge are section settings, not hardcoded
+  copy: both are claims that must match the supplier spec sheet and the real
+  returns policy.
+{%- endcomment -%}
+
+<section class="cloud-hero">
+  <span class="cloud-hero__bloom cloud-hero__bloom--one" aria-hidden="true"></span>
+  <span class="cloud-hero__bloom cloud-hero__bloom--two" aria-hidden="true"></span>
+
+  <div class="cloud-hero__inner">
+    <div class="cloud-hero__copy">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="cloud-hero__eyebrow">
+          <span class="sr-icon" style="--sr-icon: url({{ 'icon-sparkles.svg' | asset_url }})" aria-hidden="true"></span>
+          {{ section.settings.eyebrow }}
+        </span>
+      {%- endif -%}
+
+      <h1 class="cloud-hero__heading">{{ section.settings.heading }}</h1>
+
+      {%- if section.settings.text != blank -%}
+        <p class="cloud-hero__text">{{ section.settings.text }}</p>
+      {%- endif -%}
+
+      <div class="cloud-hero__ctas">
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_link }}" class="cloud-hero__cta cloud-hero__cta--primary">
+            {{ section.settings.button_label }}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.button2_label != blank -%}
+          <a href="{{ section.settings.button2_link }}" class="cloud-hero__cta cloud-hero__cta--secondary">
+            {{ section.settings.button2_label }}
+          </a>
+        {%- endif -%}
+      </div>
+
+      {%- if section.blocks.size > 0 -%}
+        <div class="cloud-hero__features">
+          {%- for block in section.blocks -%}
+            <span class="cloud-hero__feature" {{ block.shopify_attributes }}>
+              {%- if block.settings.icon != blank -%}
+                <span class="sr-icon" style="--sr-icon: url({{ block.settings.icon | asset_url }})" aria-hidden="true"></span>
+              {%- endif -%}
+              {{ block.settings.label }}
+            </span>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="cloud-hero__media">
+      <div class="cloud-hero__blob">
+        {%- if section.settings.image != blank -%}
+          {{
+            section.settings.image
+            | image_url: width: 1200
+            | image_tag: loading: 'eager', fetchpriority: 'high', alt: section.settings.heading, sizes: '(min-width: 750px) 45vw, 100vw'
+          }}
+        {%- else -%}
+          <img
+            src="{{ 'sr-nurse-locker-room.webp' | asset_url }}"
+            alt="{{ section.settings.heading | escape }}"
+            loading="eager"
+            fetchpriority="high"
+            width="1200"
+            height="1440"
+          >
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.card_figure != blank -%}
+        <div class="cloud-hero__card">
+          <span class="cloud-hero__card-figure">{{ section.settings.card_figure }}</span>
+          {%- if section.settings.card_label != blank -%}
+            <span class="cloud-hero__card-label">{{ section.settings.card_label }}</span>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.badge_text != blank -%}
+        <div class="cloud-hero__badge">
+          <span>{{ section.settings.badge_text }}</span>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="sr-scallop cloud-hero__scallop" aria-hidden="true"></div>
+</section>
+
+{% stylesheet %}
+  .cloud-hero {
+    position: relative;
+    background: var(--color-sky-pale);
+    overflow: hidden;
+  }
+
+  /* Soft out-of-focus colour, not a gradient: two large blurred discs. */
+  .cloud-hero__bloom {
+    position: absolute;
+    border-radius: var(--radius-full);
+    pointer-events: none;
+  }
+
+  .cloud-hero__bloom--one {
+    top: -80px;
+    left: -60px;
+    width: 420px;
+    height: 420px;
+    background: rgba(255, 255, 255, 0.55);
+    filter: blur(10px);
+  }
+
+  .cloud-hero__bloom--two {
+    bottom: 40px;
+    right: -100px;
+    width: 360px;
+    height: 360px;
+    background: rgba(250, 220, 203, 0.5);
+    filter: blur(14px);
+  }
+
+  .cloud-hero__inner {
+    position: relative;
+    max-width: var(--container-page);
+    margin: 0 auto;
+    padding: clamp(32px, 6vw, 88px) var(--gutter-page) clamp(44px, 7vw, 104px);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(288px, 100%), 1fr));
+    gap: clamp(28px, 5vw, 64px);
+    align-items: center;
+  }
+
+  .cloud-hero__copy {
+    display: grid;
+    justify-items: start;
+    gap: 24px;
+  }
+
+  .cloud-hero__eyebrow {
+    height: 40px;
+    padding: 0 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: var(--radius-full);
+    background: var(--color-white);
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: var(--type-caption-size);
+    font-weight: var(--weight-semibold);
+    white-space: nowrap;
+    box-shadow: var(--shadow-chip);
+  }
+
+  .cloud-hero__eyebrow .sr-icon {
+    width: 17px;
+    height: 17px;
+  }
+
+  .cloud-hero__heading {
+    max-width: 14ch;
+    font-size: var(--type-hero-size);
+    font-weight: var(--type-hero-weight);
+    line-height: var(--type-hero-line);
+  }
+
+  .cloud-hero__text {
+    max-width: 44ch;
+    font-size: var(--type-body-lg-size);
+    line-height: var(--type-line-body);
+    color: var(--color-body);
+  }
+
+  .cloud-hero__ctas {
+    width: 100%;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .cloud-hero__cta {
+    height: var(--control-height-xl);
+    padding: 0 30px;
+    display: inline-flex;
+    align-items: center;
+    border-radius: var(--radius-full);
+    font-family: var(--font-sans);
+    font-size: 15.5px;
+    font-weight: var(--weight-semibold);
+    transition: var(--transition-color);
+  }
+
+  .cloud-hero__cta--primary {
+    background: var(--color-blue);
+    color: var(--color-on-dark);
+  }
+
+  .cloud-hero__cta--primary:hover {
+    background: var(--color-blue-hover);
+    color: var(--color-on-dark);
+  }
+
+  .cloud-hero__cta--secondary {
+    background: var(--color-white);
+    color: var(--color-ink);
+  }
+
+  .cloud-hero__cta--secondary:hover {
+    background: var(--color-peach);
+    color: var(--color-ink);
+  }
+
+  .cloud-hero__features {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+
+  .cloud-hero__feature {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-size: var(--type-body-xs-size);
+    font-weight: var(--weight-medium);
+    color: var(--color-blue);
+  }
+
+  .cloud-hero__feature .sr-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .cloud-hero__media {
+    position: relative;
+    justify-self: center;
+    width: 100%;
+    max-width: 520px;
+  }
+
+  /* The blob is the signature of this design. Percentage radii on each corner
+     give an organic silhouette that a single radius cannot. */
+  .cloud-hero__blob {
+    border-radius: var(--radius-blob);
+    overflow: hidden;
+    background: var(--color-mist);
+    aspect-ratio: 5 / 6;
+    box-shadow: var(--shadow-media);
+  }
+
+  .cloud-hero__blob img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .cloud-hero__card {
+    position: absolute;
+    left: 0;
+    bottom: 34px;
+    background: var(--color-white);
+    border-radius: var(--radius-tile);
+    padding: 14px 18px;
+    display: grid;
+    gap: 4px;
+    box-shadow: var(--shadow-menu);
+  }
+
+  .cloud-hero__card-figure {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: var(--weight-bold);
+    color: var(--color-ink);
+    letter-spacing: -0.02em;
+  }
+
+  .cloud-hero__card-label {
+    font-size: 12.5px;
+    font-weight: var(--weight-medium);
+    color: var(--color-body);
+  }
+
+  .cloud-hero__badge {
+    position: absolute;
+    right: 0;
+    top: 26px;
+    width: 106px;
+    height: 106px;
+    border-radius: var(--radius-full);
+    background: var(--color-peach);
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: 12px;
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: var(--weight-bold);
+    color: var(--color-ink);
+    line-height: 1.15;
+  }
+
+  /* The scallop punches page-coloured half circles out of the band. */
+  .cloud-hero__scallop {
+    background-color: var(--color-sky-pale);
+    background-image: radial-gradient(circle at 30px 30px, var(--color-page) 30px, rgba(244, 247, 251, 0) 31px);
+  }
+
+  @media screen and (max-width: 680px) {
+    .cloud-hero__badge {
+      display: none;
+    }
+
+    .cloud-hero__card {
+      left: 10px;
+      bottom: 14px;
+    }
+
+    .cloud-hero__media {
+      max-width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 560px) {
+    .cloud-hero__eyebrow {
+      white-space: normal;
+      height: auto;
+      border-radius: 22px;
+      padding: 11px 16px;
+      line-height: 1.4;
+    }
+
+    .cloud-hero__cta {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Cloud hero",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Made for nurses and support workers" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Socks that stay soft all shift" },
+    { "type": "textarea", "id": "text", "label": "Text", "info": "Describe comfort and support. Never imply diagnosis, prevention or treatment." },
+    { "type": "text", "id": "button_label", "label": "Primary button", "default": "Shop compression socks" },
+    { "type": "url", "id": "button_link", "label": "Primary link" },
+    { "type": "text", "id": "button2_label", "label": "Secondary button", "default": "Choose your size" },
+    { "type": "url", "id": "button2_link", "label": "Secondary link" },
+    { "type": "image_picker", "id": "image", "label": "Image (optional, falls back to bundled photo)" },
+    { "type": "header", "content": "Floating card" },
+    { "type": "text", "id": "card_figure", "label": "Figure", "info": "Leave blank until the supplier spec sheet is confirmed. A support level only, for example 15-20." },
+    { "type": "text", "id": "card_label", "label": "Label", "default": "mmHg graduated support" },
+    { "type": "header", "content": "Badge" },
+    { "type": "textarea", "id": "badge_text", "label": "Badge text", "info": "Leave blank unless the returns window is a policy the store actually offers." }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "limit": 4,
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon filename", "default": "icon-wind.svg" },
+        { "type": "text", "id": "label", "label": "Label", "info": "Material and care claims must be verifiable." }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Cloud hero" }]
+}
+{% endschema %}

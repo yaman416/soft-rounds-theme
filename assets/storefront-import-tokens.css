@@ -1,211 +1,104 @@
-/* Soft Rounds design tokens.
-   Source of truth: the Claude Design project "Soft Rounds Website Design",
-   file SoftRounds Full Site.dc.html (navy generation).
+/* Soft Rounds design tokens: the "Cloud" system.
+   Source of truth: Claude Design project "Soft Rounds Website Design",
+   file SoftRounds Home - Cloud.dc.html.
 
-   This file is the machine-readable copy of design.md sections 5-13.
-   Always style with a token, never a raw hex. If the two disagree, design.md
-   wins and this file should be corrected to match it.
-
-   Note on the source project: its _ds/tokens/*.css and theme/ folder are two
-   older generations (slate, then Lora). Do not take values from either. The
-   page files carry the current system. */
+   Supersedes every earlier generation in that project. Do not take values
+   from _ds/tokens/*.css, the theme/ folder, or the navy page files: all are
+   older systems. */
 
 :root {
-  /* ================= Brand ================= */
-  /* Navy does the heavy lifting: ink, the utility bar, the footer, and the
-     primary button. It is the only strong colour on the page. */
-  --color-navy: #10222f;
-  --color-navy-hover: #1c3446;
-  --color-on-navy: #fbf6f2;
-  --color-on-navy-soft: #dde3e8;
-
-  /* ================= Supporting accent ================= */
-  /* Sage is a fill only, never small text. Its text-safe partner is
-     --color-sage-text, which is what eyebrows, stars and link hover use. */
-  --color-sage: #aeb8a4;
-  --color-sage-text: #4f6152;
-
   /* ================= Surface ================= */
-  --color-page: #f5f0ea;
-  --color-header: #fbf6f2;
-  --color-card: #fbf6f3;
-  --color-sand: #f2e9e2;
-  --color-plate: #e9e0d8;
+  --color-page: #f4f7fb;
+  --color-white: #ffffff;
+  --color-mist: #edf3f9;
+  --color-sky-pale: #dce8f4;
+  --color-sky: #a7c8e4;
+  --color-peach: #fadccb;
+  --color-lilac: #dcd9ee;
 
-  /* ================= Hairlines ================= */
-  --color-hairline: #eae1d8;
-  --color-border: #e1d8ce;
+  /* ================= Brand ================= */
+  --color-blue: #45749a;
+  --color-blue-hover: #3a6485;
 
   /* ================= Text ================= */
-  --color-ink: #10222f;
-  --color-body: #5e6b75;
-  --color-link: #4c6478;
+  --color-ink: #33383f;
+  --color-body: #5b6470;
+  --color-body-strong: #4a4f58;
+  --color-on-dark: #ffffff;
 
   /* ================= Semantic ================= */
   --color-sale: #a64e49;
-  --color-success: #4f6152;
   --color-error: #a64e49;
+  --color-success: #45749a;
 
   /* ================= Fabric swatches (product only, never UI) ================= */
-  /* These describe garments so a swatch dot matches the cloth. They are the one
-     place blush is still allowed; it is banned from the interface. */
-  --fabric-blush: #edafb6;
-  --fabric-sage: #a8b79b;
-  --fabric-navy: #1f2a52;
-  --fabric-oat: #f1e7d6;
-  --fabric-charcoal: #3b3f46;
-  --fabric-black: #16181c;
-  --fabric-white: #fbfaf7;
-  --fabric-dusty-rose: #c4798c;
-  --fabric-sky: #9fb8d4;
+  --fabric-black: #33383f;
+  --fabric-oat: #c9b79f;
+  --fabric-blush: #e9c7c9;
+  --fabric-sky: #a7c8e4;
+  --fabric-blue: #45749a;
 
-  /* ================= Scrim ================= */
-  --color-scrim: rgba(16, 34, 47, 0.5);
-  --scrim-photo: rgba(16, 34, 47, 0.62);
-  --scrim-photo-mid: rgba(16, 34, 47, 0.18);
-  --veil-on-dark: rgba(251, 246, 242, 0.08);
-  --veil-on-dark-border: rgba(251, 246, 242, 0.2);
-
-  /* ================= Semantic aliases ================= */
-  /* Kept under the names the existing component layer already uses, so every
-     section inherits the new palette without being edited. */
-  --color-primary: var(--color-navy);
-  --color-primary-active: var(--color-navy-hover);
-  --color-primary-disabled: #8d9aa4;
-  --color-canvas: var(--color-header);
+  /* ================= Aliases for Dawn and shared components ================= */
+  --color-primary: var(--color-blue);
+  --color-canvas: var(--color-white);
   --color-ivory: var(--color-page);
   --color-muted: var(--color-body);
-  --color-muted-soft: #8b949c;
-  --color-on-primary: var(--color-on-navy);
+  --color-hairline: var(--color-sky-pale);
+  --color-on-primary: var(--color-on-dark);
 
   --text-heading: var(--color-ink);
   --text-body: var(--color-body);
   --text-muted: var(--color-body);
-  --text-disabled: var(--color-muted-soft);
-  --text-link: var(--color-link);
-  --text-link-hover: var(--color-sage-text);
-  --text-sale: var(--color-sale);
-  --text-error: var(--color-error);
-  --text-on-primary: var(--color-on-navy);
+  --text-link: var(--color-blue);
+  --text-on-primary: var(--color-on-dark);
 
   --surface-page: var(--color-page);
-  --surface-card: var(--color-card);
-  --surface-header: var(--color-header);
-  --surface-soft: var(--color-sand);
-  --surface-strong: var(--color-plate);
-  --surface-skeleton: var(--color-plate);
-  --surface-photo: var(--color-plate);
-  --surface-promo: var(--color-sand);
-  --surface-panel: var(--color-navy);
-  --surface-inverse: var(--color-navy);
+  --surface-card: var(--color-white);
+  --surface-soft: var(--color-mist);
+  --surface-strong: var(--color-sky-pale);
+  --surface-photo: var(--color-mist);
+  --surface-inverse: var(--color-ink);
 
-  --border-default: var(--color-hairline);
-  --border-soft: var(--color-hairline);
-  --border-strong: var(--color-border);
-  --border-focus: var(--color-navy);
-  --border-selected: var(--color-navy);
+  --border-default: var(--color-sky-pale);
+  --border-strong: var(--color-sky);
+  --border-focus: var(--color-blue);
 
-  --action-primary-bg: var(--color-navy);
-  --action-primary-bg-active: var(--color-navy-hover);
-  --action-primary-bg-disabled: var(--color-primary-disabled);
-  --action-primary-fg: var(--color-on-navy);
-  --action-secondary-bg: transparent;
+  --action-primary-bg: var(--color-blue);
+  --action-primary-bg-active: var(--color-blue-hover);
+  --action-primary-fg: var(--color-on-dark);
+  --action-secondary-bg: var(--color-white);
   --action-secondary-fg: var(--color-ink);
-  --action-secondary-border: var(--color-border);
-  --action-dark-bg: var(--color-navy);
-  --action-dark-bg-active: var(--color-navy-hover);
+  --action-dark-bg: var(--color-ink);
 
-  /* ================= Type families ================= */
-  /* Outfit sets every heading. Instrument Sans does body, UI, prices and nav.
-     There is no third face and no italic accent face in this generation. */
-  --font-display: 'Outfit', system-ui, -apple-system, sans-serif;
-  --font-sans: 'Instrument Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* ================= Type ================= */
+  --font-display: 'Gabarito', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-body: var(--font-sans);
-  --font-accent: var(--font-display);
-  --font-mono: ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-heading-family: var(--font-display);
+  --font-body-family: var(--font-sans);
+  --font-heading-weight: 700;
+  --font-body-weight: 400;
+  --font-body-weight-bold: 600;
 
-  /* ================= Type roles ================= */
-  /* Headings are sentence case. Do not add text-transform: uppercase to a
-     heading; uppercase belongs to eyebrows, nav links and the utility bar. */
-  --type-hero-size: clamp(38px, 5.2vw, 62px);
-  --type-hero-weight: 700;
+  /* Headings are fluid and tight. Tracking is negative throughout. */
+  --type-hero-size: clamp(44px, 6.4vw, 88px);
+  --type-hero-weight: 800;
   --type-hero-line: 0.98;
-  --type-hero-tracking: -0.01em;
-
-  --type-page-title-size: clamp(30px, 4vw, 46px);
-  --type-page-title-weight: 700;
-  --type-page-title-line: 1.02;
-  --type-page-title-tracking: -0.01em;
-
-  --type-section-size: clamp(20px, 2.4vw, 28px);
+  --type-section-size: clamp(28px, 3.4vw, 46px);
   --type-section-weight: 700;
-  --type-section-line: 1.15;
-  --type-section-tracking: -0.01em;
+  --type-section-line: 1.05;
+  --type-panel-size: clamp(28px, 3.2vw, 42px);
+  --type-card-title-size: 21px;
+  --type-product-title-size: 20px;
+  --type-price-size: 18px;
+  --type-tracking: -0.015em;
 
-  --type-card-title-size: 17px;
-  --type-card-title-weight: 700;
-  --type-card-title-line: 1.25;
-
-  --type-product-name-size: 12.5px;
-  --type-product-name-weight: 600;
-  --type-product-name-line: 1.4;
-  --type-product-name-tracking: 0.05em;
-
-  --type-body-lg-size: 17px;
-  --type-body-lg-weight: 400;
-  --type-body-lg-line: 1.65;
+  --type-body-lg-size: clamp(16px, 1.3vw, 18.5px);
   --type-body-md-size: 16px;
-  --type-body-md-weight: 400;
-  --type-body-md-line: 1.65;
   --type-body-sm-size: 15px;
-  --type-body-sm-weight: 400;
-  --type-body-sm-line: 1.6;
-
-  --type-eyebrow-size: 11.5px;
-  --type-eyebrow-weight: 600;
-  --type-eyebrow-line: 1;
-  --type-eyebrow-tracking: 0.14em;
-
-  --type-nav-link-size: 12.5px;
-  --type-nav-link-weight: 600;
-  --type-nav-link-line: 1;
-  --type-nav-link-tracking: 0.09em;
-
-  --type-utility-size: 11px;
-  --type-utility-weight: 500;
-  --type-utility-line: 1;
-  --type-utility-tracking: 0.09em;
-
-  --type-price-size: 16px;
-  --type-price-weight: 600;
-  --type-price-line: 1;
-  --type-price-lg-size: 24px;
-  --type-price-lg-weight: 600;
-  --type-price-lg-line: 1.2;
-  --type-price-was-size: 13px;
-  --type-price-was-weight: 400;
-  --type-price-was-line: 1.4;
-
-  --type-button-md-size: 14px;
-  --type-button-md-weight: 600;
-  --type-button-md-line: 1;
-  --type-button-md-tracking: 0.04em;
-  --type-button-sm-size: 12.5px;
-  --type-button-sm-weight: 600;
-  --type-button-sm-line: 1;
-  --type-button-sm-tracking: 0.04em;
-
-  --type-caption-size: 13px;
-  --type-caption-weight: 500;
-  --type-caption-line: 1.5;
-  --type-caption-sm-size: 12.5px;
-  --type-caption-sm-weight: 400;
-  --type-caption-sm-line: 1.5;
-
-  --type-badge-size: 11px;
-  --type-badge-weight: 600;
-  --type-badge-line: 1;
-  --type-badge-tracking: 0.07em;
+  --type-body-xs-size: 14px;
+  --type-caption-size: 13.5px;
+  --type-line-body: 1.65;
 
   --weight-regular: 400;
   --weight-medium: 500;
@@ -213,145 +106,48 @@
   --weight-bold: 700;
   --weight-black: 800;
 
-  /* Legacy role aliases, so sections written against the previous generation
-     keep rendering while they are migrated. */
-  --type-display-xl-size: var(--type-page-title-size);
-  --type-display-xl-weight: var(--type-page-title-weight);
-  --type-display-xl-line: var(--type-page-title-line);
-  --type-display-xl-tracking: var(--type-page-title-tracking);
-  --type-display-lg-size: var(--type-section-size);
-  --type-display-lg-weight: var(--type-section-weight);
-  --type-display-lg-line: var(--type-section-line);
-  --type-display-lg-tracking: var(--type-section-tracking);
-  --type-display-md-size: var(--type-section-size);
-  --type-display-md-weight: var(--type-section-weight);
-  --type-display-md-line: var(--type-section-line);
-  --type-display-md-tracking: var(--type-section-tracking);
-  --type-display-sm-size: var(--type-card-title-size);
-  --type-display-sm-weight: var(--type-card-title-weight);
-  --type-display-sm-line: var(--type-card-title-line);
-  --type-display-sm-tracking: 0;
-  --type-title-md-size: var(--type-card-title-size);
-  --type-title-md-weight: var(--type-card-title-weight);
-  --type-title-md-line: var(--type-card-title-line);
-  --type-title-sm-size: 15px;
-  --type-title-sm-weight: 600;
-  --type-title-sm-line: 1.35;
-  --type-link-size: var(--type-body-sm-size);
-  --type-link-weight: 400;
-  --type-link-line: 1.5;
-  --type-micro-label-size: 12px;
-  --type-micro-label-weight: 600;
-  --type-micro-label-line: 1;
-  --type-uppercase-tag-size: 11px;
-  --type-uppercase-tag-weight: 600;
-  --type-uppercase-tag-line: 1;
-  --type-uppercase-tag-tracking: 0.07em;
-  --type-footer-head-size: 11.5px;
-  --type-footer-head-weight: 600;
-  --type-footer-head-line: 1;
-  --type-footer-head-tracking: 0.14em;
-
-  /* ================= Spacing ================= */
-  --space-xxs: 2px;
-  --space-xs: 4px;
-  --space-sm: 8px;
-  --space-md: 12px;
-  --space-base: 16px;
-  --space-lg: 24px;
-  --space-xl: 32px;
-  --space-xxl: 48px;
-  --space-section: 72px;
-
-  --pad-card: var(--space-lg);
-  --pad-card-meta: 20px;
-  --pad-panel: clamp(22px, 2.6vw, 30px);
-  --gap-grid: var(--space-lg);
-  --gap-footer-column: var(--space-xxl);
-  --band-padding-y: var(--space-section);
-
   /* ================= Shape ================= */
-  --radius-plate: 10px;
-  --radius-input: 10px;
-  --radius-button: 12px;
-  --radius-product-card: 14px;
-  --radius-card: 16px;
+  /* This system is very round. Panels 40, cards 30, media 22, pills 999. */
+  --radius-panel: 40px;
+  --radius-card: 30px;
+  --radius-tile: 26px;
+  --radius-chip: 24px;
+  --radius-media: 22px;
   --radius-full: 999px;
-
-  --border-hairline: 1px;
-  --border-focus-width: 2px;
-  --border-swatch: 1px;
-
-  /* Legacy shape aliases. */
-  --radius-sm: var(--radius-plate);
-  --radius-md: var(--radius-card);
-  --radius-lg: var(--radius-card);
-  --radius-xl: var(--radius-card);
-  --radius-photo: var(--radius-plate);
-  --radius-pill: var(--radius-full);
+  /* The hero image is an organic blob, not a rounded rectangle. */
+  --radius-blob: 46% 46% 44% 44% / 26% 26% 24% 24%;
 
   /* ================= Elevation ================= */
-  /* This generation leans on the hairline and the warm card fill rather than
-     shadow. Keep both tiers restrained. */
-  --shadow-none: none;
-  --shadow-soft: 0 1px 2px rgba(16, 34, 47, 0.04), 0 8px 24px rgba(16, 34, 47, 0.05);
-  --shadow-pop: 0 2px 6px rgba(16, 34, 47, 0.06), 0 16px 40px rgba(16, 34, 47, 0.1);
-  --shadow-overlay: 0 16px 48px rgba(16, 34, 47, 0.16);
-  --shadow-focus: 0 0 0 3px rgba(16, 34, 47, 0.18);
-  --lift-pop: 0px;
+  --shadow-card: 0 6px 24px rgba(51, 56, 63, 0.06);
+  --shadow-chip: 0 4px 16px rgba(51, 56, 63, 0.06);
+  --shadow-header: 0 6px 26px rgba(51, 56, 63, 0.07);
+  --shadow-menu: 0 10px 30px rgba(51, 56, 63, 0.1);
+  --shadow-media: 0 20px 50px rgba(51, 56, 63, 0.12);
 
   /* ================= Layout ================= */
-  /* The design specifies a 1240px container. Dawn's page_width setting only
-     steps in hundreds, so the theme setting is 1200 and this token matches it.
-     Change both together or custom sections misalign with Dawn's. */
-  --container-page: 1200px;
-  --container-narrow: 760px;
+  /* The design specifies 1320px. Dawn's page_width setting only steps in
+     hundreds, so both are 1300 and stay in step. */
+  --container-page: 1300px;
   --gutter-page: clamp(16px, 3vw, 32px);
-  --gutter-page-mobile: 16px;
-  --utility-height: 40px;
-  --nav-height: 96px;
-  --nav-height-mobile: 64px;
-  --announcement-height: var(--utility-height);
-  --button-height: 56px;
-  --button-height-secondary: 52px;
-  --button-height-sm: 38px;
-  --input-height: 52px;
-  --swatch-size: 22px;
-  --swatch-size-lg: 34px;
-  --size-chip: 38px;
-  --heart-size: 40px;
-  --icon-button-size: 44px;
-  --cart-drawer-width: 420px;
-  --product-ratio: 4 / 5;
+  --control-height: 46px;
+  --control-height-lg: 54px;
+  --control-height-xl: 56px;
+  --nav-link-height: 44px;
 
   /* ================= Motion ================= */
-  /* Colour transitions only, 150-200ms. No parallax, no auto-advancing
-     carousels, no lift or scale on hover. */
-  --duration-instant: 0ms;
   --duration-fast: 150ms;
   --duration-base: 200ms;
-  --duration-slow: 200ms;
   --ease-standard: cubic-bezier(0.2, 0, 0, 1);
-  --ease-pop: cubic-bezier(0.2, 0, 0, 1);
   --transition-color: background-color var(--duration-fast) var(--ease-standard),
     color var(--duration-fast) var(--ease-standard), border-color var(--duration-fast) var(--ease-standard);
-  --transition-pop: box-shadow var(--duration-base) var(--ease-standard);
-  --transition-fade: opacity var(--duration-base) var(--ease-standard);
-
-  /* ================= Dawn cascade overrides ================= */
-  --font-heading-family: 'Outfit', system-ui, sans-serif;
-  --font-heading-weight: 700;
-  --font-body-family: 'Instrument Sans', system-ui, 'Segoe UI', sans-serif;
-  --font-body-weight: 400;
-  --font-body-weight-bold: 600;
 }
 
 body {
-  background-color: var(--surface-page);
+  margin: 0;
+  background: var(--color-page);
   color: var(--color-body);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
 }
 
 h1,
@@ -360,34 +156,29 @@ h3,
 h4,
 h5,
 h6 {
+  margin: 0;
   font-family: var(--font-display);
   font-weight: var(--weight-bold);
   color: var(--color-ink);
-  letter-spacing: -0.01em;
+  letter-spacing: var(--type-tracking);
+  text-wrap: pretty;
 }
 
-/* This generation has no italic accent face: headings are uniformly Outfit.
-   .sr-accent is kept as a no-op so sections written against the previous
-   generation keep rendering, but it no longer changes the type. */
-.sr-accent {
-  font-family: inherit;
-  font-weight: inherit;
-  font-style: normal;
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-/* The eyebrow: the one place uppercase tracking belongs above a heading. */
-.sr-eyebrow {
-  font-family: var(--font-sans);
-  font-size: var(--type-eyebrow-size);
-  font-weight: var(--type-eyebrow-weight);
-  line-height: var(--type-eyebrow-line);
-  letter-spacing: var(--type-eyebrow-tracking);
-  text-transform: uppercase;
-  color: var(--color-sage-text);
+a:hover {
+  color: var(--color-blue);
 }
 
-/* Icons are masks so a single SVG inherits currentColor anywhere it is used.
-   Set --sr-icon to the asset URL. Never hand-draw a replacement glyph. */
+::selection {
+  background: var(--color-sky);
+  color: var(--color-ink);
+}
+
+/* Icons are masks so one SVG inherits currentColor anywhere. */
 .sr-icon {
   display: block;
   flex: none;
@@ -398,9 +189,19 @@ h6 {
   mask: var(--sr-icon) center / contain no-repeat;
 }
 
-::selection {
-  background: var(--color-sage);
-  color: var(--color-navy);
+/* Shared page shell. */
+.sr-wrap {
+  max-width: var(--container-page);
+  margin: 0 auto;
+}
+
+/* The scalloped edge between a coloured band and the page. Repeating
+   half-circles punched out of the band, so the join reads as a cloud. */
+.sr-scallop {
+  height: 30px;
+  background-size: 60px 30px;
+  background-repeat: repeat-x;
+  background-position: 0 100%;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -408,7 +209,6 @@ h6 {
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }

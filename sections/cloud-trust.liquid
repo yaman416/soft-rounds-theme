@@ -1,0 +1,95 @@
+{%- comment -%}
+  Cloud trust strip: a reflowing row of white chips above the footer.
+  Every line is a promise to a customer, so each is editable and none is
+  hardcoded.
+{%- endcomment -%}
+
+{%- if section.blocks.size > 0 -%}
+  <section class="cloud-trust">
+    <div class="cloud-trust__grid">
+      {%- for block in section.blocks -%}
+        <div class="cloud-trust__chip" {{ block.shopify_attributes }}>
+          {%- if block.settings.icon != blank -%}
+            <span class="sr-icon cloud-trust__icon" style="--sr-icon: url({{ block.settings.icon | asset_url }})" aria-hidden="true"></span>
+          {%- endif -%}
+          <div class="cloud-trust__copy">
+            {%- if block.settings.title != blank -%}
+              <span class="cloud-trust__title">{{ block.settings.title }}</span>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <span class="cloud-trust__text">{{ block.settings.text }}</span>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </section>
+{%- endif -%}
+
+{% stylesheet %}
+  .cloud-trust {
+    padding: 0 var(--gutter-page) clamp(36px, 5vw, 72px);
+  }
+
+  .cloud-trust__grid {
+    max-width: var(--container-page);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr));
+    gap: clamp(14px, 2vw, 20px);
+  }
+
+  .cloud-trust__chip {
+    background: var(--color-white);
+    border-radius: var(--radius-chip);
+    padding: 20px 22px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    box-shadow: 0 4px 18px rgba(51, 56, 63, 0.05);
+  }
+
+  .cloud-trust__icon {
+    width: 24px;
+    height: 24px;
+    color: var(--color-blue);
+  }
+
+  .cloud-trust__copy {
+    display: grid;
+    gap: 3px;
+  }
+
+  .cloud-trust__title {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: var(--weight-bold);
+    color: var(--color-ink);
+  }
+
+  .cloud-trust__text {
+    font-size: 13.5px;
+    color: var(--color-body);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Cloud trust strip",
+  "tag": "section",
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon filename", "default": "icon-truck.svg" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "text", "id": "text", "label": "Text", "info": "Dispatch times, returns windows and support promises must match what the store actually offers." }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Cloud trust strip", "blocks": [{ "type": "item" }, { "type": "item" }, { "type": "item" }, { "type": "item" }] }
+  ]
+}
+{% endschema %}

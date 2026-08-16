@@ -1,0 +1,190 @@
+{%- comment -%}
+  Cloud support band: a peach section with a scalloped edge top and bottom,
+  explaining the support level honestly and listing sizing guidance.
+
+  The copy here is deliberately careful. A support level is not a treatment,
+  and the size numbers are placeholders until the supplier spec sheet lands.
+{%- endcomment -%}
+
+<section class="cloud-support">
+  <div class="sr-scallop cloud-support__scallop cloud-support__scallop--top" aria-hidden="true"></div>
+
+  <div class="cloud-support__inner">
+    <div class="cloud-support__copy">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="cloud-support__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <p class="cloud-support__text">{{ section.settings.text }}</p>
+      {%- endif -%}
+      {%- if section.settings.button_label != blank -%}
+        <a href="{{ section.settings.button_link }}" class="cloud-support__cta">{{ section.settings.button_label }}</a>
+      {%- endif -%}
+    </div>
+
+    <div class="cloud-support__list">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign tints = 'sky,lilac,peach' | split: ','
+          assign tint = tints[forloop.index0] | default: 'sky'
+        -%}
+        <div class="cloud-support__row" {{ block.shopify_attributes }}>
+          {%- if block.settings.icon != blank -%}
+            <span class="cloud-support__disc cloud-card__disc--{{ tint }}" aria-hidden="true">
+              <span class="sr-icon" style="--sr-icon: url({{ block.settings.icon | asset_url }})"></span>
+            </span>
+          {%- endif -%}
+          <div class="cloud-support__row-copy">
+            {%- if block.settings.title != blank -%}
+              <span class="cloud-support__row-title">{{ block.settings.title }}</span>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <span class="cloud-support__row-text">{{ block.settings.text }}</span>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <div class="sr-scallop cloud-support__scallop cloud-support__scallop--bottom" aria-hidden="true"></div>
+</section>
+
+{% stylesheet %}
+  .cloud-support {
+    background: var(--color-peach);
+  }
+
+  /* Top scallop punches peach out of the page; bottom does the reverse. */
+  .cloud-support__scallop--top {
+    background-color: var(--color-page);
+    background-image: radial-gradient(circle at 30px 30px, var(--color-peach) 30px, rgba(250, 220, 203, 0) 31px);
+  }
+
+  .cloud-support__scallop--bottom {
+    background-color: var(--color-peach);
+    background-image: radial-gradient(circle at 30px 30px, var(--color-page) 30px, rgba(244, 247, 251, 0) 31px);
+  }
+
+  .cloud-support__inner {
+    max-width: var(--container-page);
+    margin: 0 auto;
+    padding: clamp(32px, 5vw, 76px) var(--gutter-page);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+    gap: clamp(24px, 4vw, 56px);
+    align-items: center;
+  }
+
+  .cloud-support__copy {
+    display: grid;
+    gap: 20px;
+    justify-items: start;
+  }
+
+  .cloud-support__heading {
+    max-width: 20ch;
+    font-size: clamp(28px, 3.6vw, 48px);
+    line-height: 1.03;
+  }
+
+  .cloud-support__text {
+    max-width: 46ch;
+    font-size: var(--type-body-md-size);
+    line-height: 1.68;
+    color: var(--color-body);
+  }
+
+  .cloud-support__cta {
+    height: var(--control-height-lg);
+    padding: 0 28px;
+    display: inline-flex;
+    align-items: center;
+    border-radius: var(--radius-full);
+    background: var(--color-ink);
+    color: var(--color-on-dark);
+    font-family: var(--font-sans);
+    font-size: 15.5px;
+    font-weight: var(--weight-semibold);
+    transition: var(--transition-color);
+  }
+
+  .cloud-support__cta:hover {
+    background: var(--color-blue);
+    color: var(--color-on-dark);
+  }
+
+  .cloud-support__list {
+    display: grid;
+    gap: 14px;
+  }
+
+  .cloud-support__row {
+    background: var(--color-white);
+    border-radius: var(--radius-tile);
+    padding: 20px 22px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .cloud-support__disc {
+    width: 52px;
+    height: 52px;
+    flex: none;
+    border-radius: var(--radius-full);
+    display: grid;
+    place-items: center;
+  }
+
+  .cloud-support__disc .sr-icon {
+    width: 23px;
+    height: 23px;
+  }
+
+  .cloud-support__row-copy {
+    display: grid;
+    gap: 4px;
+  }
+
+  .cloud-support__row-title {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: var(--weight-bold);
+    color: var(--color-ink);
+  }
+
+  .cloud-support__row-text {
+    font-size: var(--type-body-xs-size);
+    color: var(--color-body);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Cloud support band",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "textarea", "id": "text", "label": "Text", "info": "Describe compression as a support level. Include the advice to check with a clinician where relevant." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Open the size guide" },
+    { "type": "url", "id": "button_link", "label": "Button link" }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Row",
+      "limit": 4,
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon filename", "default": "icon-ruler.svg" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "text", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Cloud support band", "blocks": [{ "type": "row" }, { "type": "row" }, { "type": "row" }] }
+  ]
+}
+{% endschema %}

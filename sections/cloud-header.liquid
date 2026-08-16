@@ -1,0 +1,337 @@
+{%- comment -%}
+  Cloud header: a floating white pill on a translucent page-coloured strip,
+  sticky to the top. Below 940px the inline nav is replaced by a round menu
+  button that opens a rounded panel underneath.
+
+  This replaces Dawn's header entirely rather than overriding it, because the
+  pill shape, the labelled cart and the panel menu are structurally different
+  from anything Dawn renders.
+
+  Cart and search stay wired to Dawn's own drawer and search modal so the
+  commerce behaviour is unchanged.
+{%- endcomment -%}
+
+<div class="cloud-head">
+  <div class="cloud-head__panel">
+    <a href="{{ routes.root_url }}" class="cloud-head__logo-link">
+      {%- if section.settings.logo != blank -%}
+        {{
+          section.settings.logo
+          | image_url: width: 400
+          | image_tag: class: 'cloud-head__logo', alt: shop.name, loading: 'eager'
+        }}
+      {%- else -%}
+        <img
+          src="{{ 'logo-cloud-dark.png' | asset_img_url: '400x' }}"
+          class="cloud-head__logo"
+          alt="{{ shop.name | escape }}"
+          width="200"
+          height="200"
+          loading="eager"
+        >
+      {%- endif -%}
+    </a>
+
+    {%- if section.settings.menu != blank -%}
+      <nav class="cloud-head__nav">
+        {%- for link in section.settings.menu.links -%}
+          <a
+            href="{{ link.url }}"
+            class="cloud-head__link{% if link.active %} cloud-head__link--active{% endif %}"
+          >
+            {{- link.title -}}
+          </a>
+        {%- endfor -%}
+      </nav>
+    {%- endif -%}
+
+    <div class="cloud-head__actions">
+      <details-modal class="cloud-head__search">
+        <details>
+          <summary class="cloud-head__icon-btn" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}">
+            <span class="sr-icon" style="--sr-icon: url({{ 'icon-search.svg' | asset_url }})" aria-hidden="true"></span>
+          </summary>
+          <div class="search-modal modal__content gradient" role="dialog" aria-modal="true" aria-label="{{ 'general.search.search' | t }}">
+            <div class="modal-overlay"></div>
+            <div class="search-modal__content search-modal__content-bottom" tabindex="-1">
+              {%- render 'header-search', input_id: 'Search-In-Cloud-Modal', label: 'Search' -%}
+              <button
+                type="button"
+                class="search-modal__close-button modal__close-button link link--text focus-inset"
+                aria-label="{{ 'accessibility.close' | t }}"
+              >
+                {{- 'icon-close.svg' | inline_asset_content -}}
+              </button>
+            </div>
+          </div>
+        </details>
+      </details-modal>
+
+      <a href="{{ routes.cart_url }}" class="cloud-head__cart">
+        <span class="sr-icon" style="--sr-icon: url({{ 'icon-cart.svg' | asset_url }})" aria-hidden="true"></span>
+        <span class="cloud-head__cart-label">
+          {{ section.settings.cart_label | default: 'Cart' }} ({{ cart.item_count }})
+        </span>
+      </a>
+
+      <button
+        type="button"
+        class="cloud-head__menu-btn"
+        aria-expanded="false"
+        aria-controls="CloudMenu"
+        aria-label="Open menu"
+        data-cloud-menu-toggle
+      >
+        <span class="sr-icon" style="--sr-icon: url({{ 'icon-plus.svg' | asset_url }})" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+
+  {%- if section.settings.menu != blank -%}
+    <div class="cloud-head__menu" id="CloudMenu" hidden>
+      {%- for link in section.settings.menu.links -%}
+        <a href="{{ link.url }}" class="cloud-head__menu-link">{{ link.title }}</a>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+  .cloud-head {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    padding: 12px clamp(12px, 3vw, 28px);
+    background: rgba(244, 247, 251, 0.92);
+    backdrop-filter: saturate(180%) blur(8px);
+  }
+
+  .cloud-head__panel {
+    max-width: var(--container-page);
+    margin: 0 auto;
+    background: var(--color-white);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-header);
+    padding: 10px clamp(12px, 2vw, 22px);
+    display: flex;
+    align-items: center;
+    gap: clamp(8px, 2.5vw, 32px);
+  }
+
+  .cloud-head__logo-link {
+    flex: none;
+    display: block;
+  }
+
+  .cloud-head__logo {
+    height: 58px;
+    width: auto;
+    display: block;
+  }
+
+  /* The nav takes the space the logo and actions do not need. It never
+     wraps: a second row would break the pill. Menus longer than the pill can
+     hold collapse to the menu button instead. */
+  .cloud-head__nav {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: nowrap;
+    overflow: hidden;
+  }
+
+  .cloud-head__link {
+    flex: none;
+    white-space: nowrap;
+    height: var(--nav-link-height);
+    padding: 0 18px;
+    display: inline-flex;
+    align-items: center;
+    border-radius: var(--radius-full);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: var(--weight-semibold);
+    color: var(--color-ink);
+    transition: var(--transition-color);
+  }
+
+  .cloud-head__link:hover,
+  .cloud-head__link--active {
+    background: var(--color-mist);
+    color: var(--color-ink);
+  }
+
+  .cloud-head__actions {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+
+  .cloud-head__icon-btn {
+    width: var(--control-height);
+    height: var(--control-height);
+    flex: none;
+    border: none;
+    border-radius: var(--radius-full);
+    background: var(--color-page);
+    color: var(--color-ink);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    list-style: none;
+    transition: var(--transition-color);
+  }
+
+  .cloud-head__icon-btn::-webkit-details-marker {
+    display: none;
+  }
+
+  .cloud-head__icon-btn:hover {
+    background: var(--color-sky-pale);
+  }
+
+  .cloud-head__icon-btn .sr-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .cloud-head__cart {
+    height: var(--control-height);
+    flex: none;
+    padding: 0 20px 0 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: var(--radius-full);
+    background: var(--color-blue);
+    color: var(--color-on-dark);
+    font-family: var(--font-sans);
+    font-size: 14.5px;
+    font-weight: var(--weight-semibold);
+    transition: var(--transition-color);
+  }
+
+  .cloud-head__cart:hover {
+    background: var(--color-blue-hover);
+    color: var(--color-on-dark);
+  }
+
+  .cloud-head__cart .sr-icon {
+    width: 19px;
+    height: 19px;
+  }
+
+  .cloud-head__menu-btn {
+    width: var(--control-height);
+    height: var(--control-height);
+    flex: none;
+    display: none;
+    border: none;
+    border-radius: var(--radius-full);
+    background: var(--color-ink);
+    color: var(--color-on-dark);
+    place-items: center;
+    cursor: pointer;
+  }
+
+  .cloud-head__menu-btn .sr-icon {
+    width: 20px;
+    height: 20px;
+    transition: transform var(--duration-base) var(--ease-standard);
+  }
+
+  .cloud-head__menu-btn[aria-expanded='true'] .sr-icon {
+    transform: rotate(45deg);
+  }
+
+  .cloud-head__menu {
+    max-width: var(--container-page);
+    margin: 10px auto 0;
+    background: var(--color-white);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-menu);
+    padding: 12px;
+    display: grid;
+    gap: 4px;
+  }
+
+  .cloud-head__menu[hidden] {
+    display: none;
+  }
+
+  .cloud-head__menu-link {
+    height: 52px;
+    padding: 0 18px;
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: var(--weight-semibold);
+    color: var(--color-ink);
+    transition: var(--transition-color);
+  }
+
+  .cloud-head__menu-link:hover {
+    background: var(--color-mist);
+    color: var(--color-ink);
+  }
+
+  @media screen and (max-width: 940px) {
+    .cloud-head__nav {
+      display: none;
+    }
+
+    .cloud-head__menu-btn {
+      display: grid;
+    }
+  }
+
+  @media screen and (max-width: 680px) {
+    .cloud-head__logo {
+      height: 46px;
+    }
+  }
+
+  /* At the narrowest widths the cart collapses to its icon. */
+  @media screen and (max-width: 560px) {
+    .cloud-head__cart {
+      padding: 0;
+      width: var(--control-height);
+      justify-content: center;
+    }
+
+    .cloud-head__cart-label {
+      display: none;
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  document.addEventListener('click', (event) => {
+    const toggle = event.target.closest('[data-cloud-menu-toggle]');
+    if (!toggle) return;
+    const menu = document.getElementById('CloudMenu');
+    if (!menu) return;
+    const open = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!open));
+    toggle.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
+    menu.hidden = open;
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Cloud header",
+  "class": "cloud-header-section",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo", "info": "Falls back to the bundled cloud wordmark." },
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
+    { "type": "text", "id": "cart_label", "label": "Cart label", "default": "Cart" }
+  ]
+}
+{% endschema %}

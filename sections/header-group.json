@@ -1,66 +1,29 @@
 /*
  * ------------------------------------------------------------
  * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
 {
-  "name": "t:sections.header.name",
   "type": "header",
+  "name": "Header",
   "sections": {
-    "header": {
-      "type": "header",
+    "announcement": {
+      "type": "cloud-announcement",
       "settings": {
-        "logo_position": "middle-left",
-        "mobile_logo_position": "center",
-        "menu": "main-menu",
-        "menu_type_desktop": "dropdown",
-        "sticky_header_type": "on-scroll-up",
-        "show_line_separator": true,
-        "color_scheme": "scheme-1",
-        "menu_color_scheme": "scheme-1",
-        "enable_country_selector": false,
-        "enable_language_selector": false,
-        "enable_customer_avatar": false,
-        "margin_bottom": 0,
-        "padding_top": 20,
-        "padding_bottom": 20
+        "icon": "icon-truck.svg",
+        "text": "Australia wide dispatch. Free returns for 30 days."
       }
     },
-    "utility-bar": {
-      "type": "utility-bar",
-      "blocks": {
-        "shipping": {
-          "type": "message",
-          "settings": {
-            "text": "Australia wide shipping",
-            "icon": "icon-truck.svg"
-          }
-        },
-        "shifts": {
-          "type": "message",
-          "settings": {
-            "text": "Designed for long shifts",
-            "icon": "icon-heart.svg"
-          }
-        }
-      },
-      "block_order": [
-        "shipping",
-        "shifts"
-      ],
+    "header": {
+      "type": "cloud-header",
       "settings": {
-        "show_currency": true,
-        "show_account": true,
-        "account_label": "Account"
+        "menu": "main-menu",
+        "cart_label": "Cart"
       }
     }
   },
   "order": [
-    "utility-bar",
+    "announcement",
     "header"
   ]
 }

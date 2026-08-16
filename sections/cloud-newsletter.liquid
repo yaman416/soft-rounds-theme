@@ -1,0 +1,187 @@
+{%- comment -%}
+  Cloud newsletter: a blue panel with a decorative disc, copy one side and a
+  white sign-up card the other. Uses Shopify's native customer form, so
+  sign-ups land in the store's customer list with the newsletter tag.
+{%- endcomment -%}
+
+<section class="cloud-news">
+  <div class="cloud-news__panel">
+    <span class="cloud-news__disc" aria-hidden="true"></span>
+
+    <div class="cloud-news__copy">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="cloud-news__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <p class="cloud-news__text">{{ section.settings.text }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="cloud-news__card">
+      {%- form 'customer', id: 'CloudNewsletter', class: 'cloud-news__form' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        {%- if form.posted_successfully? -%}
+          <p class="cloud-news__success" role="status">{{ section.settings.success_text }}</p>
+        {%- else -%}
+          <label class="cloud-news__label" for="CloudNewsletterEmail">{{ section.settings.label }}</label>
+          <input
+            id="CloudNewsletterEmail"
+            class="cloud-news__input"
+            type="email"
+            name="contact[email]"
+            value="{{ form.email }}"
+            autocomplete="email"
+            placeholder="{{ section.settings.placeholder }}"
+            required
+            {% if form.errors %}aria-invalid="true" aria-describedby="CloudNewsletterError"{% endif %}
+          >
+          <button type="submit" class="cloud-news__button">{{ section.settings.button_label }}</button>
+          {%- if form.errors -%}
+            <p class="cloud-news__error" id="CloudNewsletterError" role="alert">{{ form.errors.messages.email }}</p>
+          {%- endif -%}
+          {%- if section.settings.disclaimer != blank -%}
+            <p class="cloud-news__fine">{{ section.settings.disclaimer }}</p>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .cloud-news {
+    padding: 0 var(--gutter-page) clamp(36px, 5vw, 72px);
+  }
+
+  .cloud-news__panel {
+    max-width: var(--container-page);
+    margin: 0 auto;
+    background: var(--color-blue);
+    border-radius: var(--radius-panel);
+    padding: clamp(28px, 4.5vw, 64px);
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(264px, 100%), 1fr));
+    gap: clamp(22px, 4vw, 48px);
+    align-items: center;
+  }
+
+  .cloud-news__disc {
+    position: absolute;
+    top: -70px;
+    right: -40px;
+    width: 260px;
+    height: 260px;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  .cloud-news__copy {
+    position: relative;
+    display: grid;
+    gap: 14px;
+  }
+
+  .cloud-news__heading {
+    font-size: var(--type-panel-size);
+    line-height: 1.05;
+    color: var(--color-on-dark);
+  }
+
+  .cloud-news__text {
+    max-width: 40ch;
+    font-size: var(--type-body-md-size);
+    line-height: var(--type-line-body);
+    color: rgba(255, 255, 255, 0.86);
+  }
+
+  .cloud-news__card {
+    position: relative;
+    background: var(--color-white);
+    border-radius: var(--radius-card);
+    padding: clamp(20px, 2.6vw, 28px);
+  }
+
+  .cloud-news__form {
+    display: grid;
+    gap: 14px;
+  }
+
+  .cloud-news__label {
+    font-size: var(--type-body-xs-size);
+    font-weight: var(--weight-semibold);
+    color: var(--color-ink);
+  }
+
+  .cloud-news__input {
+    height: var(--control-height-lg);
+    padding: 0 18px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--color-sky-pale);
+    background: var(--color-page);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 15.5px;
+  }
+
+  .cloud-news__input:focus {
+    outline: none;
+    border-color: var(--color-blue);
+    box-shadow: 0 0 0 3px rgba(69, 116, 154, 0.18);
+  }
+
+  .cloud-news__button {
+    height: var(--control-height-lg);
+    padding: 0 26px;
+    border: none;
+    border-radius: var(--radius-full);
+    background: var(--color-ink);
+    color: var(--color-on-dark);
+    font-family: var(--font-sans);
+    font-size: 15.5px;
+    font-weight: var(--weight-semibold);
+    cursor: pointer;
+    transition: var(--transition-color);
+  }
+
+  .cloud-news__button:hover {
+    background: var(--color-blue);
+  }
+
+  .cloud-news__fine,
+  .cloud-news__error,
+  .cloud-news__success {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--color-body);
+  }
+
+  .cloud-news__error {
+    color: var(--color-error);
+  }
+
+  @media screen and (max-width: 560px) {
+    .cloud-news__panel {
+      border-radius: 28px;
+      padding: 22px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Cloud newsletter",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Stay in the loop" },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    { "type": "text", "id": "label", "label": "Field label", "default": "Email address" },
+    { "type": "text", "id": "placeholder", "label": "Placeholder", "default": "you@example.com" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Sign me up" },
+    { "type": "text", "id": "success_text", "label": "Success message", "default": "You are on the list." },
+    { "type": "text", "id": "disclaimer", "label": "Fine print", "default": "Unsubscribe any time. Your details stay with Soft Rounds." }
+  ],
+  "presets": [{ "name": "Cloud newsletter" }]
+}
+{% endschema %}

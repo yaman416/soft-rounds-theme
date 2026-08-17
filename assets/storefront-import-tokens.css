@@ -19,6 +19,10 @@
   /* ================= Brand ================= */
   --color-blue: #45749a;
   --color-blue-hover: #3a6485;
+  /* #45749A scores only 4.00:1 on the pale sky band, under the 4.5 minimum.
+     This darker blue reaches 5.06:1 and is what small text on a tinted
+     surface must use. On white, --color-blue is fine at 4.98:1. */
+  --color-blue-on-tint: #3a6485;
 
   /* ================= Text ================= */
   --color-ink: #33383f;

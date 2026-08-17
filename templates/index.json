@@ -43,7 +43,7 @@
         "button_label": "Shop compression socks",
         "button_link": "shopify://collections/compression",
         "button2_label": "Choose your size",
-        "button2_link": "",
+        "button2_link": "/pages/frequently-asked-questions",
         "card_figure": "",
         "card_label": "mmHg graduated support",
         "badge_text": ""
@@ -162,7 +162,7 @@
         "heading": "What a graduated support level actually means",
         "text": "Firmest at the ankle, easing as it moves up the calf. It is a support level, not a treatment. If you have a medical condition, check with your clinician first.",
         "button_label": "Open the size guide",
-        "button_link": ""
+        "button_link": "/pages/frequently-asked-questions"
       }
     },
     "story": {

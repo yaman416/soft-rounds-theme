@@ -28,12 +28,12 @@
       {%- endif -%}
 
       <div class="cloud-hero__ctas">
-        {%- if section.settings.button_label != blank -%}
+        {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
           <a href="{{ section.settings.button_link }}" class="cloud-hero__cta cloud-hero__cta--primary">
             {{ section.settings.button_label }}
           </a>
         {%- endif -%}
-        {%- if section.settings.button2_label != blank -%}
+        {%- if section.settings.button2_label != blank and section.settings.button2_link != blank -%}
           <a href="{{ section.settings.button2_link }}" class="cloud-hero__cta cloud-hero__cta--secondary">
             {{ section.settings.button2_label }}
           </a>
@@ -228,13 +228,14 @@
     margin-top: 4px;
   }
 
+  /* On the sky band, not white, so this takes the tint-safe blue. */
   .cloud-hero__feature {
     display: inline-flex;
     align-items: center;
     gap: 9px;
     font-size: var(--type-body-xs-size);
     font-weight: var(--weight-medium);
-    color: var(--color-blue);
+    color: var(--color-blue-on-tint);
   }
 
   .cloud-hero__feature .sr-icon {

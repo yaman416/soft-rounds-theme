@@ -347,16 +347,59 @@
     window.addEventListener('resize', publish);
   })();
 
-  document.addEventListener('click', (event) => {
-    const toggle = event.target.closest('[data-cloud-menu-toggle]');
-    if (!toggle) return;
+  (function () {
     const menu = document.getElementById('CloudMenu');
-    if (!menu) return;
-    const open = toggle.getAttribute('aria-expanded') === 'true';
-    toggle.setAttribute('aria-expanded', String(!open));
-    toggle.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
-    menu.hidden = open;
-  });
+    const toggle = document.querySelector('[data-cloud-menu-toggle]');
+    if (!menu || !toggle) return;
+
+    const isOpen = () => toggle.getAttribute('aria-expanded') === 'true';
+
+    const setOpen = (open, returnFocus) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      menu.hidden = !open;
+      if (open) {
+        const first = menu.querySelector('a');
+        if (first) first.focus();
+      } else if (returnFocus) {
+        toggle.focus();
+      }
+    };
+
+    toggle.addEventListener('click', () => setOpen(!isOpen(), true));
+
+    // Escape closes and hands focus back to the control that opened it.
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && isOpen()) setOpen(false, true);
+    });
+
+    // Clicking outside closes, without stealing focus.
+    document.addEventListener('click', (event) => {
+      if (!isOpen()) return;
+      if (menu.contains(event.target) || toggle.contains(event.target)) return;
+      setOpen(false, false);
+    });
+
+    // Keep Tab inside the panel while it is open.
+    menu.addEventListener('keydown', (event) => {
+      if (event.key !== 'Tab') return;
+      const items = [toggle, ...menu.querySelectorAll('a')];
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    });
+
+    // A resize back to desktop must not leave the panel stranded open.
+    window.addEventListener('resize', () => {
+      if (isOpen() && window.innerWidth > 940) setOpen(false, false);
+    });
+  })();
 {% endjavascript %}
 
 {% schema %}

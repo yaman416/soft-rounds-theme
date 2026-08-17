@@ -17,7 +17,7 @@
       {%- if section.settings.text != blank -%}
         <p class="cloud-support__text">{{ section.settings.text }}</p>
       {%- endif -%}
-      {%- if section.settings.button_label != blank -%}
+      {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
         <a href="{{ section.settings.button_link }}" class="cloud-support__cta">{{ section.settings.button_label }}</a>
       {%- endif -%}
     </div>

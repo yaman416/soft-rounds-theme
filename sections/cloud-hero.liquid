@@ -239,13 +239,6 @@
     margin-top: 4px;
   }
 
-  @media screen and (max-width: 480px) {
-    .cloud-hero__features {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  }
-
   /* On the sky band, not white, so this takes the tint-safe blue. */
   .cloud-hero__feature {
     display: inline-flex;
@@ -260,6 +253,35 @@
   .cloud-hero__feature .sr-icon {
     width: 18px;
     height: 18px;
+  }
+
+  /* One row on a phone too, spread across the full width rather than left
+     packed with dead space at the end.
+
+     This block has to sit after the base .cloud-hero__feature rules: at equal
+     specificity the later rule wins, and when it was above them only the flex
+     container properties took effect while the font and icon stayed at their
+     desktop size, overflowing a 320px screen.
+
+     Sized for the narrowest common phone. At 320px there is 288px of room and
+     the three labels need 276px at 12px with 15px icons. */
+  @media screen and (max-width: 560px) {
+    .cloud-hero__features {
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      gap: 5px;
+    }
+
+    .cloud-hero__feature {
+      font-size: 12px;
+      gap: 5px;
+    }
+
+    .cloud-hero__feature .sr-icon {
+      width: 15px;
+      height: 15px;
+      flex: none;
+    }
   }
 
   .cloud-hero__media {

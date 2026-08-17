@@ -78,8 +78,17 @@
     margin: 0 auto;
     padding: clamp(36px, 4vw, 60px) var(--gutter-page) 0;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr));
-    gap: clamp(26px, 3vw, 44px);
+    grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
+    gap: clamp(20px, 3vw, 44px);
+  }
+
+  /* The brand block takes the full width on a phone; the two link columns
+     then sit side by side beneath it. At 190px they each claimed a whole row
+     and left most of it empty. */
+  @media screen and (max-width: 749px) {
+    .cloud-foot__brand {
+      grid-column: 1 / -1;
+    }
   }
 
   .cloud-foot__logo {

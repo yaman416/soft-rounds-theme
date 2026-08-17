@@ -13,21 +13,21 @@
           "type": "feature",
           "settings": {
             "icon": "icon-wind.svg",
-            "label": "Breathable knit"
+            "label": "Breathable"
           }
         },
         "f2": {
           "type": "feature",
           "settings": {
             "icon": "icon-heart.svg",
-            "label": "Cushioned sole"
+            "label": "Cushioned"
           }
         },
         "f3": {
           "type": "feature",
           "settings": {
             "icon": "icon-washing.svg",
-            "label": "Machine washable"
+            "label": "Washable"
           }
         }
       },

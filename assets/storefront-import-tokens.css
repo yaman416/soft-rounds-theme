@@ -7,55 +7,56 @@
    older systems. */
 
 :root {
-  /* Three colours carry the whole site: a deep navy taken straight from the
-     logo, a warm clay, and a blush tint. Everything else is white or a warm
-     neutral. The earlier palette ran nine surface colours (page tint, mist,
-     sky, sky-pale, peach, lilac, blue, blue-hover, white) and read busy and
-     cold; six of those are gone.
+  /* Three colours on a white page. Near-black carries structure (headings,
+     dark bands, footer); coral is the single action colour and appears only
+     on things you can click; butter is the one tinted surface.
+
+     Coral is deliberately not used as wallpaper. Reserving it for actions is
+     what makes a button obvious without an outline or a shadow.
 
      Contrast, measured not estimated:
-       navy  #213E54 on white  11.16:1
-       clay  #A85B3C on white   4.97:1, and white on clay 4.97:1
-       body  #5A5F66 on white   6.43:1
-       navy on blush #F5E9E2    9.37:1
-     All clear WCAG AA. Clay is the darkest warm tone that still passes with
-     white text on it, which is why it is not a lighter terracotta. */
+       near-black #1C1B1A on white   17.20:1
+       coral      #AC4835 on white    5.63:1, white on coral 5.63:1
+       coral on butter #F7EBD9        4.78:1
+       body       #5A5F66 on white    6.43:1
+     All clear WCAG AA. Coral is this shade rather than a brighter one
+     because brighter fails with white button text. */
 
   /* ================= The three ================= */
-  --color-primary: #213e54;
-  --color-primary-hover: #1a3244;
-  --color-secondary: #a85b3c;
-  --color-secondary-hover: #8f4a2f;
-  --color-accent: #f5e9e2;
+  --color-primary: #1c1b1a;
+  --color-primary-hover: #322f2c;
+  --color-secondary: #ac4835;
+  --color-secondary-hover: #93392a;
+  --color-accent: #f7ebd9;
 
   /* ================= Surface ================= */
   --color-white: #ffffff;
   --color-page: #ffffff;
-  --color-surface: #faf8f6;
-  --color-border: #e8e3de;
+  --color-surface: #fbf7f1;
+  --color-border: #e5ded4;
 
   /* ================= Text ================= */
-  --color-ink: #213e54;
+  --color-ink: #1c1b1a;
   --color-body: #5a5f66;
   --color-body-strong: #44484f;
   --color-on-dark: #ffffff;
 
   /* ================= Semantic ================= */
-  --color-sale: #a85b3c;
-  --color-error: #a64e49;
-  --color-success: #213e54;
+  --color-sale: #ac4835;
+  --color-error: #a4342b;
+  --color-success: #1c1b1a;
 
-  /* Legacy names kept so Dawn overrides and any section still referencing the
-     Cloud palette resolve onto the three colours instead of breaking. New work
-     should use the names above. */
+  /* Legacy names, kept so nothing still referencing the Cloud palette breaks.
+     --color-blue was the CTA/accent colour throughout, so it resolves to
+     coral. New work should use the three names above. */
   --color-mist: var(--color-surface);
   --color-sky-pale: var(--color-surface);
   --color-sky: var(--color-secondary);
   --color-peach: var(--color-accent);
   --color-lilac: var(--color-surface);
-  --color-blue: var(--color-primary);
-  --color-blue-hover: var(--color-primary-hover);
-  --color-blue-on-tint: var(--color-primary);
+  --color-blue: var(--color-secondary);
+  --color-blue-hover: var(--color-secondary-hover);
+  --color-blue-on-tint: var(--color-secondary);
 
   /* ================= Fabric swatches (product only, never UI) ================= */
   --fabric-black: #33383f;
@@ -96,8 +97,8 @@
   --action-dark-bg: var(--color-ink);
 
   /* ================= Type ================= */
-  --font-display: 'Gabarito', system-ui, -apple-system, sans-serif;
-  --font-sans: 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Bricolage Grotesque', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-body: var(--font-sans);
   --font-heading-family: var(--font-display);
   --font-body-family: var(--font-sans);
@@ -106,7 +107,7 @@
   --font-body-weight-bold: 600;
 
   /* Headings are fluid and tight. Tracking is negative throughout. */
-  --type-hero-size: clamp(44px, 6.4vw, 88px);
+  --type-hero-size: clamp(40px, 5.6vw, 78px);
   --type-hero-weight: 800;
   --type-hero-line: 0.98;
   --type-section-size: clamp(28px, 3.4vw, 46px);
@@ -116,7 +117,7 @@
   --type-card-title-size: 21px;
   --type-product-title-size: 20px;
   --type-price-size: 18px;
-  --type-tracking: -0.015em;
+  --type-tracking: -0.032em;
 
   --type-body-lg-size: clamp(16px, 1.3vw, 18.5px);
   --type-body-md-size: 16px;

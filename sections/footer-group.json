@@ -24,7 +24,8 @@
       "settings": {
         "blurb": "Premium comfort made for long shifts.",
         "utility_menu": "footer",
-        "show_payment_icons": true
+        "show_payment_icons": true,
+        "show_back_to_top": true
       }
     }
   },

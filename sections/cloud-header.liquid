@@ -34,38 +34,38 @@
 
     {%- if section.settings.menu != blank -%}
       <nav class="cloud-head__nav">
+        {%- comment -%}
+          A menu item whose title says "coming soon" renders as plain text, not
+          a link. Shopify menus carry no per-item settings, so the title is the
+          only place a merchant can mark one, and a link to an empty collection
+          is worse than a label that says it is not ready.
+        {%- endcomment -%}
         {%- for link in section.settings.menu.links -%}
-          <a
-            href="{{ link.url }}"
-            class="cloud-head__link{% if link.active %} cloud-head__link--active{% endif %}"
-          >
-            {{- link.title -}}
-          </a>
+          {%- assign link_title_check = link.title | downcase -%}
+          {%- if link_title_check contains 'coming soon' -%}
+            <span class="cloud-head__link cloud-head__link--soon" aria-disabled="true">
+              {{- link.title -}}
+            </span>
+          {%- else -%}
+            <a
+              href="{{ link.url }}"
+              class="cloud-head__link{% if link.active %} cloud-head__link--active{% endif %}"
+            >
+              {{- link.title -}}
+            </a>
+          {%- endif -%}
         {%- endfor -%}
       </nav>
     {%- endif -%}
 
     <div class="cloud-head__actions">
-      <details-modal class="cloud-head__search">
-        <details>
-          <summary class="cloud-head__icon-btn" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}">
-            <span class="sr-icon" style="--sr-icon: url({{ 'icon-search.svg' | asset_url }})" aria-hidden="true"></span>
-          </summary>
-          <div class="search-modal modal__content gradient" role="dialog" aria-modal="true" aria-label="{{ 'general.search.search' | t }}">
-            <div class="modal-overlay"></div>
-            <div class="search-modal__content search-modal__content-bottom" tabindex="-1">
-              {%- render 'header-search', input_id: 'Search-In-Cloud-Modal', label: 'Search' -%}
-              <button
-                type="button"
-                class="search-modal__close-button modal__close-button link link--text focus-inset"
-                aria-label="{{ 'accessibility.close' | t }}"
-              >
-                {{- 'icon-close.svg' | inline_asset_content -}}
-              </button>
-            </div>
-          </div>
-        </details>
-      </details-modal>
+      {%- comment -%}
+        header-search renders the whole modal: its own details, summary and
+        dialog. Wrapping it in a second details-modal produced two summaries,
+        so two close icons appeared and the input collapsed to 72px inside the
+        nested dialog. Render it plain and restyle its summary below.
+      {%- endcomment -%}
+      {%- render 'header-search', input_id: 'Search-In-Cloud-Modal' -%}
 
       <a href="{{ routes.cart_url }}" class="cloud-head__cart">
         <span class="sr-icon" style="--sr-icon: url({{ 'icon-cart.svg' | asset_url }})" aria-hidden="true"></span>
@@ -90,7 +90,14 @@
   {%- if section.settings.menu != blank -%}
     <div class="cloud-head__menu" id="CloudMenu" hidden>
       {%- for link in section.settings.menu.links -%}
-        <a href="{{ link.url }}" class="cloud-head__menu-link">{{ link.title }}</a>
+        {%- assign link_title_check = link.title | downcase -%}
+        {%- if link_title_check contains 'coming soon' -%}
+          <span class="cloud-head__menu-link cloud-head__menu-link--soon" aria-disabled="true">
+            {{- link.title -}}
+          </span>
+        {%- else -%}
+          <a href="{{ link.url }}" class="cloud-head__menu-link">{{ link.title }}</a>
+        {%- endif -%}
       {%- endfor -%}
     </div>
   {%- endif -%}
@@ -170,6 +177,18 @@
     transition: var(--transition-color);
   }
 
+  /* Shown but not clickable: dimmed, no pointer, no hover response. */
+  .cloud-head__link--soon,
+  .cloud-head__menu-link--soon {
+    opacity: 0.55;
+    cursor: default;
+  }
+
+  .cloud-head__link--soon:hover,
+  .cloud-head__menu-link--soon:hover {
+    background: transparent;
+  }
+
   .cloud-head__link:hover,
   .cloud-head__link--active {
     background: var(--color-mist);
@@ -186,6 +205,42 @@
     align-items: center;
     justify-content: flex-end;
     gap: 8px;
+  }
+
+  /* Dawn's own search trigger, dressed as the round button this header uses.
+     Higher specificity than .header__icon because Dawn's stylesheets load
+     after this section's. */
+  .cloud-head .header__search .header__icon--search {
+    width: var(--control-height);
+    height: var(--control-height);
+    flex: none;
+    padding: 0;
+    border: none;
+    border-radius: var(--radius-full);
+    background: var(--color-page);
+    color: var(--color-ink);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    list-style: none;
+    transition: var(--transition-color);
+  }
+
+  .cloud-head .header__search .header__icon--search:hover {
+    background: var(--color-accent);
+  }
+
+  .cloud-head .header__search .header__icon--search::-webkit-details-marker {
+    display: none;
+  }
+
+  .cloud-head .header__search .header__search-label {
+    display: none;
+  }
+
+  .cloud-head .header__search .svg-wrapper svg {
+    width: 20px;
+    height: 20px;
   }
 
   .cloud-head__icon-btn {

@@ -132,7 +132,11 @@
     margin: 0 auto;
     padding: clamp(32px, 6vw, 88px) var(--gutter-page) clamp(44px, 7vw, 104px);
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(288px, 100%), 1fr));
+    /* 420 not the design's 288: below roughly 900px two columns leave the
+       heading about seven characters per line, because the type is sized off
+       the viewport while the column is half of it. Stacking earlier keeps the
+       headline readable. */
+    grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
     gap: clamp(28px, 5vw, 64px);
     align-items: center;
   }

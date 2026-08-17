@@ -163,8 +163,12 @@
     color: var(--color-ink);
   }
 
+  /* margin-left:auto rather than relying on the nav to fill the gap. Below
+     940px the nav is hidden, and without this the buttons bunch up against
+     the logo with dead space to their right. */
   .cloud-head__actions {
     flex: 0 0 auto;
+    margin-left: auto;
     display: flex;
     align-items: center;
     justify-content: flex-end;

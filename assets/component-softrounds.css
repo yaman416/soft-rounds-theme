@@ -166,3 +166,183 @@ main h2,
 main h3 {
   letter-spacing: var(--type-tracking);
 }
+
+/* ============================================================
+   Product page, Cloud system
+   Dawn's main-product section is kept intact so variant selection, the media
+   gallery, dynamic checkout and pickup availability all keep working. Only
+   the surface is restyled.
+   ============================================================ */
+
+/* The buy column becomes a white card that tracks the page. */
+.product .product__info-wrapper {
+  background: var(--color-white);
+  border-radius: var(--radius-card);
+  padding: clamp(24px, 3vw, 36px);
+  box-shadow: var(--shadow-card);
+}
+
+.product .product__info-container > * + * {
+  margin-top: 0;
+}
+
+/* Media plate matches the product card: 4:5 at the system's media radius. */
+.product__media-wrapper .product__media,
+.product__media-item .product__media {
+  border-radius: var(--radius-media);
+  overflow: hidden;
+  background: var(--color-mist);
+}
+
+.product__media-wrapper .thumbnail,
+.thumbnail-list__item .thumbnail {
+  border-radius: 16px;
+  overflow: hidden;
+  border: none;
+  background: var(--color-mist);
+}
+
+.thumbnail[aria-current='true'] {
+  box-shadow: 0 0 0 2px var(--color-blue);
+}
+
+/* Eyebrow, title, price. */
+.product__text.caption-with-letter-spacing {
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-blue);
+}
+
+.product__title,
+.product__title h1 {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3vw, 36px);
+  font-weight: var(--weight-bold);
+  line-height: 1.1;
+  letter-spacing: var(--type-tracking);
+  color: var(--color-ink);
+}
+
+.product__info-container .price {
+  font-family: var(--font-display);
+  font-size: 27px;
+  font-weight: var(--weight-bold);
+  letter-spacing: 0;
+  color: var(--color-blue);
+}
+
+.product__info-container .price--on-sale .price-item--regular {
+  font-size: 15px;
+  color: var(--color-body);
+}
+
+/* Variant controls. Pills, matching every other control in the system. */
+.product-form__input .form__label,
+fieldset.product-form__input legend {
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.product-form__input--pill input[type='radio'] + label {
+  min-width: 62px;
+  height: 44px;
+  padding: 0 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-sky-pale);
+  background: var(--color-white);
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: var(--weight-medium);
+  color: var(--color-ink);
+  transition: var(--transition-color);
+}
+
+.product-form__input--pill input[type='radio'] + label:hover {
+  border-color: var(--color-blue);
+}
+
+.product-form__input--pill input[type='radio']:checked + label {
+  background: var(--color-blue);
+  border-color: var(--color-blue);
+  color: var(--color-on-dark);
+}
+
+/* Sold-out combinations read as struck through, not merely faded. */
+.product-form__input--pill input[type='radio'].disabled + label,
+.product-form__input--pill input[type='radio'][disabled] + label {
+  color: var(--color-body);
+  border-color: var(--color-mist);
+  background: var(--color-page);
+  text-decoration: line-through;
+}
+
+/* Colour swatches: circles with a blue ring when chosen. */
+.product-form__input--swatch .swatch-input__label {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-full);
+}
+
+.swatch-input__input:checked + .swatch-input__label {
+  box-shadow: 0 0 0 2px var(--color-white), 0 0 0 4px var(--color-blue);
+  outline: none;
+}
+
+/* Quantity stepper and add to cart. */
+.product-form__quantity .quantity {
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  border: 1px solid var(--color-sky-pale);
+}
+
+.product-form__submit,
+.product__info-container .shopify-payment-button__button {
+  border-radius: var(--radius-full);
+  min-height: var(--control-height-lg);
+  font-family: var(--font-sans);
+  font-size: 15.5px;
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0;
+}
+
+/* Accordions for materials, care and shipping. */
+.product__accordion.accordion {
+  border-top: 1px solid var(--color-sky-pale);
+  border-bottom: none;
+}
+
+.product__accordion .summary__title,
+.product__accordion .accordion__title {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: var(--weight-bold);
+  color: var(--color-ink);
+}
+
+.product__accordion .accordion__content {
+  font-family: var(--font-sans);
+  font-size: var(--type-body-sm-size);
+  line-height: 1.6;
+  color: var(--color-body);
+}
+
+/* Related products inherit the Cloud card automatically through
+   .product-card-wrapper, so only the heading needs setting. */
+.related-products__heading {
+  font-family: var(--font-display);
+  font-size: var(--type-section-size);
+  font-weight: var(--weight-bold);
+  line-height: var(--type-section-line);
+  letter-spacing: var(--type-tracking);
+  color: var(--color-ink);
+}

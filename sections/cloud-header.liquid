@@ -125,7 +125,7 @@
     background: var(--color-white);
     border-radius: var(--radius-full);
     box-shadow: var(--shadow-header);
-    padding: 10px clamp(12px, 2vw, 22px);
+    padding: 9px clamp(12px, 2vw, 22px);
     display: flex;
     align-items: center;
     gap: clamp(8px, 2.5vw, 32px);
@@ -137,7 +137,7 @@
   }
 
   .cloud-head__logo {
-    height: 58px;
+    height: var(--logo-height);
     width: auto;
     display: block;
   }
@@ -305,12 +305,6 @@
 
     .cloud-head__menu-btn {
       display: grid;
-    }
-  }
-
-  @media screen and (max-width: 680px) {
-    .cloud-head__logo {
-      height: 46px;
     }
   }
 

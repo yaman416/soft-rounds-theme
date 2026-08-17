@@ -153,6 +153,12 @@
   /* ================= Layout ================= */
   /* The design specifies 1320px. Dawn's page_width setting only steps in
      hundreds, so both are 1300 and stay in step. */
+  /* One logo scale for the whole site. The header and footer previously set
+     their own heights (58px and 70px), which read as two different logos.
+     The wordmark's cap height is 20.3% of the lockup, so 60px puts it at
+     ~12px against 15px nav links, which sits right. */
+  --logo-height: 60px;
+
   --container-page: 1300px;
   --gutter-page: clamp(16px, 3vw, 32px);
   --control-height: 46px;
@@ -205,6 +211,15 @@ a:hover {
 }
 
 /* Icons are masks so one SVG inherits currentColor anywhere. */
+/* The logo scales at one breakpoint for the whole site. Keeping this on the
+   token rather than on each component is what stops the header and footer
+   drifting apart again. */
+@media screen and (max-width: 680px) {
+  :root {
+    --logo-height: 48px;
+  }
+}
+
 .sr-icon {
   display: block;
   flex: none;

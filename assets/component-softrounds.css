@@ -124,6 +124,15 @@
   padding: 0;
 }
 
+/* A 228px minimum drops a 375px phone to one product per screen, which makes
+   the range impossible to compare and pushes everything below the fold. Two
+   columns need a smaller floor at phone widths. */
+@media screen and (max-width: 620px) {
+  .collection .product-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr)) !important;
+  }
+}
+
 .product-grid.grid > .grid__item,
 .collection .product-grid > .grid__item {
   width: auto;

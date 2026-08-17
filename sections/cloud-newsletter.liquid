@@ -122,7 +122,9 @@
     background: var(--color-page);
     color: var(--color-ink);
     font-family: var(--font-sans);
-    font-size: 15.5px;
+    /* Not below 16px: iOS Safari zooms the page when a smaller field takes
+       focus, and does not zoom back out. */
+    font-size: 16px;
   }
 
   .cloud-news__input:focus {

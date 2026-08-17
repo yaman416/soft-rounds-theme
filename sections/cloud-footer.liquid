@@ -83,7 +83,7 @@
   }
 
   .cloud-foot__logo {
-    height: 70px;
+    height: var(--logo-height);
     width: auto;
     display: block;
     margin-left: -6px;
@@ -130,11 +130,20 @@
     color: var(--color-on-dark);
   }
 
+  /* Links are 44px tall rather than 23px. On a phone these are the main way
+     out of the footer, and a 23px target between two others is easy to miss.
+     The row gap shrinks to compensate, so the footer is barely taller. */
   .cloud-foot__links {
-    margin-top: 14px;
+    margin-top: 8px;
     display: grid;
-    gap: 10px;
+    gap: 0;
     font-size: var(--type-body-xs-size);
+  }
+
+  .cloud-foot__links a {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
   }
 
   .cloud-foot__links a:hover {
@@ -166,8 +175,14 @@
     display: flex;
     gap: 24px;
     flex-wrap: wrap;
-    row-gap: 8px;
+    row-gap: 0;
     min-width: 0;
+  }
+
+  .cloud-foot__legal-links a {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
   }
 {% endstylesheet %}
 

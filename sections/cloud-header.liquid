@@ -329,6 +329,24 @@
 {% endstylesheet %}
 
 {% javascript %}
+  // Publish the header's real height so anything else that sticks (the
+  // collection filter bar) can sit directly beneath it instead of sliding
+  // under. The height changes with the logo size across breakpoints, so this
+  // is measured rather than hardcoded.
+  (function () {
+    const header = document.querySelector('.cloud-head');
+    if (!header) return;
+    const publish = () => {
+      document.documentElement.style.setProperty(
+        '--cloud-header-h',
+        Math.round(header.getBoundingClientRect().height) + 'px'
+      );
+    };
+    publish();
+    if (window.ResizeObserver) new ResizeObserver(publish).observe(header);
+    window.addEventListener('resize', publish);
+  })();
+
   document.addEventListener('click', (event) => {
     const toggle = event.target.closest('[data-cloud-menu-toggle]');
     if (!toggle) return;

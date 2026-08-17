@@ -346,3 +346,167 @@ fieldset.product-form__input legend {
   letter-spacing: var(--type-tracking);
   color: var(--color-ink);
 }
+
+/* ============================================================
+   Collection page, Cloud system
+   Banner band, a sticky filter bar beneath the header, then the grid.
+   Dawn's facets and sorting are kept working; only the surface changes.
+   ============================================================ */
+
+/* Banner echoes the hero band so a collection feels like part of the site. */
+.collection-hero,
+.collection-hero.collection-hero--with-image {
+  background: var(--color-sky-pale);
+  padding: clamp(22px, 3vw, 34px) 0 clamp(28px, 3.5vw, 40px);
+  margin-bottom: 0;
+}
+
+.collection-hero__inner {
+  max-width: var(--container-page);
+  margin: 0 auto;
+  padding: 0 var(--gutter-page);
+}
+
+.collection-hero__title,
+.collection-hero__title.title {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 4vw, 46px);
+  font-weight: var(--weight-bold);
+  line-height: 1.02;
+  letter-spacing: var(--type-tracking);
+  text-transform: none;
+  color: var(--color-ink);
+}
+
+.collection-hero__description {
+  max-width: 56ch;
+  font-family: var(--font-sans);
+  font-size: var(--type-body-md-size);
+  line-height: var(--type-line-body);
+  color: var(--color-body);
+}
+
+/* Breadcrumb, where the theme renders one. */
+.breadcrumbs,
+.collection-hero .breadcrumb {
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  color: var(--color-body);
+}
+
+/* The filter bar sticks directly under the header. --cloud-header-h is
+   measured and published by the header section, because the header's height
+   changes with the logo across breakpoints. */
+.facets-container,
+.collection .facets-container {
+  position: sticky;
+  top: var(--cloud-header-h, 102px);
+  z-index: 20;
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-sky-pale);
+  padding: 14px var(--gutter-page);
+  margin: 0 0 clamp(24px, 3vw, 36px);
+}
+
+/* Filter and sort controls become pills, matching the rest of the system. */
+.facets__summary,
+.facets__label,
+.facet-checkbox {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.facets__disclosure .facets__summary,
+.disclosure-has-popup > summary {
+  height: 44px;
+  padding: 0 20px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-sky-pale);
+  background: var(--color-white);
+  color: var(--color-body);
+  transition: var(--transition-color);
+}
+
+.facets__disclosure .facets__summary:hover,
+.disclosure-has-popup > summary:hover {
+  border-color: var(--color-blue);
+  color: var(--color-ink);
+}
+
+/* An applied filter reads as a filled pill. */
+.active-facets__button,
+.active-facets .active-facets__button-wrapper button {
+  height: 44px;
+  padding: 0 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-blue);
+  background: var(--color-blue);
+  color: var(--color-on-dark);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  transition: var(--transition-color);
+}
+
+.active-facets__button:hover {
+  background: var(--color-blue-hover);
+  border-color: var(--color-blue-hover);
+}
+
+.facets__form .product-count,
+.product-count__text {
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: var(--weight-regular);
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--color-body);
+}
+
+.facet-filters__label,
+.facets__label {
+  color: var(--color-ink);
+}
+
+/* Dawn draws the border and radius on the .select wrapper and leaves the
+   <select> itself transparent, so the wrapper is what has to be styled. */
+.facets-container .select,
+.facets-container .select::after {
+  border-radius: var(--radius-full);
+}
+
+.facets-container .select::after {
+  box-shadow: 0 0 0 1px var(--color-sky-pale);
+}
+
+.facets-container .select__select,
+.facet-filters__sort {
+  height: 38px;
+  padding: 0 12px;
+  border-radius: var(--radius-full);
+  background: var(--color-white);
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: var(--weight-medium);
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--color-ink);
+}
+
+/* Empty state should look intentional, not broken. */
+.collection .title--primary,
+.collection__empty .title {
+  font-family: var(--font-display);
+  color: var(--color-ink);
+}

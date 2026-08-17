@@ -3,24 +3,6 @@
   round social buttons, and a legal bar.
 {%- endcomment -%}
 
-{%- liquid
-  # Every URL already linked from a column or the secondary row, so a policy
-  # is never listed twice.
-  assign linked_urls = ''
-  for block in section.blocks
-    if block.settings.menu != blank
-      for link in block.settings.menu.links
-        assign linked_urls = linked_urls | append: link.url | append: ' '
-      endfor
-    endif
-  endfor
-  if section.settings.utility_menu != blank
-    for link in section.settings.utility_menu.links
-      assign linked_urls = linked_urls | append: link.url | append: ' '
-    endfor
-  endif
--%}
-
 <footer class="cloud-foot">
   <div class="cloud-foot__inner">
     <div class="cloud-foot__brand">
@@ -73,9 +55,9 @@
 
   <div class="cloud-foot__legal-wrap">
     {%- comment -%}
-      Secondary links sit in one row above the copyright. Any published policy
-      not already linked from a column or from this menu is appended, so every
-      policy is reachable however the merchant arranges their menus.
+      Secondary links sit in one row above the copyright, and are exactly the
+      chosen menu. Policies are reachable from that menu, so nothing is added
+      automatically: a link the merchant removes has to stay removed.
     {%- endcomment -%}
     {%- capture utility_links -%}
       {%- if section.settings.utility_menu != blank -%}
@@ -83,13 +65,6 @@
           <a href="{{ link.url }}">{{ link.title }}</a>
         {%- endfor -%}
       {%- endif -%}
-      {%- for policy in shop.policies -%}
-        {%- if policy.url != blank -%}
-          {%- unless linked_urls contains policy.url -%}
-            <a href="{{ policy.url }}">{{ policy.title }}</a>
-          {%- endunless -%}
-        {%- endif -%}
-      {%- endfor -%}
     {%- endcapture -%}
     {%- if utility_links != blank -%}
       <div class="cloud-foot__utility">{{ utility_links }}</div>
@@ -126,12 +101,27 @@
     gap: clamp(20px, 3vw, 44px);
   }
 
-  /* The brand block takes the full width on a phone; the two link columns
-     then sit side by side beneath it. At 190px they each claimed a whole row
-     and left most of it empty. */
+  /* On a phone the brand block and the link column sit side by side, so the
+     links run up the right of the logo rather than starting a new row. The
+     column heading is hidden there: with one column beside the logo it only
+     repeats what the links already say. */
   @media screen and (max-width: 749px) {
-    .cloud-foot__brand {
-      grid-column: 1 / -1;
+    .cloud-foot__col-head {
+      display: none;
+    }
+
+    .cloud-foot__links {
+      margin-top: 0;
+    }
+
+    .cloud-foot__legal,
+    .cloud-foot__pay {
+      justify-content: center;
+      text-align: center;
+    }
+
+    .cloud-foot__pay {
+      justify-content: center;
     }
   }
 
@@ -273,7 +263,7 @@
   "name": "Cloud footer",
   "settings": [
     { "type": "text", "id": "blurb", "label": "Blurb", "default": "Premium comfort made for long shifts." },
-    { "type": "link_list", "id": "utility_menu", "label": "Secondary links row", "info": "Shown as one small row above the copyright. Any published policy not listed here or in a column is added automatically." },
+    { "type": "link_list", "id": "utility_menu", "label": "Secondary links row", "info": "Shown as one small row above the copyright. Add your policy links here." },
     { "type": "checkbox", "id": "show_payment_icons", "label": "Show payment icons", "default": true }
   ],
   "blocks": [

@@ -96,6 +96,19 @@
   {%- endif -%}
 </div>
 
+{%- comment -%}
+  Dawn renders the add-to-cart notification from inside its own header
+  section. This header replaces that one, so it has to carry the notification
+  too. Without it, "Add to cart" succeeds silently and the customer gets no
+  confirmation at all.
+
+  The drawer variant is rendered by layout/theme.liquid, so only the
+  notification needs handling here.
+{%- endcomment -%}
+{%- if settings.cart_type == 'notification' -%}
+  {%- render 'cart-notification', color_scheme: 'scheme-1', desktop_menu_type: 'dropdown' -%}
+{%- endif -%}
+
 {% stylesheet %}
   .cloud-head {
     position: sticky;

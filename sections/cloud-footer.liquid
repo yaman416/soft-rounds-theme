@@ -4,16 +4,21 @@
 {%- endcomment -%}
 
 {%- liquid
-  # Every URL already linked from the footer columns. The legal bar uses this
-  # to avoid listing a policy twice when a merchant also keeps it in a menu.
-  assign column_urls = ''
+  # Every URL already linked from a column or the secondary row, so a policy
+  # is never listed twice.
+  assign linked_urls = ''
   for block in section.blocks
     if block.settings.menu != blank
       for link in block.settings.menu.links
-        assign column_urls = column_urls | append: link.url | append: ' '
+        assign linked_urls = linked_urls | append: link.url | append: ' '
       endfor
     endif
   endfor
+  if section.settings.utility_menu != blank
+    for link in section.settings.utility_menu.links
+      assign linked_urls = linked_urls | append: link.url | append: ' '
+    endfor
+  endif
 -%}
 
 <footer class="cloud-foot">
@@ -67,38 +72,43 @@
   </div>
 
   <div class="cloud-foot__legal-wrap">
+    {%- comment -%}
+      Secondary links sit in one row above the copyright. Any published policy
+      not already linked from a column or from this menu is appended, so every
+      policy is reachable however the merchant arranges their menus.
+    {%- endcomment -%}
+    {%- capture utility_links -%}
+      {%- if section.settings.utility_menu != blank -%}
+        {%- for link in section.settings.utility_menu.links -%}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {%- endfor -%}
+      {%- endif -%}
+      {%- for policy in shop.policies -%}
+        {%- if policy.url != blank -%}
+          {%- unless linked_urls contains policy.url -%}
+            <a href="{{ policy.url }}">{{ policy.title }}</a>
+          {%- endunless -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+    {%- if utility_links != blank -%}
+      <div class="cloud-foot__utility">{{ utility_links }}</div>
+    {%- endif -%}
+
     <div class="cloud-foot__legal">
       <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</span>
-      {%- comment -%}
-        With no legal menu set, the bar builds itself from the store's own
-        policies. Shopify exposes whichever ones are published, so this needs
-        no menu to maintain and cannot fall out of sync with the policies
-        themselves. Setting a legal menu overrides it.
-
-        Policies already linked from a footer column are skipped, so each one
-        appears exactly once however the merchant arranges their menus. Move a
-        policy out of a column and it reappears down here on its own.
-      {%- endcomment -%}
-      {%- capture legal_links -%}
-        {%- if section.settings.legal_menu != blank -%}
-          {%- for link in section.settings.legal_menu.links -%}
-            <a href="{{ link.url }}">{{ link.title }}</a>
-          {%- endfor -%}
-        {%- else -%}
-          {%- for policy in shop.policies -%}
-            {%- if policy.url != blank -%}
-              {%- unless column_urls contains policy.url -%}
-                <a href="{{ policy.url }}">{{ policy.title }}</a>
-              {%- endunless -%}
-            {%- endif -%}
-          {%- endfor -%}
-        {%- endif -%}
-      {%- endcapture -%}
-      {%- if legal_links != blank -%}
-        <div class="cloud-foot__legal-links">{{ legal_links }}</div>
-      {%- endif -%}
     </div>
+
+    {%- if section.settings.show_payment_icons and shop.enabled_payment_types.size > 0 -%}
+      <div class="cloud-foot__pay">
+        <span class="visually-hidden">{{ 'sections.footer.payment' | t }}</span>
+        {%- for type in shop.enabled_payment_types -%}
+          {{ type | payment_type_svg_tag: class: 'cloud-foot__pay-icon' }}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
   </div>
+
 </footer>
 
 {% stylesheet %}
@@ -198,35 +208,63 @@
     padding: 0 var(--gutter-page);
   }
 
-  .cloud-foot__legal {
+  /* Secondary links in a single row above the copyright, with the divider
+     above them. Smaller than the column links because this is a utility row,
+     not primary navigation, but each target is still 44px tall. */
+  .cloud-foot__utility {
     margin-top: clamp(28px, 4vw, 44px);
-    padding: 20px 0 28px;
+    padding-top: 6px;
     border-top: 1px solid rgba(255, 255, 255, 0.14);
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 18px;
     flex-wrap: wrap;
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.62);
+    gap: 0 18px;
+    font-size: 12.5px;
   }
 
-  /* Wraps because a real store menu can carry more legal links than the two
-     in the design. Without this the row forces the page to scroll sideways. */
-  /* A grid, not a wrapping flex row. With eight links the flex version broke
-     into three rows starting at 16, 87 and 236px, which read as misaligned.
-     Equal columns keep them lined up however many the merchant adds. */
-  .cloud-foot__legal-links {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
-    gap: 0 20px;
-    min-width: 0;
-  }
-
-  .cloud-foot__legal-links a {
+  .cloud-foot__utility a {
     min-height: 44px;
     display: flex;
     align-items: center;
+    white-space: nowrap;
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  .cloud-foot__utility a:hover {
+    color: var(--color-on-dark);
+  }
+
+  .cloud-foot__legal {
+    padding: 4px 0 16px;
+    font-size: 12.5px;
+    color: rgba(255, 255, 255, 0.62);
+  }
+
+  /* Payment marks come from Shopify, so they always match what the store
+     actually accepts at checkout. They are artwork, not links. */
+  .cloud-foot__pay {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: clamp(28px, 4vw, 40px);
+  }
+
+  .cloud-foot__pay-icon {
+    height: 24px;
+    width: auto;
+    display: block;
+    border-radius: 4px;
+  }
+
+  @media screen and (max-width: 560px) {
+    .cloud-foot__utility {
+      gap: 0 14px;
+      font-size: 12px;
+    }
+
+    .cloud-foot__pay-icon {
+      height: 22px;
+    }
   }
 {% endstylesheet %}
 
@@ -235,7 +273,8 @@
   "name": "Cloud footer",
   "settings": [
     { "type": "text", "id": "blurb", "label": "Blurb", "default": "Premium comfort made for long shifts." },
-    { "type": "link_list", "id": "legal_menu", "label": "Legal menu", "info": "Leave empty to list the store's published policies automatically." }
+    { "type": "link_list", "id": "utility_menu", "label": "Secondary links row", "info": "Shown as one small row above the copyright. Any published policy not listed here or in a column is added automatically." },
+    { "type": "checkbox", "id": "show_payment_icons", "label": "Show payment icons", "default": true }
   ],
   "blocks": [
     {

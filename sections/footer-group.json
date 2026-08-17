@@ -16,22 +16,15 @@
             "heading": "Shop",
             "menu": "main-menu"
           }
-        },
-        "info": {
-          "type": "column",
-          "settings": {
-            "heading": "Info",
-            "menu": "footer"
-          }
         }
       },
       "block_order": [
-        "shop",
-        "info"
+        "shop"
       ],
       "settings": {
         "blurb": "Premium comfort made for long shifts.",
-        "legal_menu": ""
+        "utility_menu": "footer",
+        "show_payment_icons": true
       }
     }
   },

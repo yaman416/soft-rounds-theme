@@ -221,11 +221,29 @@
     color: var(--color-ink);
   }
 
+  /* One row where there is room, one aligned column where there is not.
+
+     A wrapping flex row broke 2 + 1 at 375px, putting the second item at
+     174px with nothing beneath it. A grid fixed the ragged edge but forced
+     equal columns: at 375px those were 171px, which wrapped "Machine
+     washable" onto two lines, and at 1440px the 608px copy column only fits
+     two 190px columns, so the same 2 + 1 came back.
+
+     Natural widths in a row total 481px, which fits comfortably from tablet
+     up. Below 480px the row becomes a single left-aligned stack. */
   .cloud-hero__features {
+    width: 100%;
     display: flex;
-    gap: 22px;
     flex-wrap: wrap;
+    gap: 12px 22px;
     margin-top: 4px;
+  }
+
+  @media screen and (max-width: 480px) {
+    .cloud-hero__features {
+      flex-direction: column;
+      align-items: flex-start;
+    }
   }
 
   /* On the sky band, not white, so this takes the tint-safe blue. */
@@ -236,6 +254,7 @@
     font-size: var(--type-body-xs-size);
     font-weight: var(--weight-medium);
     color: var(--color-blue-on-tint);
+    white-space: nowrap;
   }
 
   .cloud-hero__feature .sr-icon {

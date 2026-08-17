@@ -56,13 +56,13 @@
   <div class="cloud-foot__legal-wrap">
     <div class="cloud-foot__legal">
       <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</span>
-      <div class="cloud-foot__legal-links">
-        {%- if section.settings.legal_menu != blank -%}
+      {%- if section.settings.legal_menu != blank -%}
+        <div class="cloud-foot__legal-links">
           {%- for link in section.settings.legal_menu.links -%}
             <a href="{{ link.url }}">{{ link.title }}</a>
           {%- endfor -%}
-        {%- endif -%}
-      </div>
+        </div>
+      {%- endif -%}
     </div>
   </div>
 </footer>
@@ -170,11 +170,13 @@
 
   /* Wraps because a real store menu can carry more legal links than the two
      in the design. Without this the row forces the page to scroll sideways. */
+  /* A grid, not a wrapping flex row. With eight links the flex version broke
+     into three rows starting at 16, 87 and 236px, which read as misaligned.
+     Equal columns keep them lined up however many the merchant adds. */
   .cloud-foot__legal-links {
-    display: flex;
-    gap: 24px;
-    flex-wrap: wrap;
-    row-gap: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
+    gap: 0 20px;
     min-width: 0;
   }
 

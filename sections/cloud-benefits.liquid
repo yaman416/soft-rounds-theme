@@ -81,19 +81,14 @@
     height: 26px;
   }
 
-  .cloud-card__disc--sky {
-    background: var(--color-sky-pale);
-    color: var(--color-blue);
-  }
-
-  .cloud-card__disc--peach {
-    background: var(--color-peach);
-    color: var(--color-ink);
-  }
-
+  /* One plate colour across all four cards. Three different tints made the
+     grid look like four unrelated things. The modifier classes stay so the
+     markup and schema do not have to change. */
+  .cloud-card__disc--sky,
+  .cloud-card__disc--peach,
   .cloud-card__disc--lilac {
-    background: var(--color-lilac);
-    color: var(--color-ink);
+    background: var(--color-accent);
+    color: var(--color-secondary);
   }
 
   .cloud-card__title {

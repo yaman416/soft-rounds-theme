@@ -7,33 +7,55 @@
    older systems. */
 
 :root {
-  /* ================= Surface ================= */
-  --color-page: #f4f7fb;
-  --color-white: #ffffff;
-  --color-mist: #edf3f9;
-  --color-sky-pale: #dce8f4;
-  --color-sky: #a7c8e4;
-  --color-peach: #fadccb;
-  --color-lilac: #dcd9ee;
+  /* Three colours carry the whole site: a deep navy taken straight from the
+     logo, a warm clay, and a blush tint. Everything else is white or a warm
+     neutral. The earlier palette ran nine surface colours (page tint, mist,
+     sky, sky-pale, peach, lilac, blue, blue-hover, white) and read busy and
+     cold; six of those are gone.
 
-  /* ================= Brand ================= */
-  --color-blue: #45749a;
-  --color-blue-hover: #3a6485;
-  /* #45749A scores only 4.00:1 on the pale sky band, under the 4.5 minimum.
-     This darker blue reaches 5.06:1 and is what small text on a tinted
-     surface must use. On white, --color-blue is fine at 4.98:1. */
-  --color-blue-on-tint: #3a6485;
+     Contrast, measured not estimated:
+       navy  #213E54 on white  11.16:1
+       clay  #A85B3C on white   4.97:1, and white on clay 4.97:1
+       body  #5A5F66 on white   6.43:1
+       navy on blush #F5E9E2    9.37:1
+     All clear WCAG AA. Clay is the darkest warm tone that still passes with
+     white text on it, which is why it is not a lighter terracotta. */
+
+  /* ================= The three ================= */
+  --color-primary: #213e54;
+  --color-primary-hover: #1a3244;
+  --color-secondary: #a85b3c;
+  --color-secondary-hover: #8f4a2f;
+  --color-accent: #f5e9e2;
+
+  /* ================= Surface ================= */
+  --color-white: #ffffff;
+  --color-page: #ffffff;
+  --color-surface: #faf8f6;
+  --color-border: #e8e3de;
 
   /* ================= Text ================= */
-  --color-ink: #33383f;
-  --color-body: #5b6470;
-  --color-body-strong: #4a4f58;
+  --color-ink: #213e54;
+  --color-body: #5a5f66;
+  --color-body-strong: #44484f;
   --color-on-dark: #ffffff;
 
   /* ================= Semantic ================= */
-  --color-sale: #a64e49;
+  --color-sale: #a85b3c;
   --color-error: #a64e49;
-  --color-success: #45749a;
+  --color-success: #213e54;
+
+  /* Legacy names kept so Dawn overrides and any section still referencing the
+     Cloud palette resolve onto the three colours instead of breaking. New work
+     should use the names above. */
+  --color-mist: var(--color-surface);
+  --color-sky-pale: var(--color-surface);
+  --color-sky: var(--color-secondary);
+  --color-peach: var(--color-accent);
+  --color-lilac: var(--color-surface);
+  --color-blue: var(--color-primary);
+  --color-blue-hover: var(--color-primary-hover);
+  --color-blue-on-tint: var(--color-primary);
 
   /* ================= Fabric swatches (product only, never UI) ================= */
   --fabric-black: #33383f;
@@ -43,11 +65,10 @@
   --fabric-blue: #45749a;
 
   /* ================= Aliases for Dawn and shared components ================= */
-  --color-primary: var(--color-blue);
-  --color-canvas: var(--color-white);
-  --color-ivory: var(--color-page);
+    --color-canvas: var(--color-white);
+  --color-ivory: var(--color-surface);
   --color-muted: var(--color-body);
-  --color-hairline: var(--color-sky-pale);
+  --color-hairline: var(--color-border);
   --color-on-primary: var(--color-on-dark);
 
   --text-heading: var(--color-ink);
@@ -56,7 +77,7 @@
   --text-link: var(--color-blue);
   --text-on-primary: var(--color-on-dark);
 
-  --surface-page: var(--color-page);
+  --surface-page: var(--color-white);
   --surface-card: var(--color-white);
   --surface-soft: var(--color-mist);
   --surface-strong: var(--color-sky-pale);

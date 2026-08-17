@@ -3,6 +3,19 @@
   round social buttons, and a legal bar.
 {%- endcomment -%}
 
+{%- liquid
+  # Every URL already linked from the footer columns. The legal bar uses this
+  # to avoid listing a policy twice when a merchant also keeps it in a menu.
+  assign column_urls = ''
+  for block in section.blocks
+    if block.settings.menu != blank
+      for link in block.settings.menu.links
+        assign column_urls = column_urls | append: link.url | append: ' '
+      endfor
+    endif
+  endfor
+-%}
+
 <footer class="cloud-foot">
   <div class="cloud-foot__inner">
     <div class="cloud-foot__brand">
@@ -56,12 +69,33 @@
   <div class="cloud-foot__legal-wrap">
     <div class="cloud-foot__legal">
       <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</span>
-      {%- if section.settings.legal_menu != blank -%}
-        <div class="cloud-foot__legal-links">
+      {%- comment -%}
+        With no legal menu set, the bar builds itself from the store's own
+        policies. Shopify exposes whichever ones are published, so this needs
+        no menu to maintain and cannot fall out of sync with the policies
+        themselves. Setting a legal menu overrides it.
+
+        Policies already linked from a footer column are skipped, so each one
+        appears exactly once however the merchant arranges their menus. Move a
+        policy out of a column and it reappears down here on its own.
+      {%- endcomment -%}
+      {%- capture legal_links -%}
+        {%- if section.settings.legal_menu != blank -%}
           {%- for link in section.settings.legal_menu.links -%}
             <a href="{{ link.url }}">{{ link.title }}</a>
           {%- endfor -%}
-        </div>
+        {%- else -%}
+          {%- for policy in shop.policies -%}
+            {%- if policy.url != blank -%}
+              {%- unless column_urls contains policy.url -%}
+                <a href="{{ policy.url }}">{{ policy.title }}</a>
+              {%- endunless -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      {%- endcapture -%}
+      {%- if legal_links != blank -%}
+        <div class="cloud-foot__legal-links">{{ legal_links }}</div>
       {%- endif -%}
     </div>
   </div>
@@ -201,7 +235,7 @@
   "name": "Cloud footer",
   "settings": [
     { "type": "text", "id": "blurb", "label": "Blurb", "default": "Premium comfort made for long shifts." },
-    { "type": "link_list", "id": "legal_menu", "label": "Legal menu" }
+    { "type": "link_list", "id": "legal_menu", "label": "Legal menu", "info": "Leave empty to list the store's published policies automatically." }
   ],
   "blocks": [
     {

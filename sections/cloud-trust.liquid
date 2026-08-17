@@ -28,12 +28,13 @@
 
 {% stylesheet %}
   .cloud-trust {
-    padding: 0 var(--gutter-page) clamp(36px, 5vw, 72px);
+    padding: 0 0 clamp(36px, 5vw, 72px);
   }
 
   .cloud-trust__grid {
     max-width: var(--container-page);
     margin: 0 auto;
+    padding: 0 var(--gutter-page);
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr));
     gap: clamp(14px, 2vw, 20px);

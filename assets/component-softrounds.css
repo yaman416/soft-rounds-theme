@@ -164,10 +164,15 @@
 /* ============================================================
    Page scaffolding
    ============================================================ */
-.page-width {
+/* Dawn's base.css re-declares .page-width padding as 5rem inside a min-width
+   media query and loads after this file, so a plain override loses and Dawn's
+   sections sit 27px right of ours at tablet widths. The product grid override
+   below needs !important for the same reason. */
+.page-width,
+.slider-mobile-gutter.page-width {
   max-width: var(--container-page);
-  padding-left: var(--gutter-page);
-  padding-right: var(--gutter-page);
+  padding-left: var(--gutter-page) !important;
+  padding-right: var(--gutter-page) !important;
 }
 
 main h1,

@@ -159,6 +159,11 @@
      ~12px against 15px nav links, which sits right. */
   --logo-height: 60px;
 
+  /* Inner padding shared by every rounded panel (story, newsletter). Panels
+     sit at the page gutter, so their padding is what decides where their text
+     lands; setting it in one place keeps them aligned with each other. */
+  --panel-pad: clamp(20px, 4vw, 60px);
+
   --container-page: 1300px;
   --gutter-page: clamp(16px, 3vw, 32px);
   --control-height: 46px;

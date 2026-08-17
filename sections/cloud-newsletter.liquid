@@ -58,7 +58,7 @@
     margin: 0 auto;
     background: var(--color-primary);
     border-radius: var(--radius-panel);
-    padding: clamp(28px, 4.5vw, 64px);
+    padding: var(--panel-pad);
     position: relative;
     overflow: hidden;
     display: grid;
@@ -166,7 +166,6 @@
   @media screen and (max-width: 560px) {
     .cloud-news__panel {
       border-radius: 28px;
-      padding: 22px;
     }
   }
 {% endstylesheet %}

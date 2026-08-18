@@ -328,57 +328,7 @@
       font-size: 12px;
     }
 
-    /* Floating back to top. Sits below the header's z-index so a sticky header
-     always wins, and clear of the payment row at the very bottom. */
-  .cloud-top {
-    position: fixed;
-    right: clamp(12px, 3vw, 24px);
-    bottom: clamp(12px, 3vw, 24px);
-    z-index: 35;
-    width: 48px;
-    height: 48px;
-    border: none;
-    border-radius: var(--radius-full);
-    background: var(--color-primary);
-    color: var(--color-on-dark);
-    display: grid;
-    place-items: center;
-    cursor: pointer;
-    box-shadow: var(--shadow-menu);
-    opacity: 0;
-    transform: translateY(8px);
-    transition: opacity var(--duration-base) var(--ease-standard),
-      transform var(--duration-base) var(--ease-standard),
-      background var(--duration-base) var(--ease-standard);
-  }
-
-  .cloud-top[hidden] {
-    display: none;
-  }
-
-  .cloud-top.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .cloud-top:hover {
-    background: var(--color-secondary);
-  }
-
-  /* The caret points down by default. */
-  .cloud-top .sr-icon {
-    width: 20px;
-    height: 20px;
-    transform: rotate(180deg);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .cloud-top {
-      transition: none;
-    }
-  }
-
-  .cloud-foot__pay-icon {
+    .cloud-foot__pay-icon {
       height: 22px;
     }
   }

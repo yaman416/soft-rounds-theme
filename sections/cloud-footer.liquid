@@ -130,15 +130,6 @@
       margin-top: 0;
     }
 
-    .cloud-foot__legal,
-    .cloud-foot__pay {
-      justify-content: center;
-      text-align: center;
-    }
-
-    .cloud-foot__pay {
-      justify-content: center;
-    }
   }
 
   .cloud-foot__logo {
@@ -226,12 +217,16 @@
   /* Secondary links in a single row above the copyright, with the divider
      above them. Smaller than the column links because this is a utility row,
      not primary navigation, but each target is still 44px tall. */
+  /* The bottom bar is centred as a unit at every width: the links row, the
+     copyright and the payment marks. Centring only the links would leave the
+     two lines under them hanging to the left. */
   .cloud-foot__utility {
     margin-top: clamp(28px, 4vw, 44px);
     padding-top: 6px;
     border-top: 1px solid rgba(255, 255, 255, 0.14);
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 0 18px;
     font-size: 12.5px;
   }
@@ -251,6 +246,7 @@
   .cloud-foot__legal {
     padding: 4px 0 16px;
     font-size: 12.5px;
+    text-align: center;
     color: rgba(255, 255, 255, 0.62);
   }
 
@@ -260,6 +256,7 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     padding-bottom: clamp(28px, 4vw, 40px);
   }

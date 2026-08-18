@@ -132,13 +132,23 @@
     margin: 0 auto;
     padding: clamp(32px, 6vw, 88px) var(--gutter-page) clamp(44px, 7vw, 104px);
     display: grid;
-    /* 420 not the design's 288: below roughly 900px two columns leave the
-       heading about seven characters per line, because the type is sized off
-       the viewport while the column is half of it. Stacking earlier keeps the
-       headline readable. */
-    grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
-    gap: clamp(28px, 5vw, 64px);
+    /* Stacked by default. auto-fit with a 420px floor needed about 880px of
+       room before it paired up, so tablets and narrow laptops dropped the
+       photograph into a block underneath the copy with band showing all round
+       it, which read as an afterthought rather than part of the composition.
+       The pairing is now an explicit breakpoint instead. */
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(24px, 4vw, 56px);
     align-items: center;
+  }
+
+  /* Copy left, photograph right, from tablet up. The media column is the
+     wider of the two so the image carries the band rather than sitting in
+     the middle of it. */
+  @media screen and (min-width: 800px) {
+    .cloud-hero__inner {
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    }
   }
 
   .cloud-hero__copy {
@@ -289,6 +299,15 @@
     justify-self: center;
     width: 100%;
     max-width: 520px;
+  }
+
+  /* Beside the copy the image fills its column instead of being capped at
+     520px and centred, which left a gutter of empty band on both sides. */
+  @media screen and (min-width: 800px) {
+    .cloud-hero__media {
+      justify-self: end;
+      max-width: 560px;
+    }
   }
 
   /* The blob is the signature of this design. Percentage radii on each corner

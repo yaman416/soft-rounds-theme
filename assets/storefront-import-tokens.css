@@ -243,7 +243,12 @@ a:hover {
 
 /* The scalloped edge between a coloured band and the page. Repeating
    half-circles punched out of the band, so the join reads as a cloud. */
-.sr-scallop {
+/* Doubled class for specificity. Dawn's base.css carries
+   `div:empty { display: none }`, which is (0,1,1) and beats a single class,
+   so this decorative divider — an empty div by design, since it is drawn
+   entirely with a background — was hidden on every page it appears. */
+.sr-scallop.sr-scallop {
+  display: block;
   height: 30px;
   background-size: 60px 30px;
   background-repeat: repeat-x;

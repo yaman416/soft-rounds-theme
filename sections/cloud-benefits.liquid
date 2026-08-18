@@ -55,8 +55,17 @@
 
   .cloud-benefits__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(236px, 100%), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(216px, 100%), 1fr));
     gap: clamp(14px, 2vw, 24px);
+  }
+
+  /* Four cards as a 2x2 rather than three across with one stranded below.
+     Held back to 480px because these cards carry a paragraph, and half of a
+     375px screen leaves it about eleven characters a line. */
+  @media screen and (min-width: 480px) and (max-width: 1079px) {
+    .cloud-benefits__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 
   .cloud-card {

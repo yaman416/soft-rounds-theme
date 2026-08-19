@@ -105,7 +105,7 @@
       "name": "Shop the range",
       "settings": {
         "collection": "daisy-compression-socks",
-        "products_to_show": 4,
+        "products_to_show": 6,
         "title": "Shop the range",
         "heading_size": "h2",
         "description": "",

@@ -1,33 +1,36 @@
 /*
  * ------------------------------------------------------------
  * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
 {
   "sections": {
     "hero": {
       "type": "cloud-hero",
-      "name": "Hero",
       "blocks": {
         "f1": {
           "type": "feature",
           "settings": {
             "icon": "icon-wind.svg",
-            "label": "Breathable"
+            "label": "Breathable knit"
           }
         },
         "f2": {
           "type": "feature",
           "settings": {
             "icon": "icon-heart.svg",
-            "label": "Cushioned"
+            "label": "Cushioned sole"
           }
         },
         "f3": {
           "type": "feature",
           "settings": {
             "icon": "icon-washing.svg",
-            "label": "Washable"
+            "label": "Machine washable"
           }
         }
       },
@@ -36,6 +39,7 @@
         "f2",
         "f3"
       ],
+      "name": "Hero",
       "settings": {
         "eyebrow": "Made for nurses and support workers",
         "heading": "Socks that stay soft all shift",
@@ -51,7 +55,6 @@
     },
     "benefits": {
       "type": "cloud-benefits",
-      "name": "Benefits",
       "blocks": {
         "b1": {
           "type": "benefit",
@@ -92,6 +95,7 @@
         "b3",
         "b4"
       ],
+      "name": "Benefits",
       "settings": {
         "heading": "Built around the way a shift actually goes"
       }
@@ -100,19 +104,19 @@
       "type": "featured-collection",
       "name": "Shop the range",
       "settings": {
+        "collection": "daisy-compression-socks",
+        "products_to_show": 4,
         "title": "Shop the range",
         "heading_size": "h2",
         "description": "",
         "show_description": false,
-        "collection": "compression",
-        "products_to_show": 4,
+        "description_style": "body",
         "columns_desktop": 4,
-        "color_scheme": "scheme-1",
+        "enable_desktop_slider": false,
         "full_width": false,
         "show_view_all": true,
         "view_all_style": "outline",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
+        "color_scheme": "scheme-1",
         "image_ratio": "portrait",
         "image_shape": "default",
         "show_secondary_image": true,
@@ -120,13 +124,13 @@
         "show_rating": false,
         "quick_add": "none",
         "columns_mobile": "2",
+        "swipe_on_mobile": false,
         "padding_top": 28,
         "padding_bottom": 40
       }
     },
     "support": {
       "type": "cloud-support",
-      "name": "Support level",
       "blocks": {
         "r1": {
           "type": "row",
@@ -158,6 +162,7 @@
         "r2",
         "r3"
       ],
+      "name": "Support level",
       "settings": {
         "heading": "What a graduated support level actually means",
         "text": "Firmest at the ankle, easing as it moves up the calf. It is a support level, not a treatment. If you have a medical condition, check with your clinician first.",
@@ -191,7 +196,6 @@
     },
     "trust": {
       "type": "cloud-trust",
-      "name": "Trust strip",
       "blocks": {
         "t1": {
           "type": "item",
@@ -232,6 +236,7 @@
         "t3",
         "t4"
       ],
+      "name": "Trust strip",
       "settings": {}
     }
   },

@@ -625,3 +625,36 @@ fieldset.product-form__input legend {
    won back per card came at the cost of a broken filter panel. The real lever
    is the merchant's Filter layout setting, which can switch to horizontal and
    free the whole row. */
+
+/* ============================================================
+   Focus ring
+   ============================================================ */
+
+/* Dawn derives its focus ring from --color-foreground at 50% opacity. On this
+   theme that resolves to the near-black brand colour everywhere, including
+   inside the footer and newsletter bands, whose background is that same
+   near-black: focus was drawn in the background colour and was invisible to
+   anyone navigating by keyboard. On the coral cart button it was close to
+   invisible for the same reason.
+
+   A two-tone ring instead, so one half always has contrast: a white ring at
+   the element edge and a near-black outline outside it. On light surfaces the
+   outline reads; on dark surfaces the white ring does.
+
+   Scoped as `body :focus-visible` so it is two selectors against Dawn's one
+   and wins wherever the stylesheets land in the cascade. */
+body :focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px var(--color-white);
+}
+
+/* Inside a dark band the roles swap: the white ring becomes the outline so it
+   sits outermost against the dark, keeping the thicker edge on the readable
+   side. */
+.cloud-foot :focus-visible,
+.cloud-news__panel :focus-visible,
+.cloud-announce :focus-visible {
+  outline-color: var(--color-white);
+  box-shadow: 0 0 0 2px var(--color-primary);
+}

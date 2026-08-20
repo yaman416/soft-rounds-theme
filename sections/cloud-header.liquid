@@ -353,7 +353,18 @@
     color: var(--color-ink);
   }
 
-  @media screen and (max-width: 940px) {
+  /* The inline nav survives down to 800px, which covers iPad portrait. At 805
+     the three current links need 289px against 325px of free space, so hiding
+     them there sent tablet users through a menu button for no reason. Links
+     tighten between 800 and 940 to leave room for a fourth or fifth. */
+  @media screen and (min-width: 800px) and (max-width: 940px) {
+    .cloud-head__link {
+      padding: 0 12px;
+      font-size: 14.5px;
+    }
+  }
+
+  @media screen and (max-width: 799px) {
     .cloud-head__nav {
       display: none;
     }

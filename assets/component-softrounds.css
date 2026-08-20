@@ -557,3 +557,24 @@ fieldset.product-form__input legend {
   padding-top: var(--section-y) !important;
   padding-bottom: var(--section-y) !important;
 }
+
+/* ============================================================
+   Content pages (about, FAQ, contact, policies)
+   ============================================================ */
+
+/* Dawn narrows prose pages with .page-width--narrow, but the .page-width
+   override above set the full container width at the same specificity and
+   won on order, so body copy ran the whole 1236px: about 155 characters a
+   line against the 60 to 75 that is comfortable to read. Restored with a
+   two-class selector so it beats both. */
+.page-width.page-width--narrow {
+  max-width: 664px;
+}
+
+/* Prose pages had 28px above the first line and 8px below the last, so text
+   started under the sticky header and finished hard against the footer. They
+   now breathe by the same rhythm token as the homepage sections. */
+.page-width[class*="-padding"] {
+  padding-top: var(--section-y);
+  padding-bottom: var(--section-y);
+}

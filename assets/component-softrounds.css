@@ -573,4 +573,55 @@ fieldset.product-form__input legend {
   max-width: 664px;
 }
 
+/* ============================================================
+   Collection filters
+   ============================================================ */
 
+/* Dawn's vertical filter layout is a flex row, so the sidebar competes with
+   the grid at every width. At 768 it took 309px against a 365px grid, which
+   squeezed product cards to 175px: filters occupying 46 per cent of the
+   viewport for a six product collection.
+
+   Below 1080px the filters stack above the grid at full width, so the cards
+   get the whole row. The merchant's vertical layout choice still applies on
+   desktop, where there is room for both. */
+@media screen and (max-width: 1079px) {
+  .facets-vertical {
+    flex-direction: column;
+  }
+
+  .facets-vertical .facets-wrapper {
+    width: 100%;
+    max-width: none;
+    padding-right: 0;
+  }
+
+  .facets-vertical .facets-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Collection page grid. Three across once the row is wide enough, two below
+   that. Scoped to .facets-vertical so it applies to the collection template
+   only and leaves the homepage's four-product strip alone.
+
+   Without this the stacked-filter change left 461px cards at 1024, since the
+   grid inherited the two-column rule meant for phones while now having the
+   full width to itself. !important matches the base rule it overrides. */
+@media screen and (min-width: 900px) {
+  .facets-vertical .product-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media screen and (max-width: 899px) {
+  .facets-vertical .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+/* Not trimming the desktop filter column. Dawn's filter form needs about
+   300px: at 250px its inner content overflowed the wrapper, so the 44px it
+   won back per card came at the cost of a broken filter panel. The real lever
+   is the merchant's Filter layout setting, which can switch to horizontal and
+   free the whole row. */

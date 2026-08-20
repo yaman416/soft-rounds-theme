@@ -161,7 +161,22 @@
      this top and bottom, so the gap between any two of them is the same.
      Bands keep their own internal padding, since that space is inside a
      colour and reads as part of the band rather than as a gap. */
-  --section-y: clamp(36px, 4.6vw, 66px);
+  /* Spacing scale. Every spacing value in the theme should come from here
+     rather than being invented per component. */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 80px;
+  --space-10: 96px;
+
+  /* Section rhythm, snapped to the scale at both ends: 32px on a phone,
+     64px from about 1440 up. */
+  --section-y: clamp(32px, 4.5vw, 64px);
 
   --logo-height: 60px;
 
@@ -170,8 +185,8 @@
      lands; setting it in one place keeps them aligned with each other. */
   --panel-pad: clamp(20px, 4vw, 60px);
 
-  --container-page: 1300px;
-  --gutter-page: clamp(16px, 3vw, 32px);
+  --container-page: 1280px;
+  --gutter-page: clamp(16px, 3.2vw, 48px);
   --control-height: 46px;
   --control-height-lg: 54px;
   --control-height-xl: 56px;

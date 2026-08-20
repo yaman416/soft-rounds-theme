@@ -546,3 +546,14 @@ fieldset.product-form__input legend {
   align-items: center;
   justify-content: center;
 }
+
+/* Dawn sections carry their vertical padding on a generated
+   `section-<id>-padding` class written into an inline style tag, which loads
+   after this file and wins on order. Matching the theme's rhythm token here
+   keeps the featured collection from sitting tighter than everything around
+   it: it was 28px top and 40px bottom against 66px elsewhere. */
+.collection[class*="-padding"],
+.shopify-section [class*="-padding"].collection {
+  padding-top: var(--section-y) !important;
+  padding-bottom: var(--section-y) !important;
+}

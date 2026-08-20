@@ -157,6 +157,12 @@
      their own heights (58px and 70px), which read as two different logos.
      The wordmark's cap height is 20.3% of the lockup, so 60px puts it at
      ~12px against 15px nav links, which sits right. */
+  /* Vertical rhythm. Every section that sits on the page background carries
+     this top and bottom, so the gap between any two of them is the same.
+     Bands keep their own internal padding, since that space is inside a
+     colour and reads as part of the band rather than as a gap. */
+  --section-y: clamp(36px, 4.6vw, 66px);
+
   --logo-height: 60px;
 
   /* Inner padding shared by every rounded panel (story, newsletter). Panels

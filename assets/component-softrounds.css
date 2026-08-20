@@ -524,3 +524,25 @@ fieldset.product-form__input legend {
   font-family: var(--font-display);
   color: var(--color-ink);
 }
+
+/* ============================================================
+   Product page touch targets
+   ============================================================ */
+
+/* The gallery zoom control renders 39x40 and the "More payment options"
+   link 18px tall. Both are standalone controls, so both take the 44px
+   minimum. The policy link under the price is left alone deliberately: it
+   sits inline inside a sentence, which WCAG exempts from target sizing, and
+   padding it out would break the line it lives in. */
+.product-media-modal__toggle,
+.product__modal-opener .product__media-toggle {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.shopify-payment-button__more-options {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

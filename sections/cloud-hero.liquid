@@ -276,10 +276,16 @@
      Sized for the narrowest common phone. At 320px there is 288px of room and
      the three labels need 276px at 12px with 15px icons. */
   @media screen and (max-width: 560px) {
+    /* Wrap, not nowrap. These labels are merchant text edited in the theme
+       editor, and nowrap forced whatever they typed onto one line, which the
+       hero's overflow hidden then clipped: with the longer wording restored,
+       the third label ran past the right gutter and lost its tail. Wrapping
+       costs a second line when the labels are long and still gives one line
+       when they are short. */
     .cloud-hero__features {
-      flex-wrap: nowrap;
-      justify-content: space-between;
-      gap: 5px;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      gap: 10px 14px;
     }
 
     .cloud-hero__feature {

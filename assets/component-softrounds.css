@@ -691,3 +691,25 @@ body :focus-visible {
 /* The card no longer clips, so the padding that kept the dollar sign inside
    the old panel is gone with it. Spacing now comes from the card rules
    above. */
+
+/* ============================================================
+   Product slider counter
+   ============================================================ */
+
+/* Dawn's slider counter counts pages, not products:
+     slidesPerPage = floor((trackWidth - firstOffset) / itemOffset)
+     totalPages    = items - slidesPerPage + 1
+   With six socks two-up on a phone that reads "5", and the last page shows
+   socks five and six together. It is accurate and still misleading: it looks
+   like a product count that is one short, and it was read that way.
+
+   The arrows already show position, and they disable at each end, so the
+   number is dropped rather than left to imply something untrue. */
+.collection .slider-counter {
+  display: none;
+}
+
+/* Without the counter between them the buttons need their own spacing. */
+.collection .slider-buttons {
+  gap: var(--space-5);
+}

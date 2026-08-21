@@ -55,6 +55,9 @@
 
   .cloud-benefits__grid {
     display: grid;
+    /* Every card as tall as the tallest in its row, so the set reads evenly
+       however the copy wraps. */
+    grid-auto-rows: 1fr;
     grid-template-columns: repeat(auto-fit, minmax(min(216px, 100%), 1fr));
     gap: clamp(14px, 2vw, 24px);
   }
@@ -116,24 +119,10 @@
      a half, and 20 per cent of the homepage: more than four times the space
      the products themselves get. Same content, tighter frame. */
   @media screen and (max-width: 560px) {
-    /* Icon beside the text rather than stacked above it. Stacked, each card
-       spent a whole row on a 58px disc before the title even started, and four
-       of them filled a screen and a half. */
     .cloud-card {
       padding: 16px;
-      gap: 4px 12px;
+      gap: 8px;
       border-radius: var(--radius-tile);
-      grid-template-columns: 40px minmax(0, 1fr);
-      align-items: start;
-    }
-
-    .cloud-card__disc {
-      grid-row: span 2;
-    }
-
-    .cloud-card__title,
-    .cloud-card__text {
-      grid-column: 2;
     }
 
     .cloud-card__disc {
@@ -154,6 +143,27 @@
     .cloud-card__text {
       font-size: 13.5px;
       line-height: 1.45;
+    }
+  }
+
+  /* Icon beside the text, but only while the card has the full width to
+     itself. Stacked, each card spent a whole row on the disc before the title
+     started. Above 480px the grid is two columns, and beside the icon the copy
+     column fell to about 90px, which wrapped every line to three words. */
+  @media screen and (max-width: 479px) {
+    .cloud-card {
+      grid-template-columns: 40px minmax(0, 1fr);
+      align-items: center;
+      gap: 4px 12px;
+    }
+
+    .cloud-card__disc {
+      grid-row: span 2;
+    }
+
+    .cloud-card__title,
+    .cloud-card__text {
+      grid-column: 2;
     }
   }
 {% endstylesheet %}

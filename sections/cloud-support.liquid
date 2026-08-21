@@ -130,7 +130,10 @@
     padding: 20px 22px;
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
-    align-items: start;
+    /* Centred, not top aligned. Now that every row is as tall as the tallest,
+       top alignment left the shorter rows with their content pinned up and
+       dead space beneath. */
+    align-items: center;
     gap: 16px;
     height: 100%;
   }

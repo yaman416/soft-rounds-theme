@@ -111,6 +111,51 @@
     line-height: 1.6;
     color: var(--color-body);
   }
+
+  /* Compact on a phone. At full size these four cards ran 1234px, a screen and
+     a half, and 20 per cent of the homepage: more than four times the space
+     the products themselves get. Same content, tighter frame. */
+  @media screen and (max-width: 560px) {
+    /* Icon beside the text rather than stacked above it. Stacked, each card
+       spent a whole row on a 58px disc before the title even started, and four
+       of them filled a screen and a half. */
+    .cloud-card {
+      padding: 16px;
+      gap: 4px 12px;
+      border-radius: var(--radius-tile);
+      grid-template-columns: 40px minmax(0, 1fr);
+      align-items: start;
+    }
+
+    .cloud-card__disc {
+      grid-row: span 2;
+    }
+
+    .cloud-card__title,
+    .cloud-card__text {
+      grid-column: 2;
+    }
+
+    .cloud-card__disc {
+      width: 40px;
+      height: 40px;
+    }
+
+    .cloud-card__disc .sr-icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    .cloud-card__title {
+      font-size: 15px;
+      line-height: 1.25;
+    }
+
+    .cloud-card__text {
+      font-size: 13.5px;
+      line-height: 1.45;
+    }
+  }
 {% endstylesheet %}
 
 {% schema %}

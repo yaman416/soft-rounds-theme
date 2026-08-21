@@ -159,6 +159,51 @@
     font-size: var(--type-body-xs-size);
     color: var(--color-body);
   }
+
+  /* Compact on a phone, for the same reason as the benefit cards: this section
+     ran 1084px, a third over a full screen, and 18 per cent of the homepage. */
+  @media screen and (max-width: 560px) {
+    /* Grid, not a wrapping flex row. With flex-wrap the copy block dropped
+       below the icon on its own line, so each row ran 142px when its content
+       needs about 100. */
+    .cloud-support__row {
+      padding: 14px 16px;
+      gap: 12px;
+      display: grid;
+      grid-template-columns: 40px minmax(0, 1fr);
+      align-items: start;
+    }
+
+    .cloud-support__inner {
+      padding-top: var(--space-6);
+      padding-bottom: var(--space-6);
+    }
+
+    .cloud-support__heading {
+      font-size: 24px;
+    }
+
+    .cloud-support__disc {
+      width: 40px;
+      height: 40px;
+    }
+
+    .cloud-support__disc .sr-icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    .cloud-support__row-title {
+      font-size: 15px;
+      line-height: 1.25;
+    }
+
+    .cloud-support__row-text {
+      font-size: 13.5px;
+      line-height: 1.45;
+    }
+  }
+
 {% endstylesheet %}
 
 {% schema %}

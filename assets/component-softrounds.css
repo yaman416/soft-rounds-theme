@@ -658,3 +658,26 @@ body :focus-visible {
   outline-color: var(--color-white);
   box-shadow: 0 0 0 2px var(--color-primary);
 }
+
+/* ============================================================
+   Product card text block
+   ============================================================ */
+
+/* Dawn's .card--standard clips with overflow hidden so the media keeps its
+   rounded corners, and .card-information carries no padding at all, so the
+   price sat with exactly 0px of clearance from that clipping edge. The
+   dollar sign in Bricolage Grotesque extends a little below its line box, so
+   its tail was being sliced off on every card.
+
+   Padding on the text block moves it clear of the edge and gives the title
+   and price room to breathe under the image. */
+.card-wrapper .card-information {
+  padding-top: var(--space-3);
+  padding-bottom: var(--space-4);
+}
+
+/* The price is the last line, so guarantee its descenders are inside the
+   clip regardless of what the card above it does. */
+.card-wrapper .card-information .price {
+  padding-bottom: 2px;
+}

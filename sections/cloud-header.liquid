@@ -133,14 +133,21 @@
     border-radius: var(--radius-full);
     box-shadow: var(--shadow-header);
     padding: 9px clamp(12px, 2vw, 22px);
-    display: flex;
+    /* Three tracks, with the outer two equal, so the nav sits on the centre
+       line of the page rather than wherever the logo happens to end. As a flex
+       row the nav started after the logo and drifted with its width. */
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
     gap: clamp(8px, 2.5vw, 32px);
   }
 
+  /* justify-self keeps the link the width of the wordmark. In a 1fr grid
+     track a block level anchor stretches the whole column, which gave the
+     logo a 441px click area reaching to the middle of the header. */
   .cloud-head__logo-link {
-    flex: none;
     display: block;
+    justify-self: start;
   }
 
   .cloud-head__logo {
@@ -153,13 +160,12 @@
      wraps: a second row would break the pill. Menus longer than the pill can
      hold collapse to the menu button instead. */
   .cloud-head__nav {
-    flex: 1 1 auto;
     min-width: 0;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 4px;
     flex-wrap: nowrap;
-    overflow: hidden;
   }
 
   .cloud-head__link {
@@ -199,8 +205,8 @@
      940px the nav is hidden, and without this the buttons bunch up against
      the logo with dead space to their right. */
   .cloud-head__actions {
-    flex: 0 0 auto;
-    margin-left: auto;
+    grid-column: 3;
+    justify-self: end;
     display: flex;
     align-items: center;
     justify-content: flex-end;

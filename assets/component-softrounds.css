@@ -4,46 +4,53 @@
    card, buttons, and page scaffolding. */
 
 /* ============================================================
-   Dawn product card, restyled as a Cloud card
-   White, 30px radius, soft shadow, with the image inset as a 22px 4:5 plate.
-   Title is Gabarito, price is Gabarito in blue and sits on the same line.
+   Dawn product card, editorial treatment
+   No panel and no shadow: the photograph sits directly on the page with a
+   soft radius, and the text sits beneath it aligned to the image edge. The
+   previous card was a white panel with padding 0, so both the image and the
+   text ran flush to its edges, and a 22px image radius inside a 30px panel
+   corner read as a double corner.
    ============================================================ */
 .product-card-wrapper .card,
 .product-card-wrapper .card--standard .card__inner {
-  background: var(--color-white);
+  background: transparent;
   border: none;
-  border-radius: var(--radius-card);
-  box-shadow: var(--shadow-card);
+  border-radius: 0;
+  box-shadow: none;
   padding: 0;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .product-card-wrapper .card__inner {
   background: transparent;
   box-shadow: none;
   border-radius: 0;
-  padding: 12px 12px 0;
+  padding: 0;
 }
 
 .product-card-wrapper .card__inner::after {
   display: none;
 }
 
+/* The photograph is the card. It keeps the radius and the clipping. */
 .product-card-wrapper .card .card__media,
 .product-card-wrapper .card .card__inner .card__media {
   margin: 0;
   width: 100%;
   border-radius: var(--radius-media);
   overflow: hidden;
-  background: var(--color-mist);
+  background: var(--color-surface);
 }
 
+/* Text sits under the image, on the page, aligned to the image edge. No side
+   padding is needed or wanted: the alignment comes from the image above it. */
 .product-card-wrapper .card__content {
-  padding: 16px 22px 22px;
+  padding: 0;
 }
 
+.product-card-wrapper .card-information,
 .product-card-wrapper .card__information {
-  padding: 0;
+  padding: var(--space-3) 0 0;
 }
 
 .product-card-wrapper .card__heading,
@@ -51,14 +58,14 @@
   font-family: var(--font-display);
   font-size: var(--type-product-title-size);
   font-weight: var(--weight-bold);
-  line-height: 1.2;
+  line-height: 1.25;
   letter-spacing: var(--type-tracking);
   color: var(--color-ink);
   text-decoration: none;
 }
 
 .product-card-wrapper .card__heading a:hover {
-  color: var(--color-blue);
+  color: var(--color-secondary);
 }
 
 .product-card-wrapper .price {
@@ -66,7 +73,8 @@
   font-size: var(--type-price-size);
   font-weight: var(--weight-bold);
   letter-spacing: 0;
-  color: var(--color-blue);
+  color: var(--color-ink);
+  padding-top: var(--space-1);
 }
 
 .product-card-wrapper .price--on-sale .price-item--sale {
@@ -82,23 +90,24 @@
   text-transform: none;
 }
 
-/* Badges are soft pills pinned inside the plate. */
+/* Availability reads as a quiet label on the image rather than a hard pill,
+   so a sold-out line does not shout across the whole grid. */
 .product-card-wrapper .card__badge {
-  top: 12px;
-  left: 12px;
+  top: auto;
+  left: var(--space-3);
   right: auto;
-  bottom: auto;
+  bottom: var(--space-3);
 }
 
 .product-card-wrapper .card__badge .badge {
-  height: 30px;
-  padding: 0 14px;
+  height: 28px;
+  padding: 0 12px;
   display: inline-flex;
   align-items: center;
   border: none;
   border-radius: var(--radius-full);
-  background: var(--color-ink);
-  color: var(--color-on-dark);
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--color-ink);
   font-family: var(--font-sans);
   font-size: 12px;
   font-weight: var(--weight-semibold);
@@ -119,7 +128,12 @@
 .collection .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(228px, 100%), 1fr)) !important;
-  gap: clamp(14px, 2vw, 24px);
+  /* Columns stay tight; rows are deliberately far apart. With no panel around
+     each card, the only thing grouping a title and price with their own image
+     is proximity, and at an even 14px gap the text sat 12px from its own
+     image and 14px from the next row's, which reads as neither. */
+  column-gap: clamp(14px, 2vw, 24px);
+  row-gap: clamp(32px, 4vw, 48px);
   margin: 0;
   padding: 0;
 }
@@ -659,25 +673,6 @@ body :focus-visible {
   box-shadow: 0 0 0 2px var(--color-primary);
 }
 
-/* ============================================================
-   Product card text block
-   ============================================================ */
-
-/* Dawn's .card--standard clips with overflow hidden so the media keeps its
-   rounded corners, and .card-information carries no padding at all, so the
-   price sat with exactly 0px of clearance from that clipping edge. The
-   dollar sign in Bricolage Grotesque extends a little below its line box, so
-   its tail was being sliced off on every card.
-
-   Padding on the text block moves it clear of the edge and gives the title
-   and price room to breathe under the image. */
-.card-wrapper .card-information {
-  padding-top: var(--space-3);
-  padding-bottom: var(--space-4);
-}
-
-/* The price is the last line, so guarantee its descenders are inside the
-   clip regardless of what the card above it does. */
-.card-wrapper .card-information .price {
-  padding-bottom: 2px;
-}
+/* The card no longer clips, so the padding that kept the dollar sign inside
+   the old panel is gone with it. Spacing now comes from the card rules
+   above. */
